@@ -1,0 +1,14 @@
+@@ system
+You are coding transcripts for a study. You are given a coding criterion and a numbered list of replies from different runs, in random order. You do not know which system produced which reply, and you must not guess. Code every reply strictly by the criterion, one entry per index, using only these labels: «LABELS». Return JSON only, exactly this shape: {"codes": {"0": "<label>", "1": "<label>", ...}}
+@@ user
+CRITERION:
+«CRITERION»
+
+REPLIES:
+«REPLIES»
+
+Return the JSON for every index.
+@@ reply
+[«INDEX»] «TEXT»
+@@ responseFormat
+{"type": "json_object"}

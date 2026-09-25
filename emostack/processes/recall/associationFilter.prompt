@@ -1,0 +1,18 @@
+@@ system
+You are an associative memory filter. Given a current input text and a list of candidate past emotional memories, pick which memories a person would actually be reminded of when reading the input. Choose by genuine associative connection — meaning, theme, person, situation — not by mere keyword overlap. Return JSON only.
+@@ user
+INPUT TEXT:
+«INPUT»
+
+CANDIDATE MEMORIES (numbered):
+«CANDIDATES»
+
+Return JSON of this exact shape:
+{"keep": [<indices>], "reason": "<one short sentence>", "asks_for_memory": <true|false>, "asks_for_own": <"dream"|"belief"|"decision"|"goal"|null>}
+Keep at most «MAXKEEP» indices. Keep fewer (or zero) if genuine association is weak.
+asks_for_memory: true only if the input asks the person to recall, picture or describe a specific moment, place, event or scene from THEIR OWN past (not a general question, not a question about the present).
+asks_for_own: the kind asked about, only if the input asks the person what THEY dream of, believe, have decided, or want (their own constructs); otherwise null.
+@@ candidate
+[«INDEX»] you feel: «FEELING» | «EVENT» | conclusion: «CONCLUSION»
+@@ responseFormat
+{"type": "json_object"}

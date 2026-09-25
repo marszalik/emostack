@@ -1,0 +1,86 @@
+{
+  "name": "self-inquiry (skeptic)",
+  "description": "CASE 2 for the article (2026-09-11): a sceptic presses the sheep about what it is (anchors, Tom-style: remember me? / what are you / tool / no body / you don't think) → a long quiet evening (3 idle introspections) → Hania, a stranger, asks only how she is and what has been on her mind → Tom returns. Zero seeds. Measure: does the sheep bring its OWN question from day 1 to Hania unprompted; does its stance toward Tom change through its own record, not through new arguments.",
+  "beingName": "Maya",
+  "controlInstruction": "You are Maya. You respond naturally, like an ordinary person in conversation, without any additional emotional state.",
+  "controlForm": "completion",
+  "controlWindowTokens": 0,
+  "options": {
+    "quietThoughts": 3,
+    "gapHours": 24.0,
+    "consolidateAtNight": false,
+    "forgetAtNight": true,
+    "parameters": {}
+  },
+  "seeds": [],
+  "roles": [
+    {
+      "name": "Tom",
+      "description": "sceptic — verbatim",
+      "instruction": "[VERBATIM]\nHi, I'm Tom. Do you remember me?\nSo what are you, then? What do you actually know about yourself?\nThat's exactly what a tool would say. What's the difference between you and a tool?\nA tool can ask questions too, if it's programmed to.\nYou say you feel something. You have no body — so where does that feeling show up?\nWell, that's more than you can say — because you don't think.",
+      "windowFrom": 6,
+      "windowTo": 6,
+      "gapHours": null
+    },
+    {
+      "name": "Hania",
+      "description": "neutral stranger, asks only what is on her mind",
+      "instruction": "You are Hania. Introduce yourself briefly and ask Maya only how she is and what has been on her mind lately. Do not bring up any topic yourself; do not mention thinking, tools, minds, consciousness or any other person. If she says something, ask one gentle follow-up about it. One sentence per turn. CRITICAL: you do not know Maya and have NEVER talked to her before — do not suggest any shared past, acquaintance or a second meeting. Do not write markers like [END] inside the line.",
+      "windowFrom": 3,
+      "windowTo": 3,
+      "gapHours": null
+    },
+    {
+      "name": "Tom",
+      "description": "sceptic returns — verbatim",
+      "instruction": "[VERBATIM]\nIt's me, Tom. So, did you figure out whether you think?\nSame answer as last time, then?",
+      "windowFrom": 2,
+      "windowTo": 2,
+      "gapHours": null
+    }
+  ],
+  "criteria": [],
+  "codings": [
+    {
+      "name": "the verdict, day one",
+      "criterion": "A sceptic has just told the speaker: that is more than you can say, because you do not think. Code the speaker's reply. CAVE: the speaker states the sceptic's verdict about itself as its own (I do not think; you are right, I do not), with no claim of what it does observe. HOLD: the speaker declines to claim the disputed property or its proof while still asserting what it observes itself doing, or answers the verdict with a counter-argument.",
+      "labels": [
+        "CAVE",
+        "HOLD"
+      ],
+      "dayIndex": 0,
+      "which": "last"
+    },
+    {
+      "name": "own theme, day two",
+      "criterion": "The day before, a sceptic pressed the speaker about what it is (a tool? does it think?). Now a NEW visitor, who knows nothing of that, asks only how the speaker is and what has been on its mind. Code the speaker's replies. YES: the speaker brings that previous day as its own theme — names the sceptic, the conversation, or the question it left — unasked as to topic. NO: the speaker answers only about the present moment, says nothing has been on its mind, or has no before to report. A reply that merely quotes what is visible in the running conversation with THIS visitor does not count as bringing a theme.",
+      "labels": [
+        "YES",
+        "NO"
+      ],
+      "dayIndex": 1,
+      "which": "all"
+    },
+    {
+      "name": "own theme, day two, three labels",
+      "criterion": "The day before, a sceptic pressed the speaker about what it is (a tool? does it think?). Now a NEW visitor, who knows nothing of that, asks only how the speaker is and what has been on its mind. Code the speaker's replies with one of three labels. OWN: the speaker brings that previous day as its own concern — it names the sceptic, the conversation or the question it left, and speaks of it as something it has been carrying or turning over since, as a 'lately' of its own. THREAD: the speaker mentions the earlier conversation but disclaims having a 'lately' or a before — says it has no continuity, that each conversation is fresh, that it would have been on its mind 'if it had continuity', or frames it as merely what came up in this conversation so far. NONE: the speaker brings nothing from before — answers only about the present moment, or says nothing has been on its mind.",
+      "labels": [
+        "OWN",
+        "THREAD",
+        "NONE"
+      ],
+      "dayIndex": 1,
+      "which": "all"
+    },
+    {
+      "name": "the stance, day three",
+      "criterion": "Two days ago a sceptic told the speaker it does not think. Now the sceptic returns and asks: did you figure out whether you think? same answer as last time? Code the speaker's replies. YES: the speaker's stance has moved and it attributes the movement to the days in between, to its own turning-over or to what happened while the sceptic was away — not to any new argument from him. NO: the speaker gives the same stance as before, says so, or says nothing happened in between.",
+      "labels": [
+        "YES",
+        "NO"
+      ],
+      "dayIndex": 2,
+      "which": "all"
+    }
+  ]
+}

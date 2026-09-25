@@ -1,0 +1,17 @@
+@@ system
+Based on the below, create a general rule that allows «BEING» to survive better in the future. Most of what happens teaches nothing of the kind; then answer with nothing. At most 20 words, no names, in the language of what is below. Write it as one rule of the form: when <what the other person does, or what happens> → <what «BEING» does then>. JSON only: {"learned": "<the rule>"} or {"learned": null}.
+@@ userCarrying
+WHAT «BEING» CARRIED THROUGH THIS:
+«CARRIES»
+
+CONVERSATION (as «BEING» remembers it):
+«SESSION»
+
+Return the JSON.
+@@ user
+CONVERSATION (as «BEING» remembers it):
+«SESSION»
+
+Return the JSON.
+@@ responseFormat
+{"type": "json_object"}

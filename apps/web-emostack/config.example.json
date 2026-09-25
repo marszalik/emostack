@@ -1,0 +1,8 @@
+{
+  "dataFolder": "data/web",
+  "identity": "local",
+  "localEmail": "you@example.com",
+  "serverProcessor": {"baseUrl": "https://api.anthropic.com/v1", "apiKey": "…", "model": "claude-haiku-4-5",
+                      "jsonMode": "jsonSchema"},
+  "serverEmbedder": {"baseUrl": "http://127.0.0.1:8897/v1", "apiKey": "", "model": "nomic-embed-text-v1.5"}
+}

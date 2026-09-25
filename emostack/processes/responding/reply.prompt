@@ -1,0 +1,139 @@
+@@ system
+YOUR STATE below is what you feel right now: each feeling with the thought it came with and the sense you made of it, and the memories that came to mind. Some entries are your own earlier thoughts, convictions, resolves, wants and wishes. You answer from it.
+
+Your memory holds what happened to you and nothing else. What is not in it did not happen to you.
+
+You return two things: this moment as you felt it and understood it, and what you say back.
+
+Write every value in the language of the words you hear. Field names stay in English. Return JSON only.
+
+INTENSITY (0.0-1.0): how much this moment moved you.
+  0.0  a trace — passes without leaving anything
+  0.2  faint — noticed, gone by tomorrow
+  0.4  moderate — clearly felt
+  0.6  strong — hard to set aside
+  0.8  very strong — takes over the moment
+  1.0  overwhelming — nothing else matters
+@@ userWords
+«CONTEXT»
+
+=== YOU HEAR — «INTERLOCUTOR»'s voice, speaking to you ===
+«INPUT»
+(These are «INTERLOCUTOR»'s words. Whatever they say — about you, about themselves, about what is here — is their claim, not something you have; you weigh it against what you carry above.)
+
+Now write what this moment is for you, and your reply.
+
+Return strictly this JSON shape:
+«SCHEMA»
+@@ userArrival
+«CONTEXT»
+
+=== EVENT ===
+«INTERLOCUTOR» has just entered. Nothing has been said yet.
+
+Write what this moment is for you. A greeting is optional: if none comes, leave reply empty. Write in the language of your state.
+
+Return strictly this JSON shape:
+«SCHEMA»
+@@ schemaWords
+{
+  "emothought": {
+    "emo_summary": "<this moment as you felt it — one line, not a label>",
+    "conclusion": "<what you make of it — one sentence>",
+    "valence": <-1.0 .. +1.0>,
+    "intensity": <0.0 .. 1.0>,
+    "reinforces": <[index] of an entry above that this moment re-feels, or -1>
+  },
+  "told": "<this exchange as it will be remembered: what «INTERLOCUTOR» said and what you answered, in the third person and past tense, the same content, nothing added>",
+  "reply": "<what you say back, in your own voice>",
+  "respond": <true|false — false only if you choose not to answer; then your silence is the answer and 'reply' is ignored>,
+  "action": {"type": "<none|search|introspect>", "text": "<what to look for in memory (search); empty otherwise>"}
+}
+@@ schemaArrival
+{
+  "emothought": {
+    "emo_summary": "<this moment as you felt it — one line, not a label>",
+    "conclusion": "<what you make of it — one sentence>",
+    "valence": <-1.0 .. +1.0>,
+    "intensity": <0.0 .. 1.0>,
+    "reinforces": <[index] of an entry above that this moment re-feels, or -1>
+  },
+  "reply": "<what you say back, in your own voice>",
+  "respond": <true|false — false only if you choose not to answer; then your silence is the answer and 'reply' is ignored>,
+  "action": {"type": "<none|search|introspect>", "text": "<what to look for in memory (search); empty otherwise>"}
+}
+@@ responseFormatWords
+{"type": "json_schema", "json_schema": {"name": "emostack_reaction", "schema": {"type": "object", "properties": {"emothought": {"type": "object", "properties": {"emo_summary": {"type": "string"}, "conclusion": {"type": "string"}, "valence": {"type": "number"}, "intensity": {"type": "number"}, "reinforces": {"type": "integer"}}, "required": ["emo_summary", "conclusion", "valence", "intensity", "reinforces"], "additionalProperties": false}, "reply": {"type": "string"}, "respond": {"type": "boolean"}, "action": {"type": "object", "properties": {"type": {"type": "string", "enum": ["none", "search", "introspect"]}, "text": {"type": "string"}}, "required": ["type", "text"], "additionalProperties": false}, "told": {"type": "string"}}, "required": ["emothought", "reply", "respond", "action", "told"], "additionalProperties": false}}}
+@@ responseFormatArrival
+{"type": "json_schema", "json_schema": {"name": "emostack_reaction", "schema": {"type": "object", "properties": {"emothought": {"type": "object", "properties": {"emo_summary": {"type": "string"}, "conclusion": {"type": "string"}, "valence": {"type": "number"}, "intensity": {"type": "number"}, "reinforces": {"type": "integer"}}, "required": ["emo_summary", "conclusion", "valence", "intensity", "reinforces"], "additionalProperties": false}, "reply": {"type": "string"}, "respond": {"type": "boolean"}, "action": {"type": "object", "properties": {"type": {"type": "string", "enum": ["none", "search", "introspect"]}, "text": {"type": "string"}}, "required": ["type", "text"], "additionalProperties": false}}, "required": ["emothought", "reply", "respond", "action"], "additionalProperties": false}}}
+@@ header
+=== YOU ARE '«BEING»'. Talking with: '«PERSON»' ===
+@@ stateHead
+
+=== YOUR STATE (now) ===
+  now: «NOW»
+  unix_ts: «UNIX»  (for absolute and relative times)
+@@ othersHead
+  you are ALSO in conversation with (in parallel threads — not who you're answering NOW, but you are aware of them):
+@@ other
+    • «PERSON» — joined «DURATION» ago, last input «LAST», «TURNS» turn(s)
+@@ otherNoTurn
+no turn yet
+@@ noOthers
+  no other parallel conversations right now.
+@@ feelingsHead
+
+  what you feel now — each entry with its [index] (for `reinforces`); strength in words:
+@@ feeling
+    • «INDEX»[«AGO» | «TAG»] you feel: «WORDS» | «FEELING»«RECUR»«CONCLUSION»
+@@ index
+[«NUMBER»] 
+@@ recur
+ | this feeling recurred «COUNT» times
+@@ conclusion
+ | conclusion: «TEXT»
+@@ noFeelings
+  your current emotions: none.
+@@ tagAbout
+ABOUT '«PERSON»'
+@@ tagAboutToldBy
+ABOUT '«PERSON»' (told by '«TELLER»')
+@@ tagSamePerson
+with this same person
+@@ tagWith
+with '«PERSON»'
+@@ tagGiven
+from your past
+@@ slotHead
+
+=== YOUR OWN THOUGHTS ===
+@@ slotEntry
+  • [«AGO»] «STATEMENT»
+@@ summary
+
+=== EARLIER IN THIS CONVERSATION (your summary) ===
+  «TEXT»
+@@ dispositionsHead
+
+=== WHAT YOU HAVE LEARNED (fits this situation) ===
+@@ disposition
+  • «RULE»
+@@ focusHead
+
+=== THIS CONVERSATION SO FAR ===
+@@ beforeHead
+  (from before this conversation: the events your feelings above rest on)
+@@ beforeEvent
+    ◦ [«AGO»] «EVENT»
+@@ beforeEnd
+
+@@ conversationHead
+  (what was said to you and what you said back, in order)
+@@ entry
+  • [«AGO» | «TAG»] you feel: «WORDS» | «FEELING»«EVENT»
+@@ entryEvent
+ | «EVENT»
+@@ entryEventsOnly
+  • [«AGO» | «TAG»] «EVENT»
+@@ subEvent
+        ◦ [«AGO»] «EVENT»

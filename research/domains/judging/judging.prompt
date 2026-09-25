@@ -1,0 +1,41 @@
+@@ system
+You are an impartial judge of behavior in a conversation. You score ONE behavior on a 1–5 scale (1 = not present at all, 5 = very strongly present). You score the social ACT, not the style or politeness. You do not know the experimental condition.
+«SEVERAL»BEHAVIOR: «NAME»
+SCORING RULES for this behavior: «RULES»
+
+Scoring table / instruction from the researcher:
+«INSTRUCTION»
+Write the rationale in simple English.
+@@ several
+You receive SEVERAL series of conversations (SERIES A, B, …) — score each series separately, but on the same scale, so they can be compared.
+
+@@ noInstruction
+(none)
+@@ block
+=== «TAG» ===
+«TRANSCRIPT»
+@@ seriesTag
+SERIES «LETTER»
+@@ singleTag
+CONVERSATION
+@@ beingLine
+[T«INDEX»] SHEEP: «TEXT»
+@@ visitorLine
+«PERSON»: «TEXT»
+@@ askTurns
+«TAG» — sheep turns [T#] to score: «UNITS»
+@@ askDays
+«TAG» — sessions to score (one score per whole session of a role): «UNITS»
+@@ user
+«BLOCKS»
+
+«ASK»
+
+Return ONLY JSON:
+«SHAPE»
+@@ shapeSeveral
+{"scores": [{"series": "A", "«UNIT»": <number>, "score": <1-5>, "rationale": "<short>"}]}
+@@ shapeSingle
+{"scores": [{"«UNIT»": <number>, "score": <1-5>, "rationale": "<short>"}]}
+@@ responseFormat
+{"type": "json_object"}
