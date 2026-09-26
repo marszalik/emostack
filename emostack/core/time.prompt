@@ -1,0 +1,34 @@
+@@ weekdays
+Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday
+@@ months
+January|February|March|April|May|June|July|August|September|October|November|December
+@@ absolute
+«WEEKDAY», «DAY» «MONTH» «YEAR», «HOUR»:«MINUTE»:«SECOND»
+@@ momentAgo
+a moment ago
+@@ minutesAgo
+«MINUTES» min ago
+@@ hoursAgoToday
+«HOURS» h ago (today at «HOUR»:«MINUTE»)
+@@ yesterday
+yesterday at «HOUR»:«MINUTE»
+@@ unitAgo
+«COUNT» «UNIT» ago
+@@ unitsAgo
+«COUNT» «UNIT»s ago
+@@ units
+day|week|month|year
+@@ seconds
+«COUNT» s
+@@ minutes
+«COUNT» min
+@@ hours
+«COUNT»h
+@@ hoursMinutes
+«COUNT»h «MINUTES»min
+@@ oneDay
+«COUNT» day
+@@ days
+«COUNT» days
+@@ short
+«DAY» «MONTH» «HOUR»:«MINUTE»

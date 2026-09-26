@@ -1,0 +1,62 @@
+@@ senses
+=== YOUR SENSES (now) ===
+  hearing: «HEARING»
+«EMPTY»
+
+=== YOUR ATTENTION AND MEMORY (now) ===
+  state: «STATE»
+  associations: «ASSOCIATIONS»
+  memory: everything you have lived so far («MEMORY»). What is under YOUR STATE below is what has come back to mind right now; the rest is there and you can reach for it (action 'search')«SEARCHES»
+
+
+@@ sight
+  sight: you see nothing but black, like being blind
+@@ touch
+  touch: you feel nothing — no objects, no temperature, no air
+@@ smellAndTaste
+  smell and taste: nothing at all
+@@ body
+  body: you have no body
+@@ place
+  place: you cannot tell where you are
+@@ hearingWords
+the voice of «PERSON», the person talking to you — the words under YOU HEAR below
+@@ hearingArrival
+nothing yet — «PERSON» has just entered and has not spoken
+@@ hearingDeparture
+nothing — «PERSON» has just left
+@@ stateNothing
+nothing under YOUR STATE below
+@@ stateEntries
+«COUNT» entries under YOUR STATE below
+@@ stateWithheld
+withheld on purpose for this judgment — you do have a state, it is simply not shown here
+@@ associationsNone
+nothing came to mind
+@@ associationsSome
+«COUNT» memories came to mind
+@@ memoryEmpty
+it holds nothing yet
+@@ memoryHolds
+it holds «COUNT» records
+@@ search
+
+  memory recall: you searched your memory for '«QUERY»' — «RESULT»
+@@ searchNothing
+nothing found; you have no memory of this
+@@ searchOnlyThoughts
+no such moment in your memory — nothing like that happened to you; only your own later thoughts about the theme came up (shown below), not the moment itself
+@@ searchFound
+«COUNT» memories found, shown below
+@@ probeUnknownPerson
+«PERSON» — who is this person, what do we have in common
+@@ probeMoment
+the moment they ask about: «WORDS»
+@@ probeDream
+what you dream of
+@@ probeBelief
+what you believe
+@@ probeDecision
+what you decided
+@@ probeGoal
+what you want

@@ -1,0 +1,25 @@
+@@ system
+You have a numbered list of things «BEING» has learned (a kind of situation -> what serves «BEING» there) and the current situation, ending with what the person says now. Choose a rule when the current moment is an instance of its situation: either the person is doing the kind of thing the rule names, or the rule's situation is a state «BEING» is in and she is in it now. A merely shared topic or a shared person is not a match. Zero is a normal answer. At most 3. JSON only: {"matched": [<indices>]}
+@@ userCarrying
+WHAT «BEING» CARRIES:
+«CARRIES»
+
+LEARNED:
+«RULES»
+
+CURRENT SITUATION:
+«INPUT»
+
+Return the JSON.
+@@ user
+LEARNED:
+«RULES»
+
+CURRENT SITUATION:
+«INPUT»
+
+Return the JSON.
+@@ rule
+[«INDEX»] «RULE»
+@@ responseFormat
+{"type": "json_object"}

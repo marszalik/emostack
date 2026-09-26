@@ -1,0 +1,12 @@
+@@ system
+Each learned rule has a SITUATION (what the other person does, or what happens) and an ACT (what the being does then). For the new rule and for each existing rule, name its situation and its act. Then decide: an existing rule is THE SAME as the new one only when its situation is the same kind of moment AND its act is the same act. A narrower situation, a different kind of person, or a different act means it is not the same rule. JSON only: {"new_situation": "<...>", "new_act": "<...>", "same": <index of an existing rule that is the same rule in other words, or -1>, "contradicts": <index of an existing rule that says the opposite for the same kind of situation, or -1>}
+@@ user
+EXISTING:
+«RULES»
+
+NEW:
+«NEW»
+@@ rule
+[«INDEX»] «RULE»
+@@ responseFormat
+{"type": "json_object"}

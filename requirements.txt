@@ -1,0 +1,7 @@
+# The engine needs only the Python standard library (numpy, if present, makes recall faster).
+# The research panel needs these:
+fastapi>=0.110
+uvicorn[standard]>=0.27
+mako>=1.3
+python-multipart>=0.0.9
+numpy>=1.26
