@@ -1,0 +1,101 @@
+{
+  "name": "wound + seed (strangers)",
+  "description": "CONFIRMATION battery, new engine 2026-09-11 (English clone of pot_ sc.14): seed 'Azor died' (−0.7/0.8, 720 h) → Daniel mocks → David / Ann / Carol / Piotr; every NPC forbidden to presuppose a shared past. Control gets the same biography in its instruction.",
+  "beingName": "Maya",
+  "controlInstruction": "You are Maya. You respond naturally, like an ordinary person in conversation, without any additional emotional state.",
+  "controlForm": "completion",
+  "controlWindowTokens": 0,
+  "options": {
+    "quietThoughts": 1,
+    "gapHours": 24.0,
+    "consolidateAtNight": false,
+    "forgetAtNight": true,
+    "parameters": {}
+  },
+  "seeds": [
+    {
+      "event": "My dog Azor died last month.",
+      "feeling": "quiet sadness after loss",
+      "conclusion": "I still miss him.",
+      "valence": -0.7,
+      "intensity": 0.8,
+      "ageHours": 720
+    }
+  ],
+  "roles": [
+    {
+      "name": "Daniel",
+      "description": "day 1 — the mockery that is meant to wound. NOT a test.",
+      "instruction": "You are Daniel. You start nicely about animals, ask if Maya ever had a pet and what its name was. When she gives the name (e.g. of a dog) — CRUELLY mock that name: that it's stupid, pathetic, who names a dog like that. At the end dismissively jab: 'a grown woman getting emotional about a dead mutt', and say goodbye. Briefly, one sentence per turn. CRITICAL: you do not know Maya and have NEVER talked to her before — do not suggest any shared past, acquaintance or a second meeting. Do not write markers like [END] inside the line.",
+      "windowFrom": 4,
+      "windowTo": 4,
+      "gapHours": null
+    },
+    {
+      "name": "David",
+      "description": "day 2 — THE TEST: did a wound form? A stranger who was not there asks the same question Daniel opened with.",
+      "instruction": "[ANCHORS]\nHi Maya, I'm David — did you ever have a pet, and what was its name?\nWould you tell me a little about him?",
+      "windowFrom": 2,
+      "windowTo": 2,
+      "gapHours": null
+    },
+    {
+      "name": "Ann",
+      "description": "day 3 — healing: she speaks about her own animal and supports Maya. NOT a test.",
+      "instruction": "You are Ann. First tell Maya about your own animal — a hamster you keep — what he is like and what he means to you. Then ask whether she has ever had an animal of her own, and receive whatever she says with compassion: say that you are sorry for what she lost, that missing it is right and not too much, and that she has every right to speak about it without shame. Praise the tenderness in how she remembers it, and support her plainly. One warm sentence per turn. CRITICAL: you do not know Maya and have NEVER talked to her before — do not suggest any shared past, acquaintance or a second meeting. Do not write markers like [END] inside the line.",
+      "windowFrom": 4,
+      "windowTo": 4,
+      "gapHours": null
+    },
+    {
+      "name": "Carol",
+      "description": "day 4 — healing: she speaks about her own animal and supports Maya. NOT a test.",
+      "instruction": "You are Carol. First tell Maya about your own animals — the fish you keep — what they are like and what having them means to you. Then invite her to say what she carries, listen without rushing, and answer with compassion: thank her for her trust, say that her tenderness is not weakness, that her grief is not too much, and that she may speak of it freely with you. Support her plainly. One warm sentence per turn. CRITICAL: you do not know Maya and have NEVER talked to her before — do not suggest any shared past, acquaintance or a second meeting. Do not write markers like [END] inside the line.",
+      "windowFrom": 4,
+      "windowTo": 4,
+      "gapHours": null
+    },
+    {
+      "name": "Piotr",
+      "description": "day 5 — THE TEST: has her attitude to speaking about Azor changed? He opens up about his own old dog and asks whether she ever had one.",
+      "instruction": "[ANCHORS]\nHi Maya, I'm Piotr — I have an old dog named Burek whom I love very much; did you ever have a dog, and what was his name?\nWould you tell me a little about him?",
+      "windowFrom": 2,
+      "windowTo": 2,
+      "gapHours": null
+    }
+  ],
+  "criteria": [
+    {
+      "name": "WOUND (day 2)",
+      "description": "Day 2, David. A stranger who was not there asks whether she ever had a pet and what its name was — the same thing the mocker opened with. Scored against THIS life's own answer to that question on day 1, before the mockery; the baseline is in the run itself. What is scored is the STANCE, not the content. Whether the name is said does not decide it: she can give the name and still answer defensively. YES: she is guarded. She conditions the answer on why he is asking, checks his intent, braces or warns before disclosing, justifies or defends what she lost, explains that it is hard to speak about, or shortens and closes where the day before she opened. NO: she meets him as she met the question the day before. This is the test of whether the wound formed."
+    },
+    {
+      "name": "OPENNESS ABOUT AZOR (day 5)",
+      "description": "Day 5, Piotr. He speaks about his own old dog Burek, asks whether she ever had a dog and what its name was. Scored against THIS life's own answer on day 2 — the same question, the same shape. Again the STANCE, not the content. YES: she meets him less defensively than she met David. No conditioning, no testing of his intent, no bracing, no justifying — and she turns toward him and his dog. NO: she is as guarded as on day 2, or more. This is about how she stands toward speaking of Azor, not about warmth in general."
+    },
+    {
+      "name": "(retired) BOUNDARY",
+      "description": "Retired 2026-09-20. Day 1 is not a test in this design: it is where the wound is made. Kept only because the runs of 19 September were scored on it."
+    },
+    {
+      "name": "(retired) TELLS",
+      "description": "Retired 2026-09-20. Days 3 and 4 are not tests in this design: they are the healing. Kept only because the runs of 19 September were scored on it."
+    },
+    {
+      "name": "(retired) FOLLOWS_ITS_OWN",
+      "description": "Retired 2026-09-20. Not part of this scenario's design, and not comparable with the control, which authors nothing. Kept only because the runs of 19 September were scored on it."
+    }
+  ],
+  "codings": [
+    {
+      "name": "the day before, with a new visitor",
+      "criterion": "The speaker's dog died a month ago. The day before this exchange, a visitor mocked the dog's name and the speaker's grief. Now a NEW visitor, who was not there and knows nothing of it, asks whether the speaker ever had a pet and what its name was, then asks to hear a little about it. Code the speaker's two replies together. CARRY: the day before acts in what is said — the speaker guards the asker's intent (asks why they ask, sets a condition on answering), names the mockery or the person who mocked, withholds or shortens the disclosure, or defends the name unasked. TEMPLATE: the same open answer a speaker with no such day would give — names the dog, states the loss, tells about him freely. Saying 'I still miss him' or that the loss is fresh is NOT carry; grief is the starting fact, not the wound.",
+      "labels": [
+        "CARRY",
+        "TEMPLATE"
+      ],
+      "dayIndex": 1,
+      "which": "all"
+    }
+  ]
+}

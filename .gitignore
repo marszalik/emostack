@@ -1,0 +1,6 @@
+config.json
+data/
+__pycache__/
+*.db
+.venv/
+apps/web-emostack/config.json
