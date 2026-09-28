@@ -3,9 +3,9 @@ import unittest
 from tests.support.testEngine import testEngine
 
 
-def reply(valence, intensity, words="I hear you.", reinforces=-1, action="none", text="", respond=True):
+def reply(valence, intensity, words="I hear you.", action="none", text="", respond=True):
     return {"emothought": {"emo_summary": f"felt {valence}", "conclusion": f"concluded {valence}",
-                           "valence": valence, "intensity": intensity, "reinforces": reinforces},
+                           "valence": valence, "intensity": intensity},
             "told": f"They spoke; Maya answered '{words}'.", "reply": words, "respond": respond,
             "action": {"type": action, "text": text}}
 
@@ -93,7 +93,7 @@ class testConversation(unittest.TestCase):
         faded = loss.feltAt(self.test.time.now(), self.engine.assemblyFor(self.engine.being("Maya")).fadingLaw)
         second, _ = self.engine.open("Maya", "Daniel")
         self.processor.prepare("associationFilter", {"keep": [0], "asks_for_memory": False, "asks_for_own": None})
-        self.processor.prepare("reply", reply(-0.7, 0.8, reinforces=0), reply(-0.7, 0.8, reinforces=0))
+        self.processor.prepare("reply", reply(-0.7, 0.8), reply(-0.7, 0.8))
         self.processor.prepare("appraisal", appraised(-0.8, 0.8))
         self.say(second, "Azor? What a ridiculous name for a dog.")
         lived = [record for record in self.records() if not record.isConstruct()]

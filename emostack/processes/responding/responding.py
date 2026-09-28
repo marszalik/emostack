@@ -27,19 +27,8 @@ class responding:
                 conclusion=str(felt["conclusion"]).strip(),
                 valence=float(felt["valence"]),
                 intensity=float(felt["intensity"]),
-                reinforcesId=self._reinforced(felt.get("reinforces", -1), context.stateIndex),
                 retold=str(answer.get("told", "") or "").strip(),
                 words=words,
                 action=self.actions.fromReply(answer, words))
         except (ProcessorError, KeyError, TypeError, ValueError):
             return Reaction.failure()
-
-    @staticmethod
-    def _reinforced(raw, stateIndex):
-        if isinstance(raw, list):
-            raw = raw[0] if raw else -1
-        try:
-            index = int(raw)
-        except (TypeError, ValueError):
-            return None
-        return stateIndex[index] if 0 <= index < len(stateIndex) else None

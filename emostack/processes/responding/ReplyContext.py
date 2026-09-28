@@ -27,7 +27,6 @@ class ReplyContext:
         self.held = list(held or [])
         self.summary = summary
         self.dispositions = list(dispositions or [])
-        self.stateIndex = []
         self.parts = promptTemplate.beside(__file__, "reply.prompt")
         self.template = self._ownTemplate()
 
@@ -57,7 +56,6 @@ class ReplyContext:
     # ---- the context ----
 
     def render(self):
-        self.stateIndex = []
         moved = []
         lines = [self.parts.fill("header", BEING=self.hereAndNow.beingName, PERSON=self.hereAndNow.person)]
         lines.append("\n" + self.hereAndNow.senses.render())
@@ -98,12 +96,8 @@ class ReplyContext:
                           key=lambda cluster: -cluster.representative.feltAt(now, self.fading))
         for cluster in clusters:
             record = cluster.representative
-            index = ""
-            if not record.isConstruct():
-                index = self.parts.fill("index", NUMBER=len(self.stateIndex))
-                self.stateIndex.append(record.id)
             lines.append(self.parts.fill(
-                "feeling", INDEX=index, AGO=self.clock.formatAgo(record.happenedAt, now),
+                "feeling", AGO=self.clock.formatAgo(record.happenedAt, now),
                 TAG=self._tag(record), WORDS=self._words(record), FEELING=record.feeling,
                 RECUR=self.parts.fill("recur", COUNT=cluster.count) if cluster.count > 1 else "",
                 CONCLUSION=self.parts.fill("conclusion", TEXT=record.conclusion) if record.conclusion else ""))

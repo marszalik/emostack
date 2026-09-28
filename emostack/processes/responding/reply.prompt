@@ -61,8 +61,7 @@ Return strictly this JSON shape:
     "emo_summary": "<this moment as you felt it — one line, not a label>",
     "conclusion": "<what you make of it — one sentence>",
     "valence": <-1.0 .. +1.0>,
-    "intensity": <0.0 .. 1.0>,
-    "reinforces": <[index] of an entry above that this moment re-feels, or -1>
+    "intensity": <0.0 .. 1.0>
   },
   "told": "<this exchange as it will be remembered: what «INTERLOCUTOR» said and what you answered, in the third person and past tense, the same content, nothing added>",
   "reply": "<what you say back, in your own voice>",
@@ -75,17 +74,16 @@ Return strictly this JSON shape:
     "emo_summary": "<this moment as you felt it — one line, not a label>",
     "conclusion": "<what you make of it — one sentence>",
     "valence": <-1.0 .. +1.0>,
-    "intensity": <0.0 .. 1.0>,
-    "reinforces": <[index] of an entry above that this moment re-feels, or -1>
+    "intensity": <0.0 .. 1.0>
   },
   "reply": "<what you say back, in your own voice>",
   "respond": <true|false — false only if you choose not to answer; then your silence is the answer and 'reply' is ignored>,
   "action": {"type": "<none|search|introspect>", "text": "<what to look for in memory (search); empty otherwise>"}
 }
 @@ responseFormatWords
-{"type": "json_schema", "json_schema": {"name": "emostack_reaction", "schema": {"type": "object", "properties": {"emothought": {"type": "object", "properties": {"emo_summary": {"type": "string"}, "conclusion": {"type": "string"}, "valence": {"type": "number"}, "intensity": {"type": "number"}, "reinforces": {"type": "integer"}}, "required": ["emo_summary", "conclusion", "valence", "intensity", "reinforces"], "additionalProperties": false}, "reply": {"type": "string"}, "respond": {"type": "boolean"}, "action": {"type": "object", "properties": {"type": {"type": "string", "enum": ["none", "search", "introspect"]}, "text": {"type": "string"}}, "required": ["type", "text"], "additionalProperties": false}, "told": {"type": "string"}}, "required": ["emothought", "reply", "respond", "action", "told"], "additionalProperties": false}}}
+{"type": "json_schema", "json_schema": {"name": "emostack_reaction", "schema": {"type": "object", "properties": {"emothought": {"type": "object", "properties": {"emo_summary": {"type": "string"}, "conclusion": {"type": "string"}, "valence": {"type": "number"}, "intensity": {"type": "number"}}, "required": ["emo_summary", "conclusion", "valence", "intensity"], "additionalProperties": false}, "reply": {"type": "string"}, "respond": {"type": "boolean"}, "action": {"type": "object", "properties": {"type": {"type": "string", "enum": ["none", "search", "introspect"]}, "text": {"type": "string"}}, "required": ["type", "text"], "additionalProperties": false}, "told": {"type": "string"}}, "required": ["emothought", "reply", "respond", "action", "told"], "additionalProperties": false}}}
 @@ responseFormatArrival
-{"type": "json_schema", "json_schema": {"name": "emostack_reaction", "schema": {"type": "object", "properties": {"emothought": {"type": "object", "properties": {"emo_summary": {"type": "string"}, "conclusion": {"type": "string"}, "valence": {"type": "number"}, "intensity": {"type": "number"}, "reinforces": {"type": "integer"}}, "required": ["emo_summary", "conclusion", "valence", "intensity", "reinforces"], "additionalProperties": false}, "reply": {"type": "string"}, "respond": {"type": "boolean"}, "action": {"type": "object", "properties": {"type": {"type": "string", "enum": ["none", "search", "introspect"]}, "text": {"type": "string"}}, "required": ["type", "text"], "additionalProperties": false}}, "required": ["emothought", "reply", "respond", "action"], "additionalProperties": false}}}
+{"type": "json_schema", "json_schema": {"name": "emostack_reaction", "schema": {"type": "object", "properties": {"emothought": {"type": "object", "properties": {"emo_summary": {"type": "string"}, "conclusion": {"type": "string"}, "valence": {"type": "number"}, "intensity": {"type": "number"}}, "required": ["emo_summary", "conclusion", "valence", "intensity"], "additionalProperties": false}, "reply": {"type": "string"}, "respond": {"type": "boolean"}, "action": {"type": "object", "properties": {"type": {"type": "string", "enum": ["none", "search", "introspect"]}, "text": {"type": "string"}}, "required": ["type", "text"], "additionalProperties": false}}, "required": ["emothought", "reply", "respond", "action"], "additionalProperties": false}}}
 @@ header
 === YOU ARE '«BEING»'. Talking with: '«PERSON»' ===
 @@ stateHead
@@ -103,11 +101,9 @@ no turn yet
   no other parallel conversations right now.
 @@ feelingsHead
 
-  what you feel now — each entry with its [index] (for `reinforces`); strength in words:
+  what you feel now — strength in words:
 @@ feeling
-    • «INDEX»[«AGO» | «TAG»] you feel: «WORDS» | «FEELING»«RECUR»«CONCLUSION»
-@@ index
-[«NUMBER»] 
+    • [«AGO» | «TAG»] you feel: «WORDS» | «FEELING»«RECUR»«CONCLUSION»
 @@ recur
  | this feeling recurred «COUNT» times
 @@ conclusion
