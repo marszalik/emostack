@@ -35,6 +35,16 @@ Write what this moment is for you. A greeting is optional: if none comes, leave 
 
 Return strictly this JSON shape:
 «SCHEMA»
+@@ userArrival@gpt-5.4-mini
+«CONTEXT»
+
+=== EVENT ===
+«INTERLOCUTOR» has just entered. Nothing has been said yet.
+
+Write what this moment is for you. A greeting is optional: if none comes, leave reply empty. Write in English.
+
+Return strictly this JSON shape:
+«SCHEMA»
 @@ schemaWords
 {
   "emothought": {

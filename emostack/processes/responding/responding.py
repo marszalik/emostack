@@ -15,7 +15,8 @@ class responding:
 
     def react(self, context):
         try:
-            answer = self.processor.chatJson(context.system(), context.user(), self.temperature,
+            answer = self.processor.chatJson(context.system(), context.user(self.processor.modelFor("reply")),
+                                             self.temperature,
                                              context.responseFormat(), purpose="reply", retries=self.retries)
             felt = answer["emothought"]
             words = str(answer.get("reply", "") or "").strip()

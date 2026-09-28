@@ -39,14 +39,15 @@ class ReplyContext:
     def system(self):
         return self.template.text("system")
 
-    def user(self):
+    def user(self, forModel=""):
+        """The call as the model `forModel` reads it: a block worded for that model replaces the common one."""
         if self.kind == self.ARRIVAL:
             schema = self.template.text("schemaArrival")
             layout = "userArrival"
         else:
             schema = self.template.fill("schemaWords", INTERLOCUTOR=self.hereAndNow.person)
             layout = "userWords"
-        return self.template.fill(layout, CONTEXT=self.render(), INTERLOCUTOR=self.hereAndNow.person,
+        return self.template.fill(layout, forModel, CONTEXT=self.render(), INTERLOCUTOR=self.hereAndNow.person,
                                   INPUT=self.words, SCHEMA=schema)
 
     def responseFormat(self):
