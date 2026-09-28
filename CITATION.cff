@@ -1,0 +1,38 @@
+cff-version: 1.2.0
+message: "If you use EmoStack, please cite the preprint below."
+title: "EmoStack"
+abstract: >-
+  A cognitive layer over a frozen language model: a being with its own history,
+  feelings, thoughts and learned dispositions, and a research panel that runs
+  its lives against a control on the same LLM model.
+type: software
+authors:
+  - family-names: Marszalik
+    given-names: Eliza
+    email: eliza.marszalik@pjwstk.edu.pl
+repository-code: "https://github.com/marszalik/emostack"
+url: "https://emostack.com"
+license: PolyForm-Noncommercial-1.0.0
+version: "1.0"
+date-released: 2026-09-25
+keywords:
+  - artificial consciousness
+  - cognitive architecture
+  - language models
+  - autobiographical memory
+  - affect
+preferred-citation:
+  type: article
+  title: "What Do Electric Sheep Dream Of? A Being That Is in Its Own Present: Artificial Consciousness by Construction, over a Frozen Language Model"
+  authors:
+    - family-names: Marszalik
+      given-names: Eliza
+      email: eliza.marszalik@pjwstk.edu.pl
+  doi: 10.5281/zenodo.22936968
+  url: "https://doi.org/10.5281/zenodo.22936968"
+  publisher:
+    name: Zenodo
+  year: 2026
+  month: 9
+  date-published: 2026-09-24
+  status: preprint
