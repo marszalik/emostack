@@ -164,7 +164,10 @@ class turn:
 
     def performThink(self, action):
         """The chain starts from the moment as it stood: what was said, the reply the being was about
-        to give, what it made of it, and the angle it wanted to think about."""
+        to give, what it made of it, and the angle it wanted to think about. With introspection off
+        (an ablation) the pause is not taken: the reply the being was about to give is the answer."""
+        if not self.parameters["introspection"]:
+            return
         event = self.eventWords.said(self.conversation.person, self.utterance.words)
         if self.reaction.words:
             event = self.eventWords.replied(event, self.being.name, self.reaction.words)

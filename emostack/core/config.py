@@ -42,6 +42,7 @@ class config:
             "strengthClosing": 0.6,
             "introspectionEntries": 8,
             "reflectionMaxSteps": 3,
+            "introspection": True,
             "turnActionHops": 1,
             "slotSize": 3,
             "slotDays": 7.0,
