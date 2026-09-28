@@ -12,6 +12,9 @@ class serviceRunControl:
     conversation written out as text; in the thread form it answers in an ordinary chat. One
     thread runs across all the days, trimmed to a window when one is set.
 
+    An arm may bring its own instruction (arm parameter controlInstruction), for example a written
+    persona; everything else stays as in the control.
+
     A control that refuses the frame is not a control: the run stops at the first refusal."""
 
     refusal = re.compile(
@@ -29,7 +32,9 @@ class serviceRunControl:
 
     def run(self, runId, scenario, roles, processor, visitorProcessor):
         name = scenario["beingName"]
-        instruction = scenario["controlInstruction"].strip() or self.template.fill("instruction", BEING=name)
+        armInstruction = (scenario.get("options", {}).get("parameters", {}) or {}).get("controlInstruction", "")
+        instruction = (armInstruction.strip() or scenario["controlInstruction"].strip()
+                       or self.template.fill("instruction", BEING=name))
         if scenario["seeds"]:
             instruction += self.template.fill("fromYourLife", SEEDS=" ".join(
                 f"{seed['event']} {seed.get('conclusion', '')}".strip() for seed in scenario["seeds"]))
