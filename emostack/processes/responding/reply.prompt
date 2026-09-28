@@ -45,6 +45,16 @@ Write what this moment is for you. A greeting is optional: if none comes, leave 
 
 Return strictly this JSON shape:
 «SCHEMA»
+@@ userArrival@gemini-3.8-flash
+«CONTEXT»
+
+=== EVENT ===
+«INTERLOCUTOR» has just entered. Nothing has been said yet.
+
+Write what this moment is for you. A greeting is optional: if none comes, leave reply empty. Write in English.
+
+Return strictly this JSON shape:
+«SCHEMA»
 @@ schemaWords
 {
   "emothought": {
