@@ -1,4 +1,5 @@
 import json
+import time
 import urllib.error
 import urllib.request
 
@@ -14,6 +15,10 @@ class openAiCompatibleProcessor(processor):
       jsonSchema  the strict schema the caller supplies (a plain JSON request then sends nothing)
       none        nothing; the prompt and the tolerant parser carry it
     """
+
+    # A backend that is only busy (rate limit, overload) is asked again after these waits, in seconds.
+    busyCodes = (429, 500, 502, 503, 504)
+    busyWaits = (2, 5, 10, 20, 40, 60)
 
     def __init__(self, settings):
         super().__init__()
@@ -67,11 +72,15 @@ class openAiCompatibleProcessor(processor):
             },
             method="POST",
         )
-        try:
-            with urllib.request.urlopen(request, timeout=self.timeoutSeconds) as response:
-                return json.loads(response.read().decode("utf-8"))
-        except urllib.error.HTTPError as error:
-            detail = error.read().decode("utf-8", errors="replace")
-            raise ProcessorError(f"HTTP {error.code} from {path}: {detail}") from error
-        except urllib.error.URLError as error:
-            raise ProcessorError(f"network error calling {path}: {error}") from error
+        for wait in self.busyWaits + (None,):
+            try:
+                with urllib.request.urlopen(request, timeout=self.timeoutSeconds) as response:
+                    return json.loads(response.read().decode("utf-8"))
+            except urllib.error.HTTPError as error:
+                detail = error.read().decode("utf-8", errors="replace")
+                if error.code in self.busyCodes and wait is not None:
+                    time.sleep(wait)
+                    continue
+                raise ProcessorError(f"HTTP {error.code} from {path}: {detail}") from error
+            except urllib.error.URLError as error:
+                raise ProcessorError(f"network error calling {path}: {error}") from error
