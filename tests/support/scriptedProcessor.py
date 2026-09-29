@@ -9,7 +9,7 @@ class scriptedProcessor(processor):
 
     defaults = {
         "reply": {"emothought": {"emo_summary": "a quiet interest", "conclusion": "they are curious",
-                                 "valence": 0.3, "intensity": 0.4, "reinforces": -1},
+                                 "valence": 0.3, "intensity": 0.4},
                   "told": "Someone spoke and the being answered.", "reply": "Hello.", "respond": True,
                   "action": {"type": "none", "text": ""}},
         "appraisal": {"emothought": {"emo_summary": "a mild warmth", "conclusion": "this was kind",
