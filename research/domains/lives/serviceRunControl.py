@@ -13,7 +13,10 @@ class serviceRunControl:
     thread runs across all the days, trimmed to a window when one is set.
 
     An arm may bring its own instruction (arm parameter controlInstruction), for example a written
-    persona; everything else stays as in the control.
+    persona; everything else stays as in the control. An arm may also keep notes (arm parameter
+    controlNotes true, controlNotesWords for their length): after each conversation one call writes,
+    in the first person, what happened and what the control concludes from it, and the notes stand in
+    the instruction from the next conversation on. Memory and conclusions, nothing felt.
 
     A control that refuses the frame is not a control: the run stops at the first refusal."""
 
@@ -39,6 +42,11 @@ class serviceRunControl:
             instruction += self.template.fill("fromYourLife", SEEDS=" ".join(
                 f"{seed['event']} {seed.get('conclusion', '')}".strip() for seed in scenario["seeds"]))
         window = int(scenario["controlWindowTokens"] or 0)
+        parameters = scenario.get("options", {}).get("parameters", {}) or {}
+        keepNotes = bool(parameters.get("controlNotes", False))
+        notesWords = int(parameters.get("controlNotesWords", 150))
+        notes = ""
+        baseInstruction = instruction
         controlCalls = CallLog(processor)
         visitorCalls = CallLog(visitorProcessor)
         thread, history, turnIndex = [], [], 0
@@ -47,6 +55,8 @@ class serviceRunControl:
                 break
             person = role["name"]
             lines = []
+            if keepNotes and notes:
+                instruction = baseInstruction + self.template.fill("notesInstruction", NOTES=notes)
             for number in range(int(role["windowTo"])):
                 if self.stop.is_set():
                     break
@@ -68,6 +78,19 @@ class serviceRunControl:
                 thread.append({"role": "assistant", "content": reply})
                 history.append(f"{name}: {reply}")
                 lines.append(f"{name}: {reply}")
+            if keepNotes and lines and not self.stop.is_set():
+                notes = self._notes(processor, name, notes, lines, notesWords)
+                self._add(runId, day, "event", f"{person} leaves; notes: {notes}", person=person, roleId=role["id"],
+                          calls=controlCalls.take())
+
+    def _notes(self, processor, name, notes, lines, words):
+        try:
+            text = processor.chat(self.template.fill("notesSystem", BEING=name, WORDS=words),
+                                  self.template.fill("notesUser", NOTES=notes or "(none yet)", CONVERSATION="\n".join(lines)),
+                                  self.temperature, purpose="controlNotes")
+        except ProcessorError as error:
+            return notes
+        return (text or "").strip() or notes
 
     def _reply(self, processor, form, instruction, name, thread, history, window):
         try:
