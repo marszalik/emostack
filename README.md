@@ -199,7 +199,7 @@ life it runs.
 
 1. **Models.** Add the being's LLM model, the visitors' model, an embedder, and optionally a judge or
    coder model. Give a key as a path to a file outside the repository, not as text.
-2. **Scenarios.** A scenario is a life. It says:
+2. **Scenarios.** The home page of the panel lists them. A scenario is a life. It says:
    - what the being is given at birth;
    - which visitors come, one conversation a day;
    - how many hours pass between conversations;
@@ -226,7 +226,9 @@ life it runs.
    paired permutation test, with the run as the unit.
 
 To replicate the paper's lives, import the two scenarios and run each as an experiment with arms A
-and C and ten repeats. Then code the finished runs with the scenario's codings. The paper reports
+and C and ten repeats. One life is a smoke test, not a result: a single sheep may answer the kind
+stranger plainly, and may show the failure described in §9 of the paper, a sheep that tells a stranger
+about its past and in the next breath says it has no memory of it. Then code the finished runs with the scenario's codings. The paper reports
 what its lives gave and how they were read. A replication is expected to agree within the error of
 ten lives, not word for word.
 

@@ -64,6 +64,12 @@ async def scenarioImport(request: Request):
     return back(serviceImportScenario(*stores(request)).load(document))
 
 
+@router.get("/scenarios", include_in_schema=False)
+def scenariosList():
+    """The scenarios are listed on the home page; a hand-typed /scenarios lands there too."""
+    return RedirectResponse("/", status_code=307)
+
+
 @router.get("/scenarios/{scenarioId}", response_class=HTMLResponse)
 def scenarioPage(request: Request, scenarioId: int):
     application = request.app.state.application
