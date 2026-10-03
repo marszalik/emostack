@@ -28,11 +28,11 @@ preferred-citation:
     - family-names: Marszalik
       given-names: Eliza
       email: eliza.marszalik@pjwstk.edu.pl
-  doi: 10.5281/zenodo.22936968
-  url: "https://doi.org/10.5281/zenodo.22936968"
+  doi: 10.5281/zenodo.23124632
+  url: "https://doi.org/10.5281/zenodo.23124632"
   publisher:
     name: Zenodo
   year: 2026
-  month: 9
-  date-published: 2026-09-24
+  month: 10
+  date-published: 2026-10-03
   status: preprint
