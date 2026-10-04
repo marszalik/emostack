@@ -5,9 +5,7 @@
   <p class="lede">Each has its own temperament. The same words meet a different state and a different history.</p>
 % else:
   <h1>Talk to a sheep</h1>
-  <p class="lede">A sheep is a being over a frozen language model: it feels what happens to it, writes about itself in the quiet, and learns how it meets people. It starts from nothing and becomes someone over days, not minutes. What it says comes from its own records, never from a script.</p>
-  <p class="lede">Three things to know. <b>Your key, your cost:</b> every call the sheep makes runs on the model and key you set under <a href="/me/model">my model</a>; nothing is billed to this server. <b>Your sheep are yours:</b> nobody else can talk to them or see them. <b>It is kept:</b> what you say and what the sheep feels is kept in your own store on this server, so that you and the sheep can return to it; it is not read by anyone else and not used for anything else. This is a research instrument, not a product or a companion.</p>
-  <p class="lede">Two ways in. <b>A sheep that has lived</b> gives you your own copy of a being with a history, so that the first conversation already meets someone. <b>A new sheep</b> starts from an empty memory; introduce yourself, say something that matters, and come back tomorrow.</p>
+  <p class="lede">A sheep is a being over a frozen language model: it feels what happens to it, writes about itself in the quiet, and learns how it meets people. It starts from nothing and becomes someone over days. Take a copy of one that has lived, or raise a new one. Every call runs on your own model key, set under <a href="/me/model">my model</a>; a research instrument, not a product.</p>
 % endif
 </section>
 
