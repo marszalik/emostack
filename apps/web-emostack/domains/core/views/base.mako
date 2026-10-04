@@ -8,8 +8,8 @@
 <title>EmoStack</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/static/core/app.css">
-<script src="/static/core/session.js"></script>
+<link rel="stylesheet" href="/static/core/app.css?v=${staticVersion}">
+<script src="/static/core/session.js?v=${staticVersion}"></script>
 </head>
 <body>
 <header>

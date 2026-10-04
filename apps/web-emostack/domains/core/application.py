@@ -17,6 +17,8 @@ class application:
         self.templates = templates(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
         self.streams = streams()
         self.conversations = {}
+        static = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "core", "static")
+        self.staticVersion = str(int(max(os.path.getmtime(os.path.join(static, f)) for f in os.listdir(static))))  # cache busting
 
     def page(self, name, **values):
         values.setdefault("user", None)
@@ -25,4 +27,5 @@ class application:
         values.setdefault("signInPath", self.config.signInPath)
         values.setdefault("signOutUrl", self.config.signOutUrl or ("/auth/logout" if self.config.identity == "cookie" else ""))
         values.setdefault("identity", self.config.identity)
+        values.setdefault("staticVersion", self.staticVersion)
         return self.templates.render(name, **values)
