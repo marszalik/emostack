@@ -562,9 +562,13 @@ table.plain th, table.plain td { text-align: left; padding: 6px 8px; border-bott
 .memory-feeling { font-family: var(--serif); margin-top: 4px; }
 .memory-event { color: var(--ink-dim); font-size: 14px; margin: 2px 0 0 12px; }
 
-/* ── the sign-in panel of the public dashboard (4 X 2026): the sheep are visible behind it ── */
-.signin-panel { position: sticky; top: 12px; z-index: 5; margin: 0 0 22px; padding: 18px 22px; border: 1px solid var(--accent); border-radius: 12px; background: rgba(20, 23, 28, .78); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); box-shadow: 0 10px 30px rgba(0,0,0,.35); transition: box-shadow .3s ease, border-color .3s ease; }
-.signin-panel h2 { margin: 0 0 8px; font-family: var(--display); font-weight: 500; font-size: 1.5rem; color: var(--ink-strong); }
-.signin-panel p { margin: 6px 0; max-width: 80ch; }
-.signin-panel .gbtn.cta { display: inline-block; padding: 9px 16px; margin-right: 10px; text-decoration: none; }
-.signin-panel.is-nudged { border-color: #fff1bf; box-shadow: 0 0 0 4px rgba(227, 195, 106, .25), 0 10px 30px rgba(0,0,0,.35); }
+/* ── the sign-in overlay of the public dashboard (4 X 2026): the sheep are visible through it ── */
+.signin-overlay { position: fixed; inset: 0; z-index: 50; display: flex; align-items: center; justify-content: center; padding: 24px; background: rgba(20, 23, 28, .55); backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px); }
+.signin-card { max-width: 520px; width: 100%; padding: 26px 28px; border: 1px solid var(--border); border-radius: 14px; background: var(--panel); box-shadow: 0 24px 60px rgba(0,0,0,.5); text-align: center; transition: box-shadow .3s ease; }
+.signin-card h2 { margin: 0 0 10px; font-family: var(--display); font-weight: 500; font-size: 1.55rem; color: var(--ink-strong); }
+.signin-card p { margin: 0 0 16px; color: var(--ink-dim); }
+.signin-card p.small { margin: 14px 0 0; font-size: .85rem; }
+.signin-google { display: inline-flex; align-items: center; gap: 12px; padding: 12px 22px; border: 1px solid rgba(185, 192, 201, .45); border-radius: 8px; background: rgba(255, 255, 255, .03); color: #eceef1; font-family: "Inter", system-ui, sans-serif; font-size: .92rem; font-weight: 500; letter-spacing: .03em; text-decoration: none; transition: background .2s ease, border-color .2s ease; }
+.signin-google:hover { background: rgba(255, 255, 255, .08); border-color: #eceef1; color: #fff; }
+.signin-google svg { width: 20px; height: 20px; }
+.signin-overlay.is-nudged .signin-card { box-shadow: 0 0 0 4px rgba(227, 195, 106, .3), 0 24px 60px rgba(0,0,0,.5); }
