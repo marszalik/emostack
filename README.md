@@ -15,9 +15,9 @@ and the research panel used to run and measure the lives of beings.
 
 The design and the experiments are described in the paper:
 
-> Eliza Marszalik. *What Do Electric Sheep Dream Of? A Being That Is in Its Own Present:
-> Artificial Consciousness by Construction, over a Frozen Language Model.* 2026.
-> [doi:10.5281/zenodo.22936968](https://doi.org/10.5281/zenodo.22936968)
+> Eliza Marszalik. *What Do Electric Sheep Dream Of? — Artificial Consciousness by Construction over a
+> Frozen Language Model.* Version 1.1, 2026.
+> [doi:10.5281/zenodo.23124632](https://doi.org/10.5281/zenodo.23124632)
 
 ## The idea in one page
 
