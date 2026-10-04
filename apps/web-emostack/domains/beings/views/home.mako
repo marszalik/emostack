@@ -11,6 +11,15 @@
 % endif
 </section>
 
+% if anonymous:
+<section class="signin-panel" id="signinPanel" role="dialog" aria-labelledby="signinTitle">
+  <h2 id="signinTitle">Free. Sign in only so that your sheep stays yours.</h2>
+  <p>Below are the sheep you can take a copy of, and the empty one you can raise. To talk to one, sign in with Google: the site learns your e-mail and nothing else, so that nobody else can reach your sheep. Then paste your own model key, from Anthropic, OpenAI, Google or any OpenAI-compatible endpoint. Every call runs on your key; the site charges nothing and sells nothing.</p>
+  <p>You will see what the sheep says and, beside it, what it feels, what came to its mind and what it has learned.</p>
+  <p><a class="gbtn cta" href="${signInPath or '/'}">Sign in with Google and meet a sheep →</a> <span class="dim small">A research instrument, not a product. <a href="https://emostack.com/article/paper-full-text">The paper</a> says how it is built.</span></p>
+</section>
+% endif
+
 % if needsModel:
 <section class="notice-box">
   <p><b>Before you start a conversation, set your model.</b> The sheep talk on your own API key
@@ -31,7 +40,9 @@
   </div>
 % endfor
 </div>
+% if not anonymous:
 <h2 class="section-title">Your sheep</h2>
+% endif
 % endif
 
 <div class="being-grid">
@@ -111,7 +122,15 @@ document.querySelectorAll('.delete-button').forEach(button => button.addEventLis
   if (!response.ok) { alert(await response.text()); return; }
   location.reload();
 }));
+const anonymous = ${'true' if anonymous else 'false'};
+const signInPath = ${repr(signInPath or '/') | n};
+function askToSignIn() {
+  const panel = document.getElementById('signinPanel');
+  if (panel) { panel.scrollIntoView({behavior: 'smooth', block: 'center'}); panel.classList.add('is-nudged'); setTimeout(() => panel.classList.remove('is-nudged'), 900); }
+  else window.location = signInPath;
+}
 document.querySelectorAll('.copy-button').forEach(button => button.addEventListener('click', async () => {
+  if (anonymous) { askToSignIn(); return; }
   button.disabled = true;
   const response = await fetch('/beings/copy/' + button.dataset.slug, {method: 'POST'});
   if (!response.ok) { alert(await response.text()); button.disabled = false; return; }
@@ -119,11 +138,12 @@ document.querySelectorAll('.copy-button').forEach(button => button.addEventListe
 }));
 document.getElementById('createForm').addEventListener('submit', async (event) => {
   event.preventDefault();
+  if (anonymous) { askToSignIn(); return; }
   const response = await fetch('/beings', {method: 'POST', body: new FormData(event.target)});
   if (!response.ok) { alert(await response.text()); return; }
   location.reload();
 });
-setInterval(async () => {
+if (!anonymous) setInterval(async () => {
   const response = await fetch('/beings');
   if (!response.ok) return;
   for (const being of await response.json()) {

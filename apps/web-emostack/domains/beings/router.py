@@ -32,6 +32,11 @@ def failing(action):
 @router.get("/", response_class=HTMLResponse)
 def homePage(request: Request):
     application = request.app.state.application
+    if application.config.publicDashboard and serviceWhoIsThis(application).person(request) is None:
+        return application.page(
+            "home.mako", section="home", user=None, level=0, beings=[], anonymous=True,
+            snapshots=repositorySnapshots(application.config.dataFolder).all(), needsModel=False,
+            most=application.config.maxBeingsPerPerson)
     person = signedIn(request)
     engine = serviceEngineFor(application).reader(person)
     try:
@@ -39,7 +44,7 @@ def homePage(request: Request):
     finally:
         engine.close()
     return application.page(
-        "home.mako", section="home", user=person.toDict(), level=person.level, beings=beings,
+        "home.mako", section="home", user=person.toDict(), level=person.level, beings=beings, anonymous=False,
         snapshots=[] if person.isAdministrator() else repositorySnapshots(application.config.dataFolder).all(),
         needsModel=(application.config.requireUserModel and not serviceConnect(application).hasModel(person)),
         most=application.config.maxBeingsPerPerson)

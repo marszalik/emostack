@@ -41,6 +41,8 @@ def build():
         needed = int(web.config.requireLoginLevel)
         if needed <= 0 or request.url.path.startswith(openPaths):
             return await callNext(request)
+        if web.config.publicDashboard and request.method == "GET" and request.url.path == "/":
+            return await callNext(request)  # the home page decides what a visitor sees
         who = serviceWhoIsThis(web)
         person = who.person(request)
         if person is not None and person.level >= needed:

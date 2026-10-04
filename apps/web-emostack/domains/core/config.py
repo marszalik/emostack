@@ -17,6 +17,8 @@ class config:
     publicBaseUrl         the address people reach the application at
     adminEmails           people who administer it; they talk on the server's own model
     requireLoginLevel     the level a person needs to see anything (0 switches the gate off)
+    publicDashboard       the home page is shown to someone not signed in, with the sheep that have lived and
+                          a sign-in panel; everything else stays behind the gate
     defaultLevel          the level of a signed-in person nobody has given a role to
     requireUserModel      everyone but an administrator talks on their own key
     serverProcessor       the administrators' LLM model (settings as in the engine's config)
@@ -34,6 +36,7 @@ class config:
         "publicBaseUrl": "",
         "adminEmails": [],
         "requireLoginLevel": 1,
+        "publicDashboard": False,
         "defaultLevel": 0,
         "requireUserModel": False,
         "serverProcessor": {},
