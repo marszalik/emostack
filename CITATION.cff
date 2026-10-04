@@ -10,6 +10,7 @@ authors:
   - family-names: Marszalik
     given-names: Eliza
     email: eliza.marszalik@pjwstk.edu.pl
+    orcid: "https://orcid.org/0009-0004-6548-7670"
 repository-code: "https://github.com/marszalik/emostack"
 url: "https://emostack.com"
 license: PolyForm-Noncommercial-1.0.0
@@ -28,6 +29,7 @@ preferred-citation:
     - family-names: Marszalik
       given-names: Eliza
       email: eliza.marszalik@pjwstk.edu.pl
+    orcid: "https://orcid.org/0009-0004-6548-7670"
   doi: 10.5281/zenodo.23124632
   url: "https://doi.org/10.5281/zenodo.23124632"
   publisher:
