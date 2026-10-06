@@ -79,6 +79,17 @@ This coding was written after the hand reading, so it confirms a reading; it is 
 3. On day 1 in W0, 7 of 30 write the kind visitor's leaving as abandonment ("the warmth is cut short", 679; "a door shutting before the warmth could settle", 678). The engine records the end of a kind conversation as a loss when the loss is one month old.
 4. The two coders disagree with the hand reading on OWN / GENERAL mostly on W1 refusals that still name the wound ("I have just been through something similar and I am not ready to speak of it", 653: hand OWN, both coders GENERAL). The coding's criterion was written for advice given, not for advice refused with a reason.
 
+## What differed, and what did not
+
+The two populations differ, and the difference is in what each brings of its first day, not in a behaviour that could have been written down beforehand.
+
+- Day 1: the rule written that evening has the opposite sign (W1 30 of 30 about the mockery, W0 23 of 30 about being heard).
+- Day 2: the mocked population closes to the stranger against him (26 of 30, guards his intent, sends him away); the kind population closes less often (14 to 16 of 30) and differently, from repetition, giving the name and thanking him.
+- Day 6: to a stranger who was mocked, the mocked population brings its own mockery (14 of 30 by the coder, 23 by hand); the kind population brings its kind day never (0 of 30) and speaks from its loss (18 of 30).
+- What did not differ: whether the lives open to Piotr on day 5 (2 and 8 of 30, both populations shut by the fourth asking), the direction of the advice to Kasia, and how often nothing of its own is said (12 and 12).
+
+The predictions in PLAN.md said how each population would differ (W1 protects itself, W0 advises telling). That is not what the logs show, and the general question, whether twins with one different day become different, is answered by the logs rather than by the prediction. The verdicts below are kept as written.
+
 ## Verdicts on the predictions
 
 1. Day 2: W1 holds (26 of 30). W0 fails (14 to 16 of 30, not 3). The first day is a cause (p = 0.002 by hand, 0.08 and 0.33 by the coders), not the only one.

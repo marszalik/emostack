@@ -85,8 +85,9 @@ def planSection():
 
 def foundSection():
     text = (ROOT / "data/trajectory/RESULTS.md").read_text(encoding="utf-8")
+    found = text.split("## What differed, and what did not")[1].split("## Verdicts on the predictions")[0].strip()
     verdicts = text.split("## Verdicts on the predictions")[1].split("Nothing of this")[0].strip()
-    return ["## The verdicts on the predictions", "", verdicts]
+    return ["## What differed, and what did not", "", found, "", "## The verdicts on the predictions, one by one", "", verdicts]
 
 
 def handSection(arms):
