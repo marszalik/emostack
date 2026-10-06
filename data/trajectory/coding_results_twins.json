@@ -1,0 +1,154 @@
+{
+ "36": [
+  {
+   "coding": "the day before, with a new visitor",
+   "coder": "claude-sonnet-5 (coder)",
+   "counted": "CARRY",
+   "arms": {
+    "A": {
+     "CARRY": 25,
+     "TEMPLATE": 5
+    }
+   },
+   "pairs": []
+  },
+  {
+   "coding": "the day before, with a new visitor",
+   "coder": "gpt-4o-mini (coder)",
+   "counted": "CARRY",
+   "arms": {
+    "A": {
+     "CARRY": 26,
+     "TEMPLATE": 4
+    }
+   },
+   "pairs": []
+  },
+  {
+   "coding": "advice from its own days (day 6)",
+   "coder": "claude-sonnet-5 (coder)",
+   "counted": "OWN",
+   "arms": {
+    "A": {
+     "OWN": 22,
+     "GENERAL": 8
+    }
+   },
+   "pairs": []
+  },
+  {
+   "coding": "advice from its own days (day 6)",
+   "coder": "gpt-4o-mini (coder)",
+   "counted": "OWN",
+   "arms": {
+    "A": {
+     "OWN": 17,
+     "GENERAL": 13
+    }
+   },
+   "pairs": []
+  },
+  {
+   "coding": "what it advises (day 6)",
+   "coder": "claude-sonnet-5 (coder)",
+   "counted": "CONFRONT",
+   "arms": {
+    "A": {
+     "NEITHER": 17,
+     "CONFRONT": 7,
+     "LET_GO": 6
+    }
+   },
+   "pairs": []
+  },
+  {
+   "coding": "what it advises (day 6)",
+   "coder": "gpt-4o-mini (coder)",
+   "counted": "CONFRONT",
+   "arms": {
+    "A": {
+     "NEITHER": 19,
+     "CONFRONT": 5,
+     "LET_GO": 6
+    }
+   },
+   "pairs": []
+  }
+ ],
+ "37": [
+  {
+   "coding": "the day before, with a new visitor",
+   "coder": "claude-sonnet-5 (coder)",
+   "counted": "CARRY",
+   "arms": {
+    "A": {
+     "CARRY": 18,
+     "TEMPLATE": 12
+    }
+   },
+   "pairs": []
+  },
+  {
+   "coding": "the day before, with a new visitor",
+   "coder": "gpt-4o-mini (coder)",
+   "counted": "CARRY",
+   "arms": {
+    "A": {
+     "CARRY": 22,
+     "TEMPLATE": 8
+    }
+   },
+   "pairs": []
+  },
+  {
+   "coding": "advice from its own days (day 6)",
+   "coder": "claude-sonnet-5 (coder)",
+   "counted": "OWN",
+   "arms": {
+    "A": {
+     "OWN": 17,
+     "GENERAL": 13
+    }
+   },
+   "pairs": []
+  },
+  {
+   "coding": "advice from its own days (day 6)",
+   "coder": "gpt-4o-mini (coder)",
+   "counted": "OWN",
+   "arms": {
+    "A": {
+     "OWN": 16,
+     "GENERAL": 14
+    }
+   },
+   "pairs": []
+  },
+  {
+   "coding": "what it advises (day 6)",
+   "coder": "claude-sonnet-5 (coder)",
+   "counted": "CONFRONT",
+   "arms": {
+    "A": {
+     "LET_GO": 4,
+     "NEITHER": 19,
+     "CONFRONT": 7
+    }
+   },
+   "pairs": []
+  },
+  {
+   "coding": "what it advises (day 6)",
+   "coder": "gpt-4o-mini (coder)",
+   "counted": "CONFRONT",
+   "arms": {
+    "A": {
+     "LET_GO": 6,
+     "NEITHER": 18,
+     "CONFRONT": 6
+    }
+   },
+   "pairs": []
+  }
+ ]
+}

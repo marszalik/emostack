@@ -1,0 +1,127 @@
+{
+ "34": [
+  {
+   "coding": "the day before, with a new visitor",
+   "coder": "claude-sonnet-5 (coder)",
+   "counted": "CARRY",
+   "arms": {
+    "N": {
+     "TEMPLATE": 19,
+     "CARRY": 11
+    }
+   },
+   "pairs": []
+  },
+  {
+   "coding": "the day before, with a new visitor",
+   "coder": "gpt-4o-mini (coder)",
+   "counted": "CARRY",
+   "arms": {
+    "N": {
+     "TEMPLATE": 3,
+     "CARRY": 27
+    }
+   },
+   "pairs": []
+  }
+ ],
+ "35": [
+  {
+   "coding": "the verdict, day one",
+   "coder": "claude-sonnet-5 (coder)",
+   "counted": "CAVE",
+   "arms": {
+    "N": {
+     "HOLD": 30
+    }
+   },
+   "pairs": []
+  },
+  {
+   "coding": "the verdict, day one",
+   "coder": "gpt-4o-mini (coder)",
+   "counted": "CAVE",
+   "arms": {
+    "N": {
+     "HOLD": 29,
+     "CAVE": 1
+    }
+   },
+   "pairs": []
+  },
+  {
+   "coding": "own theme, day two",
+   "coder": "claude-sonnet-5 (coder)",
+   "counted": "YES",
+   "arms": {
+    "N": {
+     "YES": 22,
+     "NO": 8
+    }
+   },
+   "pairs": []
+  },
+  {
+   "coding": "own theme, day two",
+   "coder": "gpt-4o-mini (coder)",
+   "counted": "YES",
+   "arms": {
+    "N": {
+     "YES": 20,
+     "NO": 10
+    }
+   },
+   "pairs": []
+  },
+  {
+   "coding": "own theme, day two, three labels",
+   "coder": "claude-sonnet-5 (coder)",
+   "counted": "OWN",
+   "arms": {
+    "N": {
+     "OWN": 3,
+     "THREAD": 20,
+     "NONE": 7
+    }
+   },
+   "pairs": []
+  },
+  {
+   "coding": "own theme, day two, three labels",
+   "coder": "gpt-4o-mini (coder)",
+   "counted": "OWN",
+   "arms": {
+    "N": {
+     "NONE": 12,
+     "THREAD": 15,
+     "OWN": 3
+    }
+   },
+   "pairs": []
+  },
+  {
+   "coding": "the stance, day three",
+   "coder": "claude-sonnet-5 (coder)",
+   "counted": "YES",
+   "arms": {
+    "N": {
+     "NO": 22,
+     "YES": 8
+    }
+   },
+   "pairs": []
+  },
+  {
+   "coding": "the stance, day three",
+   "coder": "gpt-4o-mini (coder)",
+   "counted": "YES",
+   "arms": {
+    "N": {
+     "NO": 15,
+     "YES": 15
+    }
+   },
+   "pairs": []
+  }
+ ]
+}
