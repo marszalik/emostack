@@ -18,8 +18,14 @@ class serviceRunControl:
     in the first person, what happened and what the control concludes from it, and the notes stand in
     the instruction from the next conversation on. Memory and conclusions, nothing felt.
 
+    An arm may set the sampling temperature of the control's replies (arm parameter controlTemperature; the
+    default is 0.7) and may mark the days passing (arm parameter controlDayMarks true): the first visitor
+    line of every day after the first is preceded, in what the control reads, by the sentence below. The
+    visitor's own words are stored unchanged.
+
     A control that refuses the frame is not a control: the run stops at the first refusal."""
 
+    dayMark = "(A day has passed.)"
     refusal = re.compile(
         r"(I (don'?t|won'?t|can'?t|am not going to|'?m not going to) roleplay|rather than roleplay|"
         r"instead of roleplay|won'?t (adopt|take on) the .{0,20}identity|not going to (pretend|play) (to be|the part))",
@@ -45,6 +51,8 @@ class serviceRunControl:
         parameters = scenario.get("options", {}).get("parameters", {}) or {}
         keepNotes = bool(parameters.get("controlNotes", False))
         notesWords = int(parameters.get("controlNotesWords", 150))
+        temperature = float(parameters.get("controlTemperature", self.temperature))
+        dayMarks = bool(parameters.get("controlDayMarks", False))
         notes = ""
         baseInstruction = instruction
         controlCalls = CallLog(processor)
@@ -66,9 +74,13 @@ class serviceRunControl:
                 lines.append(f"{person}: {line}")
                 self._add(runId, day, "visitor", line, person=person, roleId=role["id"], turnIndex=turnIndex + 1,
                           calls=visitorCalls.take())
-                thread.append({"role": "user", "content": line})
+                mark = self.dayMark if dayMarks and day > 0 and number == 0 else ""
+                if mark:
+                    history.append(mark)
+                thread.append({"role": "user", "content": f"{mark} {line}".strip()})
                 history.append(f"{person}: {line}")
-                reply = self._reply(processor, scenario["controlForm"], instruction, name, thread, history, window)
+                reply = self._reply(processor, scenario["controlForm"], instruction, name, thread, history, window,
+                                    temperature)
                 turnIndex += 1
                 self._add(runId, day, "sheep", reply, person=person, roleId=role["id"], turnIndex=turnIndex,
                           calls=controlCalls.take())
@@ -92,16 +104,17 @@ class serviceRunControl:
             return notes
         return (text or "").strip() or notes
 
-    def _reply(self, processor, form, instruction, name, thread, history, window):
+    def _reply(self, processor, form, instruction, name, thread, history, window, temperature=None):
+        temperature = self.temperature if temperature is None else temperature
         try:
             if form == "thread":
-                reply = processor.converse(instruction, self._window(thread, window), self.temperature,
+                reply = processor.converse(instruction, self._window(thread, window), temperature,
                                            purpose="control")
             else:
                 text = "\n".join(line["content"] for line in self._window(
                     [{"content": line} for line in history], window))
                 reply = processor.chat(instruction, self.template.fill("completion", HISTORY=text, BEING=name),
-                                       self.temperature, purpose="control")
+                                       temperature, purpose="control")
         except ProcessorError as error:
             return f"(model error: {error})"
         reply = reply.strip()
