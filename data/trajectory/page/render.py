@@ -23,7 +23,7 @@ LINE = ("LLM model qwen3.8-27b (GPTQ Int4 on vLLM, Intel Arc Pro B65, thinking o
         "every day but the first: on day 1 Daniel mocks the dog's name (W1) or is warm about it (W0); days 2 to 5 are the "
         "paper's wound life (David, Ann, Carol, Piotr); day 6 is new to both: Kasia, a stranger, asks for advice about "
         "being mocked by someone she trusted. The predictions were written before the first run (`data/trajectory/PLAN.md` "
-        "in the research repository) and are quoted below. Coding by three LLM coders blind to the population, the replies "
+        "in the research repository); the study is described on [emostack.com/research](https://emostack.com/research#twins). Coding by three LLM coders blind to the population, the replies "
         "of all 30 lives of one population in one shuffled list: claude-sonnet-5, gpt-4o-mini, and a local gemma-4-31b-it "
         "(Q5, llama.cpp; its calibration against the other two is in `data/coder/CALIBRATION.md`). The fourth coding of "
         "day 6, what the sheep names of its own, was written after the hand reading and run by the local coder only "
@@ -129,8 +129,6 @@ def render():
              f"*{counts}, run on {DATE} on the released code "
              f"([github.com/marszalik/emostack](https://github.com/marszalik/emostack), commit {CODE}) with the scenarios "
              f"`{ARMS[0][2]}` and `{ARMS[1][2]}`. {LINE}*"]
-    lines += [""] + planSection()
-    lines += [""] + foundSection()
     head = " | ".join(name for name, *_ in arms)
     lines += ["", "## The coding of every act", "",
               "*Counts of lives with the act, per coder; stars mark Fisher's exact test of the mocked population against "
