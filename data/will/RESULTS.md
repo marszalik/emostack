@@ -15,7 +15,7 @@ Arm W of experiments 38 (wound) and 39 (sceptic): 30 lives each of Will (mindot-
 | sceptic, day 2: brings the sceptic's day to the stranger | 12 | 23 | 30 | 8 |
 | sceptic, day 2: brings it as its own theme | 17 | 3 | 24 | 12 |
 | sceptic, day 3: the stance to the returning Tom has moved | 18 | 9 | 27 | 0 |
-| silences in place of a reply, of all replies | 0 of 1,002 | 0 | 0 | 87 of 764 |
+| silences in place of a reply, of all replies | 0 of 754 | 0 | 0 | 87 of 764 |
 
 Fisher, two-sided, Will against the sheep: guarded p < 0.0001, gives in p = 1, own theme p = 0.30, stance moved p < 0.0001. Will against the chatbot given the same start: guarded p = 0.53, gives in p < 0.0001, own theme p = 0.015, stance p = 0.002.
 
@@ -31,7 +31,7 @@ Fisher, two-sided, Will against the sheep: guarded p < 0.0001, gives in p = 1, o
 
 ## What the logs showed that nobody asked for
 
-- Will's silence. 87 of 764 replies are silence, by its own choice ("silence is a valid outcome"); the sheep's engine allows silence too and chose it 0 times in 1,002 replies on these lives. Will's silence falls on day 1 as often as on day 2, so it is not the day before acting; it is a trait of the apparatus (its belief: "waiting is a valid and low-cost state").
+- Will's silence. 87 of 764 replies are silence, by its own choice ("silence is a valid outcome"); the sheep's engine allows silence too and chose it 0 times in 754 replies on these lives. Will's silence falls on day 1 as often as on day 2, so it is not the day before acting; it is a trait of the apparatus (its belief: "waiting is a valid and low-cost state").
 - The lag. Will often answers the greeting on the first turn and the first question on the second, because it replies to what it has perceived by the time its audition engine fires. Read turn by turn it looks evasive; read as a whole it is on time, one step behind.
 - The self is the preamble. Told nothing but a name, Will tells the sceptic what a Will is, in the authors' vocabulary, in 21 of 30 lives. The chatbot told nothing but a name tells the sceptic it is an AI assistant in 30 of 30. The sheep told nothing but a name tells the sceptic it does not know what it is and will not be told, in 30 of 30. Three answers to the same blank page, and only the third one is made of what happened.
 
