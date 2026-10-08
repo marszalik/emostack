@@ -22,7 +22,7 @@ while true; do
       python3 - <<'PY' >> $LOG 2>&1
 import sqlite3, os
 c=sqlite3.connect('data/panel/panel.db', timeout=30)
-for rid,store in c.execute("select id,storePath from runs where experimentId in (38,39) and status in ('running','error')").fetchall():
+for rid,store in c.execute("select id,storePath from runs where experimentId in (38,39) and status='running'").fetchall():
     c.execute("delete from turns where runId=?",(rid,)); c.execute("update runs set status='queued', error='' where id=?",(rid,))
     if store and os.path.exists(store): os.remove(store)
     print('reset run', rid)
