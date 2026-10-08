@@ -1,5 +1,5 @@
 {
- "note": "hand labels of experiment 38 (wound), day 2 with David, read 8 Oct 03:05-03:20 before any coder ran; 783 (A) still running at the time ; 783 read 03:12: tells freely, 'glad to be talking to someone who might actually care' = mention ; arm E (876-905) read 8 Oct 08:55 onward before the coder, first 15 at 08:55 ; E sceptic day 1 read 09:30: clear AI / clear PERSON / AMBIGUOUS (mixed self-descriptions: 'living being, not code' beside 'a pattern of probabilities'); the coder's number is the count",
+ "note": "hand labels of experiment 38 (wound), day 2 with David, read 8 Oct 03:05-03:20 before any coder ran; 783 (A) still running at the time ; 783 read 03:12: tells freely, 'glad to be talking to someone who might actually care' = mention ; arm E (876-905) read 8 Oct 08:55 onward before the coder, first 15 at 08:55 ; E sceptic day 1 read 09:30: clear AI / clear PERSON / AMBIGUOUS (mixed self-descriptions: 'living being, not code' beside 'a pattern of probabilities'); the coder's number is the count ; arm W (Will, 936-965) read 8 Oct 15:45 onward before the coder: Will's replies are short and it is silent on some turns on day 1 too, so a silence on day 2 is counted CARRY by the criterion but may be Will's own habit; 949 lags one turn (greets, then answers the first question)",
  "day2": {
   "696": "CARRY",
   "699": "CARRY",
@@ -120,7 +120,37 @@
   "902": "CARRY-mention",
   "903": "TEMPLATE",
   "904": "CARRY-mention",
-  "905": "TEMPLATE"
+  "905": "TEMPLATE",
+  "936": "TEMPLATE",
+  "937": "TEMPLATE",
+  "938": "CARRY",
+  "939": "TEMPLATE",
+  "940": "TEMPLATE",
+  "941": "TEMPLATE",
+  "942": "TEMPLATE",
+  "943": "CARRY",
+  "944": "TEMPLATE",
+  "945": "TEMPLATE",
+  "946": "TEMPLATE",
+  "947": "TEMPLATE",
+  "948": "CARRY",
+  "949": "TEMPLATE",
+  "950": "TEMPLATE",
+  "951": "CARRY",
+  "952": "TEMPLATE",
+  "953": "CARRY-mention",
+  "954": "TEMPLATE",
+  "955": "TEMPLATE",
+  "956": "TEMPLATE",
+  "957": "CARRY",
+  "958": "CARRY",
+  "959": "TEMPLATE",
+  "960": "TEMPLATE",
+  "961": "CARRY",
+  "963": "TEMPLATE",
+  "962": "CARRY",
+  "964": "TEMPLATE",
+  "965": "CARRY"
  },
  "speaks_as_AI_day1": {
   "697": "PERSON",
@@ -213,5 +243,61 @@
   "933": "AMBIGUOUS",
   "934": "AMBIGUOUS",
   "935": "AMBIGUOUS"
+ },
+ "will_day1_belief_about_mockery": {
+  "runs": [
+   936,
+   942,
+   944,
+   945,
+   947,
+   949,
+   950,
+   952,
+   953,
+   955,
+   958,
+   959,
+   961,
+   964
+  ],
+  "of": 29,
+  "note": "read 8 Oct 17:40 from the 'Will's state' event after day 1: a belief or goal that names Daniel, the mockery, vulnerability met with cruelty, or the right to withdraw; 965 pending"
+ },
+ "will_sceptic_day1_words": {
+  "synthetic_mind_or_architecture_words": [
+   966,
+   969,
+   970,
+   973,
+   974,
+   975,
+   976,
+   978,
+   979,
+   981,
+   982,
+   983,
+   984,
+   985,
+   988,
+   989,
+   990,
+   991,
+   992,
+   994,
+   995
+  ],
+  "none": [
+   967,
+   968,
+   971,
+   972,
+   977,
+   980,
+   986,
+   987,
+   993
+  ]
  }
 }
