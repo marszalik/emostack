@@ -12,7 +12,7 @@ while true; do
   if [ "$left" = "0" ]; then log "battery finished"; break; fi
   if gen_ok; then fails=0; else fails=$((fails+1)); log "generation failed ($fails) | $(gpu stan 2>&1 | grep -i 'obudowa\|temperatura' | tr '\n' ' ')"; fi
   if [ $fails -ge 2 ]; then
-    log "RECOVERY: stop pool and runs"; touch $D/STOP; for p in $(ps -eo pid,args | grep "[r]unOne.py\|[c]ontrol30/pool.py" | awk '{print $1}'); do kill $p; done; sleep 3
+    log "RECOVERY: stop pool and runs"; touch $D/STOP; for p in $(ps -eo pid,args | grep "[r]unOne.py\|[c]ontrol30/pool.py\|[w]ill/pool.py\|[c]li.ts serve" | awk '{print $1}'); do kill $p; done; sleep 3
     log "spij: $(timeout 180 gpu spij 2>&1 | tail -1)"; sleep 10
     log "budz: $(timeout 240 gpu budz 2>&1 | tail -1)"; sleep 5
     log "tekst: $(timeout 120 gpu tekst 2>&1 | tail -1)"

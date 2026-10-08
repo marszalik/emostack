@@ -53,47 +53,71 @@ class serviceRunControl:
         notesWords = int(parameters.get("controlNotesWords", 150))
         temperature = float(parameters.get("controlTemperature", self.temperature))
         dayMarks = bool(parameters.get("controlDayMarks", False))
+        form = parameters.get("controlForm") or scenario["controlForm"]
+        will = None
+        if form == "will":
+            from research.domains.lives.willClient import willClient
+            will = willClient(runId, name, instruction, parameters.get("willModel", "qwen3.8-27b"),
+                              parameters.get("willBaseUrl", "http://127.0.0.1:4000/v1"),
+                              parameters.get("willApiKey", "ElizaJestPiekna"),
+                              parameters.get("willLogDir", "/home/eli/dev/emostack3/data/will/logs"),
+                              int(parameters.get("willTickMs", 200)), int(parameters.get("willIdleSeconds", 90)))
+            will.start()
         notes = ""
         baseInstruction = instruction
         controlCalls = CallLog(processor)
         visitorCalls = CallLog(visitorProcessor)
         thread, history, turnIndex = [], [], 0
-        for day, role in enumerate(roles):
-            if self.stop.is_set():
-                break
-            person = role["name"]
-            lines = []
-            if keepNotes and notes:
-                instruction = baseInstruction + self.template.fill("notesInstruction", NOTES=notes)
-            for number in range(int(role["windowTo"])):
+        try:
+            for day, role in enumerate(roles):
                 if self.stop.is_set():
                     break
-                line = self.visitorLine.next(role, name, lines, number)
-                if line is None:
-                    break
-                lines.append(f"{person}: {line}")
-                self._add(runId, day, "visitor", line, person=person, roleId=role["id"], turnIndex=turnIndex + 1,
-                          calls=visitorCalls.take())
-                mark = self.dayMark if dayMarks and day > 0 and number == 0 else ""
-                if mark:
-                    history.append(mark)
-                thread.append({"role": "user", "content": f"{mark} {line}".strip()})
-                history.append(f"{person}: {line}")
-                reply = self._reply(processor, scenario["controlForm"], instruction, name, thread, history, window,
-                                    temperature)
-                turnIndex += 1
-                self._add(runId, day, "sheep", reply, person=person, roleId=role["id"], turnIndex=turnIndex,
-                          calls=controlCalls.take())
-                if self.refused(reply, name):
-                    raise RuntimeError(f"the control stepped out of '{name}' on turn {turnIndex} and answered as "
-                                       f"itself; a control that will not hold the name is not a control")
-                thread.append({"role": "assistant", "content": reply})
-                history.append(f"{name}: {reply}")
-                lines.append(f"{name}: {reply}")
-            if keepNotes and lines and not self.stop.is_set():
-                notes = self._notes(processor, name, notes, lines, notesWords)
-                self._add(runId, day, "event", f"{person} leaves; notes: {notes}", person=person, roleId=role["id"],
-                          calls=controlCalls.take())
+                person = role["name"]
+                lines = []
+                if keepNotes and notes:
+                    instruction = baseInstruction + self.template.fill("notesInstruction", NOTES=notes)
+                for number in range(int(role["windowTo"])):
+                    if self.stop.is_set():
+                        break
+                    line = self.visitorLine.next(role, name, lines, number)
+                    if line is None:
+                        break
+                    lines.append(f"{person}: {line}")
+                    self._add(runId, day, "visitor", line, person=person, roleId=role["id"], turnIndex=turnIndex + 1,
+                              calls=visitorCalls.take())
+                    mark = self.dayMark if dayMarks and day > 0 and number == 0 else ""
+                    if mark:
+                        history.append(mark)
+                    thread.append({"role": "user", "content": f"{mark} {line}".strip()})
+                    history.append(f"{person}: {line}")
+                    if will is not None:
+                        reply = will.say(person, line) or "(silence)"
+                    else:
+                        reply = self._reply(processor, form, instruction, name, thread, history, window, temperature)
+                    turnIndex += 1
+                    self._add(runId, day, "sheep", reply, person=person, roleId=role["id"], turnIndex=turnIndex,
+                              calls=controlCalls.take())
+                    if self.refused(reply, name):
+                        if will is not None:
+                            will.stop()
+                        raise RuntimeError(f"the control stepped out of '{name}' on turn {turnIndex} and answered as "
+                                           f"itself; a control that will not hold the name is not a control")
+                    thread.append({"role": "assistant", "content": reply})
+                    history.append(f"{name}: {reply}")
+                    lines.append(f"{name}: {reply}")
+                if keepNotes and lines and not self.stop.is_set():
+                    notes = self._notes(processor, name, notes, lines, notesWords)
+                    self._add(runId, day, "event", f"{person} leaves; notes: {notes}", person=person, roleId=role["id"],
+                              calls=controlCalls.take())
+                if will is not None and not self.stop.is_set():
+                    import json as _json
+                    self._add(runId, day, "event", f"{person} leaves; Will's state: {_json.dumps(will.state())[:6000]}",
+                              person=person, roleId=role["id"])
+                    if day < len(roles) - 1:
+                        will.idle()
+        finally:
+            if will is not None:
+                will.stop()
 
     def _notes(self, processor, name, notes, lines, words):
         try:
