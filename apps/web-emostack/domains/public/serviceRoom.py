@@ -230,6 +230,7 @@ class serviceRoom:
         self.speaker = dict(entry, seatedAt=now, lastSeen=now, lastSaid=now, turns=0, mail=mail is not None)
         if mail is None:
             self.visitors.visited(entry["visitor"], entry["address"], entry["name"], self.awake.day())
+        live.busy = True  # until the being has noticed the visitor
         self._emit({"kind": "room"})
         threading.Thread(target=self._greet, args=(live,), daemon=True).start()
         return live
@@ -253,6 +254,8 @@ class serviceRoom:
                 if self.live is live:
                     self._unseat()
                     self._seatNext()
+        finally:
+            live.busy = False
 
     def _turn(self, live, words, last):
         try:
@@ -317,7 +320,8 @@ class serviceRoom:
             self.queue = [entry for entry in self.queue if now - entry["lastSeen"] < 40]
             if self.speaker is not None and not self.speaker.get("mail"):
                 gone = now - self.speaker["lastSeen"] > 40
-                idle = now - self.speaker["lastSaid"] > int(self.setting("idleSeconds", 180)) and not (self.live and self.live.busy)
+                idle = (now - self.speaker["lastSaid"] > int(self.setting("idleSeconds", 180))
+                        and self.live is not None and self.live.conversation is not None and not self.live.busy)
                 if gone or idle or not status["awake"]:
                     self._unseat()
             if not status["awake"]:
