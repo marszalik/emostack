@@ -24,6 +24,9 @@ class config:
     serverProcessor       the administrators' LLM model (settings as in the engine's config)
     serverEmbedder        the embedder used for providers without one (Anthropic)
     maxBeingsPerPerson, maxConversationsPerPerson, maxWords
+    publicSheep           one being everyone talks to without signing in, on the house model: {name,
+                          processor, embedder (empty: serverEmbedder), night ["22:00", "08:00"], timezone,
+                          turnsPerVisit, visitsPerDay, idleSeconds, maxWords, mailPerNight}; empty: none
     """
 
     defaults = {
@@ -44,6 +47,7 @@ class config:
         "maxBeingsPerPerson": 5,
         "maxConversationsPerPerson": 3,
         "maxWords": 4000,
+        "publicSheep": {},
     }
 
     def __init__(self, path=None, root=None):

@@ -2,7 +2,42 @@
   "dataFolder": "data/web",
   "identity": "local",
   "localEmail": "you@example.com",
-  "serverProcessor": {"baseUrl": "https://api.anthropic.com/v1", "apiKey": "…", "model": "claude-haiku-4-5",
-                      "jsonMode": "jsonSchema"},
-  "serverEmbedder": {"baseUrl": "http://127.0.0.1:8897/v1", "apiKey": "", "model": "nomic-embed-text-v1.5"}
+  "serverProcessor": {
+    "baseUrl": "https://api.anthropic.com/v1",
+    "apiKey": "…",
+    "model": "claude-haiku-4-5",
+    "jsonMode": "jsonSchema"
+  },
+  "serverEmbedder": {
+    "baseUrl": "http://127.0.0.1:8897/v1",
+    "apiKey": "",
+    "model": "nomic-embed-text-v1.5"
+  },
+  "publicSheep": {
+    "name": "Maya",
+    "processor": {
+      "baseUrl": "http://127.0.0.1:4000/v1",
+      "apiKey": "",
+      "model": "qwen3.8-27b",
+      "jsonMode": "jsonSchema",
+      "maxTokens": 2048,
+      "timeoutSeconds": 300,
+      "extraBody": {
+        "chat_template_kwargs": {
+          "enable_thinking": false
+        }
+      }
+    },
+    "embedder": {},
+    "night": [
+      "22:00",
+      "08:00"
+    ],
+    "timezone": "Europe/Warsaw",
+    "turnsPerVisit": 8,
+    "visitsPerDay": 2,
+    "idleSeconds": 180,
+    "maxWords": 600,
+    "mailPerNight": 1
+  }
 }

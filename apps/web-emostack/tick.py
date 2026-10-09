@@ -12,6 +12,8 @@ sys.path.insert(0, root)
 sys.path.insert(0, here)
 
 from emostack.core.config import config
+from emostack.core.localEmbedder import localEmbedder
+from emostack.core.openAiCompatibleProcessor import openAiCompatibleProcessor
 from emostack.runtime.engine import engine
 from domains.auth.Person import Person
 from domains.auth.serviceWhoIsThis import serviceWhoIsThis
@@ -32,6 +34,17 @@ def main():
             continue
         mind = engine(config({"databasePath": store}), processor=connect.processor(person),
                       embedder=connect.embedder(person))
+        try:
+            mind.tick()
+        except Exception as error:
+            print(f"{store}: {error}", file=sys.stderr)
+        finally:
+            mind.close()
+    public = web.config.publicSheep
+    store = os.path.join(web.config.dataFolder, "public", "emostack.db")
+    if public and public.get("processor") and os.path.exists(store):
+        mind = engine(config({"databasePath": store}), processor=openAiCompatibleProcessor(public["processor"]),
+                      embedder=localEmbedder(public.get("embedder") or web.config.serverEmbedder))
         try:
             mind.tick()
         except Exception as error:

@@ -572,3 +572,20 @@ table.plain th, table.plain td { text-align: left; padding: 6px 8px; border-bott
 .signin-google:hover { background: rgba(255, 255, 255, .08); border-color: #eceef1; color: #fff; }
 .signin-google svg { width: 20px; height: 20px; }
 .signin-overlay.is-nudged .signin-card { box-shadow: 0 0 0 4px rgba(227, 195, 106, .3), 0 24px 60px rgba(0,0,0,.5); }
+
+/* the public room */
+.room-status { background: var(--panel); border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; margin: 0 0 14px; font-family: var(--ui); font-size: 14px; }
+.room-status .badge { display: inline-block; font-size: 12px; padding: 2px 8px; border-radius: 999px; border: 1px solid var(--border); margin-right: 6px; background: var(--panel-2); }
+.room-split { min-height: 60vh; }
+.seat { border-top: 1px solid var(--border); padding: 10px 12px; }
+.seat .input-row { padding: 0; border-top: 0; }
+.seat-note { font-family: var(--ui); font-size: 13px; padding: 6px 2px 0; }
+.mail-form { display: flex; flex-direction: column; gap: 8px; }
+.mail-form textarea { background: var(--panel-2); color: var(--ink); border: 1px solid var(--border); border-radius: 6px; padding: 8px 10px; font: inherit; resize: vertical; }
+.letter { background: var(--panel-2); border-radius: 6px; padding: 8px 12px; margin-bottom: 8px; font-size: 14.5px; }
+.letter .who { font-family: var(--ui); font-size: 12px; color: var(--ink-dim); margin-top: 4px; }
+.report-link { background: transparent; color: var(--ink-dim); border: 0; font-family: var(--ui); font-size: 11px; padding: 2px 4px; margin-top: 4px; cursor: pointer; opacity: 0; }
+.msg:hover .report-link { opacity: 1; }
+.room-notice { max-width: 90ch; margin: 14px 0 0; line-height: 1.5; }
+.room-admin { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+@media (max-width: 900px) { .room-split { grid-template-columns: 1fr; } }

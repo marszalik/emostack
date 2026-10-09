@@ -28,4 +28,5 @@ class application:
         values.setdefault("signOutUrl", self.config.signOutUrl or ("/auth/logout" if self.config.identity == "cookie" else ""))
         values.setdefault("identity", self.config.identity)
         values.setdefault("staticVersion", self.staticVersion)
+        values.setdefault("hasRoom", bool(self.config.publicSheep and self.config.publicSheep.get("processor")))
         return self.templates.render(name, **values)

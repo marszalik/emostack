@@ -15,6 +15,9 @@
 <header>
   <span class="brand"><a href="https://emostack.com" class="brand-logo" title="emostack.com"><img src="/static/core/logo.png" alt="EmoStack"></a><a href="/" class="brand-name">EmoStack</a></span>
   <nav>
+    % if hasRoom:
+    <a href="/public" class="${'active' if section == 'room' else ''}">the room</a>
+    % endif
     <a href="/" class="${'active' if section == 'home' else ''}">sheep</a>
     % if user:
     <a href="/me/model" class="${'active' if section == 'myModel' else ''}">my model</a>

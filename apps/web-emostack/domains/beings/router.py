@@ -11,6 +11,7 @@ from domains.beings.serviceListBeings import serviceListBeings
 from domains.beings.serviceTakeSnapshot import serviceTakeSnapshot
 from domains.beings.serviceWakefulness import serviceWakefulness
 from domains.models.serviceConnect import serviceConnect
+from domains.public.router import roomPage
 
 router = APIRouter()
 
@@ -32,7 +33,10 @@ def failing(action):
 @router.get("/", response_class=HTMLResponse)
 def homePage(request: Request):
     application = request.app.state.application
-    if application.config.publicDashboard and serviceWhoIsThis(application).person(request) is None:
+    anonymous = serviceWhoIsThis(application).person(request) is None
+    if anonymous and application.config.publicSheep and application.config.publicSheep.get("processor"):
+        return roomPage(request)  # the public room is what a visitor sees first
+    if application.config.publicDashboard and anonymous:
         return application.page(
             "home.mako", section="home", user=None, level=0, beings=[], anonymous=True,
             snapshots=repositorySnapshots(application.config.dataFolder).all(), needsModel=False,

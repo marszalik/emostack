@@ -23,7 +23,7 @@ import importlib
 from domains.auth.serviceWhoIsThis import serviceWhoIsThis
 from domains.core.application import application
 
-openPaths = ("/auth/", "/static/", "/healthz")
+openPaths = ("/auth/", "/static/", "/healthz", "/public")  # /public/admin/ checks the person itself
 
 
 def build():
