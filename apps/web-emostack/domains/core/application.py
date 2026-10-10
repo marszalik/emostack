@@ -29,4 +29,5 @@ class application:
         values.setdefault("identity", self.config.identity)
         values.setdefault("staticVersion", self.staticVersion)
         values.setdefault("hasRoom", bool(self.config.publicSheep and self.config.publicSheep.get("processor")))
+        values.setdefault("roomBeing", (self.config.publicSheep or {}).get("name") or "the sheep")
         return self.templates.render(name, **values)

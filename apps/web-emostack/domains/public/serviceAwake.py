@@ -78,7 +78,8 @@ class serviceAwake:
                            "messages": [{"role": "user", "content": "hi"}]}).encode("utf-8")
         request = urllib.request.Request(
             processor["baseUrl"].rstrip("/") + "/chat/completions", data=body,
-            headers={"Content-Type": "application/json", "Authorization": f"Bearer {processor.get('apiKey', '')}"})
+            headers={"Content-Type": "application/json", "Authorization": f"Bearer {processor.get('apiKey', '')}",
+                     "User-Agent": "EmoStack/3"})
         try:
             with urllib.request.urlopen(request, timeout=8) as response:
                 return response.status == 200

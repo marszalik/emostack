@@ -5,7 +5,8 @@ const seat = document.getElementById("seat");
 const statusBox = document.getElementById("status");
 let status = null;
 let shownAt = new Set();
-let lastLogKey = "";
+let lastLogKey = null;
+let lastAbout = null;
 let sending = false;
 
 function text(value) { const box = document.createElement("div"); box.textContent = value ?? ""; return box.innerHTML; }
@@ -32,7 +33,7 @@ function line(message) {
       ' <small class="dim">' + when(message.at) + '</small></div><div class="text">' + text(message.text) + "</div>";
   } else {
     box.className = "msg being";
-    box.innerHTML = '<div class="who">' + text(room.being) + ' <small class="dim">' + when(message.at) + "</small></div><div class="text">" + text(message.text) + "</div>";
+    box.innerHTML = '<div class="who">' + text(room.being) + ' <small class="dim">' + when(message.at) + '</small></div><div class="text">' + text(message.text) + "</div>";
   }
   if (message.role === "person" || message.role === "being") {
     const report = document.createElement("button");
@@ -57,7 +58,7 @@ function renderLog(log) {
   chat.innerHTML = "";
   if (!log.length) {
     const box = document.createElement("div"); box.className = "msg sys";
-    box.textContent = "Nothing has happened yet. " + room.being + " is waiting for its first visitor.";
+    box.textContent = "Nobody is talking with " + room.being + " right now. Take a seat below to talk with it.";
     chat.appendChild(box);
   }
   log.forEach(message => chat.appendChild(line(message)));
@@ -69,13 +70,15 @@ function renderStatus(s, about) {
   if (!s.awake) {
     const why = s.reason === "night" ? "It is night. " + room.being + " sleeps until " + s.until + "."
       : s.reason === "rest" ? room.being + " has been put to sleep for a while."
-      : room.being + " is asleep: the computer it lives on is off or busy. It wakes when the computer comes back.";
+      : room.being + " cannot be woken right now: the computer it runs on is off or busy.";
     html = '<span class="badge asleep">😴 asleep</span> ' + text(why) + " You can leave it a letter; it answers when it wakes.";
   } else if (s.speaker) {
     html = '<span class="badge awake">🟢 awake</span> talking with <b>' + text(s.speaker) + "</b>" + (s.mail ? " (a letter from the night)" : "") +
       (s.waiting ? " · " + s.waiting + " waiting" : "");
   } else {
-    html = '<span class="badge awake">🟢 awake</span> nobody is talking with ' + text(room.being) + " right now.";
+    html = about && about.awake === false
+      ? '<span class="badge asleep">😴 asleep</span> nobody is with ' + text(room.being) + " now, so it has fallen asleep. Wake it below to talk."
+      : '<span class="badge awake">🟢 awake</span> nobody is talking with ' + text(room.being) + " right now; it falls asleep after a while alone.";
   }
   if (about && about.records !== undefined) html += ' <span class="dim small">· ' + about.records + " records in memory</span>";
   statusBox.innerHTML = html;
@@ -88,12 +91,12 @@ function renderSeat(s) {
   else if (s.me === "speaker") mode = "turn";
   else if (s.me === "queue") mode = "queue";
   else if (s.visitsLeft <= 0) mode = "done";
-  else mode = "join";
+  else mode = lastAbout && lastAbout.awake === false && !s.speaker ? "wake" : "join";
   if (mode === was) { updateSeat(s); return; }
   seat.dataset.mode = mode;
-  if (mode === "join") {
+  if (mode === "join" || mode === "wake") {
     seat.innerHTML = '<form id="joinForm" class="input-row"><input id="joinName" name="name" autocomplete="off" maxlength="24" placeholder="your name" required>' +
-      '<button type="submit">' + (s.speaker ? "wait for a turn" : "talk to " + text(room.being)) + "</button></form>" +
+      '<button type="submit">' + (s.speaker ? "wait for a turn" : (mode === "wake" ? "wake " : "talk to ") + text(room.being)) + "</button></form>" +
       '<div class="seat-note dim small">A visit is up to ' + s.turnsPerVisit + " messages; " + s.visitsLeft + " visit" + (s.visitsLeft === 1 ? "" : "s") + " left today.</div>";
     document.getElementById("joinForm").addEventListener("submit", async (event) => {
       event.preventDefault();
@@ -133,7 +136,11 @@ function renderSeat(s) {
     const mine = (s.letters || []);
     let letters = mine.map(l => '<div class="letter"><div class="who">you wrote' + (l.deliveredAt ? "" : " (not yet read)") + '</div><div class="text">' + text(l.words) + "</div>" +
       (l.deliveredAt ? '<div class="who">' + text(room.being) + ' answered</div><div class="text">' + (l.reply ? text(l.reply) : "<em>…with silence</em>") + "</div>" : "") + "</div>").join("");
-    seat.innerHTML = letters + (s.lettersLeft > 0
+    const closed = s.reason === "away" || s.reason === "rest"
+      ? '<div class="input-row"><button type="button" disabled>wake ' + text(room.being) + '</button></div>' +
+        '<div class="seat-note dim small">It cannot be woken right now: the computer it runs on is off or busy. Try again later, or leave a letter.</div>'
+      : "";
+    seat.innerHTML = closed + letters + (s.lettersLeft > 0
       ? '<form id="mailForm" class="mail-form"><input name="name" autocomplete="off" maxlength="24" placeholder="your name" required>' +
         '<textarea name="words" maxlength="400" rows="3" placeholder="a letter for ' + text(room.being) + ' to read when it wakes…" required></textarea>' +
         '<button type="submit">leave the letter</button></form>'
@@ -168,11 +175,25 @@ function updateSeat(s) {
   }
 }
 
+// An entry opens in full on a click and stays open across refreshes (as in a private conversation).
+const expanded = new Set();
+document.querySelector(".trace-pane")?.addEventListener("click", (event) => {
+  const entry = event.target.closest(".etext[data-key]");
+  if (!entry) return;
+  entry.classList.toggle("expanded");
+  if (entry.classList.contains("expanded")) expanded.add(entry.dataset.key); else expanded.delete(entry.dataset.key);
+});
+
+function entryText(key, html) {
+  return '<span class="etext' + (expanded.has(key) ? " expanded" : "") + '" data-key="' +
+    text(key).replace(/"/g, "&quot;") + '">' + html + "</span>";
+}
+
 function row(item, tag = "") {
   const valence = (item.valence >= 0 ? "+" : "") + item.valence.toFixed(2);
   return '<li class="stan-item"><span class="vbadge ' + (item.valence >= 0 ? "pos" : "neg") + '">' + valence +
-    '</span><span class="ibar"><i style="width:' + Math.round((item.felt || 0) * 100) + '%"></i></span><span class="etext">' + text(item.feeling) +
-    (item.event ? " — " + text(item.event) : "") + (item.conclusion ? " → " + text(item.conclusion) : "") + "</span>" +
+    '</span><span class="ibar"><i style="width:' + Math.round((item.felt || 0) * 100) + '%"></i></span>' + entryText(item.at + "|" + item.feeling, text(item.feeling) +
+    (item.event ? " — " + text(item.event) : "") + (item.conclusion ? " → " + text(item.conclusion) : "")) +
     (tag ? '<span class="eago dim">' + text(tag) + "</span>" : "") + "</li>";
 }
 
@@ -186,14 +207,34 @@ function renderInner(state) {
   document.getElementById("focus").innerHTML = state.focus.map(item => row(item, item.evoked ? "association" : "")).join("") || '<li class="dim">nothing now</li>';
   document.getElementById("focusCount").textContent = "(" + state.focus.length + ")";
   document.getElementById("summary").innerHTML = state.summary
-    ? '<li class="stan-item"><span class="etext">' + text(state.summary) + "</span></li>" : '<li class="dim">no conversation now</li>';
+    ? '<li class="stan-item">' + entryText("summary", text(state.summary)) + "</li>" : '<li class="dim">no conversation now</li>';
   document.getElementById("held").innerHTML = state.held.length
-    ? state.held.map(h => '<li class="stan-item"><span class="etext">' + text(h.text) + "</span></li>").join("")
+    ? state.held.map(h => '<li class="stan-item">' + entryText(h.text, text(h.text)) + "</li>").join("")
     : '<li class="dim">nothing yet</li>';
   document.getElementById("dispositions").innerHTML = state.dispositions.map(d =>
     '<li class="stan-item"><span class="vbadge ' + (d.weight >= 0 ? "pos" : "neg") + '">' + (d.weight >= 0 ? "+" : "") +
-    d.weight.toFixed(2) + '</span><span class="etext">' + text(d.rule) + "</span></li>").join("") || '<li class="dim">none applied to the last reply</li>';
+    d.weight.toFixed(2) + '</span>' + entryText(d.rule, text(d.rule)) + "</li>").join("") || '<li class="dim">none applied to the last reply</li>';
   document.getElementById("dispositionCount").textContent = "(" + state.dispositions.length + ")";
+}
+
+
+// While the being works on a reply (a turn is several model calls, it can take a minute),
+// everyone in the room sees it at the bottom of the chat.
+function showThinking(on) {
+  let el = document.getElementById("thinking");
+  if (on) {
+    if (!el) {
+      el = document.createElement("div");
+      el.id = "thinking"; el.className = "msg sys thinking";
+      el.innerHTML = text(room.being) + ' is thinking<span class="dots"><i>.</i><i>.</i><i>.</i></span>';
+    }
+    chat.appendChild(el);
+    chat.scrollTop = chat.scrollHeight;
+    clearTimeout(showThinking.timer);
+    showThinking.timer = setTimeout(refresh, 3000);
+  } else if (el) {
+    el.remove();
+  }
 }
 
 let refreshing = false;
@@ -206,9 +247,11 @@ async function refresh() {
     const data = await response.json();
     status = data.status;
     renderStatus(data.status, data.about);
+    lastAbout = data.about;
     renderSeat(data.status);
     renderLog(data.log);
     renderInner(data.inner);
+    showThinking(data.status.awake && data.status.busy);
   } catch (e) {
   } finally {
     refreshing = false;

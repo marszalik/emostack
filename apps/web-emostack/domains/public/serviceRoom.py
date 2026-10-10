@@ -4,6 +4,7 @@ import re
 import sys
 import threading
 import time
+from datetime import datetime
 from types import SimpleNamespace
 
 from emostack.core.config import config
@@ -94,7 +95,39 @@ class serviceRoom:
                 if entry["visitor"] == visitor:
                     entry["lastSeen"] = now
 
+    def history(self, day=None, days=14):
+        """Earlier days in the room, newest first, and everything that happened on one of them (the newest
+        when no day is asked for). Days are counted in the room's own time zone."""
+        reader = self.reader()
+        try:
+            being = reader.beings.named(self.name)
+            if being is None:
+                return [], None, []
+            repositoryTranscripts(reader.database)
+            rows = reader.database.read(
+                "SELECT person, role, text, details, at FROM transcripts WHERE beingId = ? ORDER BY id", (being.id,))
+        finally:
+            reader.close()
+        zone = self.awake.zone
+        byDay = {}
+        for row in rows:
+            byDay.setdefault(datetime.fromtimestamp(row["at"], zone).strftime("%Y-%m-%d"), []).append(row)
+        listed = sorted(byDay, reverse=True)[:days]
+        summary = [{"day": d, "visitors": len({r["person"] for r in byDay[d] if r["role"] == "arrival"}),
+                    "messages": sum(1 for r in byDay[d] if r["role"] == "person")} for d in listed]
+        chosen = day if day in byDay else (listed[0] if listed else None)
+        entries = [dict(role=r["role"], text=r["text"], who=r["person"],
+                        clock=datetime.fromtimestamp(r["at"], zone).strftime("%H:%M"))
+                   for r in byDay.get(chosen, [])]
+        return summary, chosen, entries
+
     def log(self, limit=80):
+        """What is being said now: only the conversation going on at this moment. The being does not keep a chat
+        history; when nobody is with it, the chat is empty (earlier days are on the history page)."""
+        with self.lock:
+            current = self.live.id if (self.live is not None and self.speaker is not None) else None
+        if current is None:
+            return []
         reader = self.reader()
         try:
             being = reader.beings.named(self.name)
@@ -102,8 +135,8 @@ class serviceRoom:
                 return []
             repositoryTranscripts(reader.database)
             rows = reader.database.read(
-                "SELECT person, role, text, details, at FROM transcripts WHERE beingId = ? ORDER BY id DESC LIMIT ?",
-                (being.id, limit))
+                "SELECT person, role, text, details, at FROM transcripts WHERE beingId = ? AND conversationId = ? ORDER BY id DESC LIMIT ?",
+                (being.id, current, limit))
         finally:
             reader.close()
         return [dict(role=row["role"], text=row["text"], who=row["person"], at=row["at"],

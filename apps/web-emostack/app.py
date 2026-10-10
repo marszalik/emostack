@@ -68,4 +68,4 @@ if __name__ == "__main__":
     parser.add_argument("--host", default="127.0.0.1")
     parser.add_argument("--port", type=int, default=8093)
     options = parser.parse_args()
-    uvicorn.run(build(), host=options.host, port=options.port)
+    uvicorn.run(build(), host=options.host, port=options.port, timeout_graceful_shutdown=3)  # open room streams must not hold a restart for 90 s

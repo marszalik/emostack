@@ -64,6 +64,17 @@ def publicPage(request: Request):
     return roomPage(request)
 
 
+@router.get("/public/history", response_class=HTMLResponse)
+def publicHistory(request: Request, day: str = ""):
+    application = request.app.state.application
+    room = roomOf(request)
+    person = serviceWhoIsThis(application).person(request)
+    days, chosen, entries = room.history(day)
+    html = application.page("history.mako", section="history", user=person.toDict() if person else None,
+                            level=person.level if person else 0, being=room.name, days=days, chosen=chosen, entries=entries)
+    return HTMLResponse(html)
+
+
 @router.get("/public/room")
 def publicRoom(request: Request):
     room = roomOf(request)

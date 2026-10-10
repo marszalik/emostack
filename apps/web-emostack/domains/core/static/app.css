@@ -589,3 +589,22 @@ table.plain th, table.plain td { text-align: left; padding: 6px 8px; border-bott
 .room-notice { max-width: 90ch; margin: 14px 0 0; line-height: 1.5; }
 .room-admin { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
 @media (max-width: 900px) { .room-split { grid-template-columns: 1fr; } }
+
+/* public room: the seat (join / type) must be visible without scrolling */
+.room-hero { padding-bottom: 8px; }
+.room-split .chat-pane { height: calc(100vh - 340px); min-height: 320px; }
+@media (max-width: 900px) { .room-split .chat-pane { height: 60vh; min-height: 300px; } }
+
+.room-more { font-family: var(--ui); font-size: 14px; margin-top: 4px; }
+.room-more a { white-space: nowrap; }
+
+.history-days { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0 16px; font-family: var(--ui); font-size: 14px; }
+.history-days a { padding: 6px 10px; border: 1px solid var(--border); border-radius: 6px; }
+.history-days a.active { border-color: var(--accent); }
+.history-stream { display: flex; flex-direction: column; gap: 10px; padding: 0; overflow: visible; }
+
+.chat-head { display: flex; justify-content: space-between; align-items: center; padding: 8px 12px;
+  border-bottom: 1px solid var(--border); font-family: var(--ui); font-size: 13px; }
+.history-button { padding: 5px 12px; border: 1px solid var(--accent); border-radius: 6px; color: var(--ink);
+  text-decoration: none; white-space: nowrap; }
+.history-button:hover { background: rgba(185, 192, 201, .08); }

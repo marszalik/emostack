@@ -8,6 +8,8 @@
 <title>EmoStack</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" href="/static/core/favicon.ico" type="image/x-icon">
+<link rel="icon" href="/static/core/favicon.png" type="image/png">
 <link rel="stylesheet" href="/static/core/app.css?v=${staticVersion}">
 <script src="/static/core/session.js?v=${staticVersion}"></script>
 </head>
@@ -16,15 +18,17 @@
   <span class="brand"><a href="https://emostack.com" class="brand-logo" title="emostack.com"><img src="/static/core/logo.png" alt="EmoStack"></a><a href="/" class="brand-name">EmoStack</a></span>
   <nav>
     % if hasRoom:
-    <a href="/public" class="${'active' if section == 'room' else ''}">the room</a>
+    <a href="/public" class="${'active' if section == 'room' else ''}">talk to ${roomBeing | h}</a>
     % endif
-    <a href="/" class="${'active' if section == 'home' else ''}">sheep</a>
+    <a href="/" class="${'active' if section == 'home' else ''}">${'your sheep' if user else 'your own sheep'}</a>
     % if user:
     <a href="/me/model" class="${'active' if section == 'myModel' else ''}">my model</a>
     % endif
     % if level >= 3:
     <a href="/people" class="${'active' if section == 'people' else ''}">people</a>
     % endif
+    <a href="https://emostack.com">about</a>
+    <a href="https://emostack.com/research">research</a>
     <a href="https://emostack.com/code">code</a>
   </nav>
   <div class="auth-box">

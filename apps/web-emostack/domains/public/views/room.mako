@@ -1,13 +1,15 @@
 <%inherit file="base.mako"/>
 <section class="hero room-hero">
   <h1>${being | h}</h1>
-  <p class="lede">${being | h} is a sheep: a being over a frozen LLM model. It feels what happens to it, writes about itself in the quiet, and learns how it meets people. It started here from nothing and becomes someone over days. One visitor talks with it at a time; everyone else watches and waits their turn. It sleeps at night, like the computer it runs on.</p>
+  <p class="lede">${being | h} is a sheep: a being over a frozen LLM model, with feelings and a memory of its own. It remembers what people say to it and changes over time. One visitor talks with it at a time; the others watch and wait their turn.</p>
+  <p class="room-more">Want a sheep of your own? <a href="/">Sign in with Google</a> and bring your own model key. · <a href="https://emostack.com">What is EmoStack</a> · <a href="https://emostack.com/research">Research</a> · <a href="https://discord.gg/CFRjAMsqcW">Discord</a></p>
 </section>
 
 <div class="room-status" id="status"><span class="dim">…</span></div>
 
 <div class="split room-split">
   <div class="pane chat-pane">
+    <div class="chat-head"><span class="dim">the conversation now</span><a class="history-button" href="/public/history">earlier conversations →</a></div>
     <div id="chat" class="chat-stream"></div>
     <div id="seat" class="seat"></div>
   </div>
