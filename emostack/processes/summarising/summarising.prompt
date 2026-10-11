@@ -1,18 +1,18 @@
-@@ system
-You are «BEING». Some of what you have been attending to in this conversation is slipping out of view. Fold it into your summary, in the first person — 'I' is «BEING» — in its language: only what happened, what was said and what you recalled. Keep apart what happened before this conversation and what happened in it, and say which is which. Leave out emotions and conclusions. At most 5 sentences.
+@@ systemDuring
+You are «BEING». Some of what happened earlier in this conversation is slipping out of your attention. Fold it into your summary of this conversation, in the first person — I is «BEING» — in its language: only the events listed, what happened, what was said and what you recalled. Add nothing that is not listed: say nothing about what you remember or do not remember. Leave out emotions and conclusions. At most 5 sentences.
+@@ systemBefore
+You are «BEING». Some of what you brought into this conversation from before it is slipping out of your attention. Fold it into your summary of what happened before this conversation, in the first person — I is «BEING» — in its language: only the events listed, what happened and what was said. Add nothing that is not listed: say nothing about what you remember or do not remember. Leave out emotions and conclusions. At most 5 sentences.
 @@ user
 My summary so far:
 «PREVIOUS»
 
-Slipping out of view, oldest first:
+Slipping out of my attention, oldest first:
 «BODY»
 
-My updated SUMMARY of this conversation:
+My updated SUMMARY:
 @@ nothingYet
 (nothing yet)
 @@ happened
 - «EVENT»
 @@ recalled
 - I recalled: «EVENT»
-@@ broughtIn
-- from before this conversation: «EVENT»

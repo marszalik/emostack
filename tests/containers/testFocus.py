@@ -15,9 +15,8 @@ class testFocus(unittest.TestCase):
         for at, recordId in enumerate(("a", "b", "c")):
             focus.pushMoment(record(recordId), at)
         self.assertEqual([entry.record.id for entry in focus.overflow()], ["a"])
-        focus.fold(focus.overflow(), "a happened")
+        focus.fold(focus.overflow())
         self.assertEqual([entry.record.id for entry in focus.inView()], ["b", "c"])
-        self.assertEqual(focus.summary.text, "a happened")
 
     def testAMemoryStandsAfterTheMomentThatEvokedIt(self):
         focus = Focus(size=8)
@@ -38,11 +37,11 @@ class testFocus(unittest.TestCase):
         focus = Focus(size=1)
         focus.pushCarried(record("before"), 0)
         focus.pushEvoked(record("memory"), 1)
-        focus.fold(focus.overflow(), "")
+        focus.fold(focus.overflow())
         focus.pushCarried(record("before"), 2)
         self.assertEqual([entry.record.id for entry in focus.inView()], ["memory"])
         focus.pushMoment(record("m1"), 3)
-        focus.fold(focus.overflow(), "")
+        focus.fold(focus.overflow())
         focus.pushEvoked(record("memory"), 4)
         self.assertEqual([entry.record.id for entry in focus.inView()], ["m1", "memory"])
 

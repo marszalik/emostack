@@ -69,7 +69,7 @@ class testConversation(unittest.TestCase):
         self.assertNotIn("this was kind", folded)
         self.assertLessEqual(len(conversation.focus.inView()), 2)
         user = test.processor.callsFor("reply")[-1]["user"]
-        self.assertIn("(your summary: what happened before this conversation and earlier in it) ===\n  We talked.", user)
+        self.assertIn("=== WHAT HAS LEFT YOUR ATTENTION (your summary) ===\n  earlier in this conversation: We talked.", user)
         self.assertNotIn("First thing.", user.split("=== THIS CONVERSATION SO FAR ===")[1])
 
     def testAFailedFoldLeavesTheEntriesInView(self):
@@ -80,7 +80,7 @@ class testConversation(unittest.TestCase):
         test.time.advance(30)
         test.engine.hear(conversation, "First thing.")
         self.assertEqual(len(conversation.focus.inView()), 2)
-        self.assertEqual(conversation.focus.summary.text, "")
+        self.assertTrue(conversation.focus.summary.isEmpty())
 
     def testTheStateShowsEachFeelingWithItsConclusion(self):
         conversation, _ = self.engine.open("Maya", "Daniel")

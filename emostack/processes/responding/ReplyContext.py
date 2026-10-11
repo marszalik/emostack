@@ -15,7 +15,7 @@ class ReplyContext:
     DEPARTURE = "departure"
 
     def __init__(self, kind, hereAndNow, state, focusEntries, clock, feelingWords, fading, rumination,
-                 words="", held=None, summary="", dispositions=None):
+                 words="", held=None, summary=None, dispositions=None):
         self.kind = kind
         self.hereAndNow = hereAndNow
         self.state = state
@@ -115,8 +115,12 @@ class ReplyContext:
         lines.extend(self.parts.fill("disposition", RULE=rule) for rule in self.dispositions)
 
     def _renderFocus(self, lines):
-        if (self.summary or "").strip():
-            lines.append(self.parts.fill("summary", TEXT=self.summary.strip().replace("\n", "\n  ")))
+        if self.summary is not None and not self.summary.isEmpty():
+            lines.append(self.parts.text("summaryHead"))
+            if self.summary.before.strip():
+                lines.append(self.parts.fill("summaryBefore", TEXT=self.summary.before.strip().replace("\n", " ")))
+            if self.summary.during.strip():
+                lines.append(self.parts.fill("summaryDuring", TEXT=self.summary.during.strip().replace("\n", " ")))
         if not self.focusEntries:
             return
         lines.append(self.parts.text("focusHead"))

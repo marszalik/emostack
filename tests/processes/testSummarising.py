@@ -21,16 +21,23 @@ class record:
 
 class testSummarising(unittest.TestCase):
 
-    def testAFoldedMemoryIsSummarisedAsRecalledAndABroughtInFeelingAsFromBefore(self):
+    def testAFoldedMemoryIsSummarisedAsRecalledInTheConversation(self):
         processor = scriptedProcessor()
-        entries = [FocusEntry(record("Anna lost her dog."), FocusEntry.CARRIED_FROM_BEFORE),
-                   FocusEntry(record("Tom said: hello."), FocusEntry.THIS_CONVERSATION),
+        entries = [FocusEntry(record("Tom said: hello."), FocusEntry.THIS_CONVERSATION),
                    FocusEntry(record("Azor ran in the park."), FocusEntry.EVOKED_FROM_BEFORE)]
-        self.assertEqual(summarising(processor).fold("Maya", "", entries), "We talked.")
-        user = processor.callsFor("summarising")[0]["user"]
-        self.assertIn("- from before this conversation: Anna lost her dog.", user)
-        self.assertIn("- Tom said: hello.", user)
-        self.assertIn("- I recalled: Azor ran in the park.", user)
+        self.assertEqual(summarising(processor).fold("Maya", "", entries, before=False), "We talked.")
+        call = processor.callsFor("summarising")[0]
+        self.assertIn("earlier in this conversation", call["system"])
+        self.assertIn("- Tom said: hello.", call["user"])
+        self.assertIn("- I recalled: Azor ran in the park.", call["user"])
+
+    def testWhatWasBroughtInIsFoldedAsBeforeTheConversation(self):
+        processor = scriptedProcessor()
+        entries = [FocusEntry(record("Anna lost her dog."), FocusEntry.CARRIED_FROM_BEFORE)]
+        summarising(processor).fold("Maya", "", entries, before=True)
+        call = processor.callsFor("summarising")[0]
+        self.assertIn("before this conversation", call["system"])
+        self.assertIn("- Anna lost her dog.", call["user"])
 
 
 if __name__ == "__main__":

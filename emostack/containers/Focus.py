@@ -43,10 +43,9 @@ class Focus:
         view = self.inView()
         return view[:max(0, len(view) - max(1, self.size))]
 
-    def fold(self, entries, summaryText):
+    def fold(self, entries):
         for entry in entries:
             entry.folded = True
-        self.summary.text = summaryText
 
     def line(self, current=(), held=()):
         """What is in view for this turn: the entries in view, then what came to mind in this turn and

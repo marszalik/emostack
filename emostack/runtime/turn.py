@@ -91,7 +91,7 @@ class turn:
             conversation.lastHereAndNow = hereAndNow
             context = ReplyContext(ReplyContext.WORDS, hereAndNow, state, focusEntries, self.clock,
                                    self.feelingWords, self.fading, self.rumination, words=utterance.words,
-                                   held=self._slotBlock(), summary=conversation.focus.summary.text,
+                                   held=self._slotBlock(), summary=conversation.focus.summary,
                                    dispositions=[disposition.rule for disposition in dispositions])
             reaction = self.responding.react(context)
             if reaction.failed:
@@ -233,7 +233,7 @@ class turn:
                                 self.presence.others(self.presenceKey, conversation.sessionId), senses)
         conversation.closingContext = ReplyContext(
             ReplyContext.DEPARTURE, hereAndNow, state, focusEntries, self.clock, self.feelingWords,
-            self.fading, self.rumination, held=self._slotBlock(), summary=conversation.focus.summary.text).render()
+            self.fading, self.rumination, held=self._slotBlock(), summary=conversation.focus.summary).render()
         self.presence.leave(conversation.sessionId)
         for _ in range(self.parameters["quietThoughts"]):
             self.thoughts += self.reflection.run(conversation.focus)
@@ -291,7 +291,7 @@ class turn:
         context = AppraisalContext(
             HereAndNow(hereAndNow.now, hereAndNow.beingName, hereAndNow.person, hereAndNow.otherSessions, senses),
             remembered, focusEntries, self.clock, self.feelingWords, self.fading, self.rumination,
-            utterance.words, summary=self.conversation.focus.summary.text)
+            utterance.words, summary=self.conversation.focus.summary)
         affect = self.appraisal.appraise(context)
         if affect is None:
             return Affect(reaction.feeling, reaction.conclusion, reaction.valence, reaction.intensity)
@@ -308,14 +308,22 @@ class turn:
             self.conversation.focus.pushEvoked(record, now)
 
     def _fold(self):
-        """What leaves view is folded into the summary. If the call fails, it stays in view."""
+        """What leaves view is folded into the summary, what was brought in from before apart from the
+        conversation itself. If a call fails, its entries stay in view."""
         focus = self.conversation.focus
         leaving = focus.overflow()
-        if not leaving:
-            return
-        summary = self.summarising.fold(self.being.name, focus.summary.text, leaving)
-        if summary is not None:
-            focus.fold(leaving, summary)
+        brought = [entry for entry in leaving if entry.isCarried()]
+        lived = [entry for entry in leaving if not entry.isCarried()]
+        if brought:
+            text = self.summarising.fold(self.being.name, focus.summary.before, brought, before=True)
+            if text is not None:
+                focus.summary.before = text
+                focus.fold(brought)
+        if lived:
+            text = self.summarising.fold(self.being.name, focus.summary.during, lived, before=False)
+            if text is not None:
+                focus.summary.during = text
+                focus.fold(lived)
 
     def _keep(self, moment):
         encoded = self.encoding.encode(self.being.id, moment, self.conversation.livingRecordId,

@@ -14,10 +14,11 @@ class summarising:
         self.processor = processor
         self.threadCap = threadCap
 
-    def fold(self, beingName, previous, entries):
-        """Returns the summary with `entries` folded in, or None when the call failed and the entries
+    def fold(self, beingName, previous, entries, before):
+        """Returns one part of the summary, what was brought in from before (`before`) or the
+        conversation itself, with `entries` folded in; None when the call failed and the entries
         should stay in view."""
-        context = SummarisingContext(beingName, previous, self._events(entries)[-self.threadCap:])
+        context = SummarisingContext(beingName, previous, self._events(entries)[-self.threadCap:], before)
         if not context.events:
             return previous
         try:

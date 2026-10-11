@@ -125,10 +125,13 @@ from your past
 === YOUR OWN THOUGHTS ===
 @@ slotEntry
   • [«AGO»] «STATEMENT»
-@@ summary
+@@ summaryHead
 
-=== WHAT HAS LEFT YOUR ATTENTION (your summary: what happened before this conversation and earlier in it) ===
-  «TEXT»
+=== WHAT HAS LEFT YOUR ATTENTION (your summary) ===
+@@ summaryBefore
+  before this conversation: «TEXT»
+@@ summaryDuring
+  earlier in this conversation: «TEXT»
 @@ dispositionsHead
 
 === WHAT YOU HAVE LEARNED (fits this situation) ===

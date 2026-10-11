@@ -10,7 +10,7 @@ class AppraisalContext(ReplyContext):
     reply but not the memory."""
 
     def __init__(self, hereAndNow, remembered, focusEntries, clock, feelingWords, fading, rumination,
-                 words, summary=""):
+                 words, summary=None):
         super().__init__(ReplyContext.WORDS, hereAndNow, None, focusEntries, clock, feelingWords, fading,
                          rumination, words=words, summary=summary)
         self.remembered = list(remembered)
