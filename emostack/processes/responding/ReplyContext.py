@@ -4,10 +4,11 @@ from emostack.episode.Rendering import Rendering
 
 class ReplyContext:
     """What the reply call sees, in the order the LLM model reads it: here and now with the senses;
-    the state, each feeling with its words, strength and conclusion; the accessibility slot; the
-    conversation summary; the applicable dispositions; the focus, opened by the retold episodes the
-    feelings of the state rest on, then this conversation as it happened, each moment under its
-    feeling, and evoked memories retold; and what is heard. Nothing is withheld."""
+    the state, each feeling with its words, strength and conclusion; the accessibility slot, when its
+    thoughts are not placed in the line; the applicable dispositions; the focus: the summary of what
+    has left view, then the line in the order things came into view, the feelings brought in from
+    before and evoked memories retold, the moments as they happened, each under its feeling unless
+    the feeling is already in the state; and what is heard. Nothing is withheld."""
 
     WORDS = "words"
     ARRIVAL = "arrival"
@@ -56,16 +57,13 @@ class ReplyContext:
     # ---- the context ----
 
     def render(self):
-        moved = []
         lines = [self.parts.fill("header", BEING=self.hereAndNow.beingName, PERSON=self.hereAndNow.person)]
         lines.append("\n" + self.hereAndNow.senses.render())
         lines.extend(self._presence())
-        self._renderState(lines, moved)
+        self._renderState(lines)
         self._renderSlot(lines)
-        if (self.summary or "").strip():
-            lines.append(self.parts.fill("summary", TEXT=self.summary.strip().replace("\n", "\n  ")))
         self._renderDispositions(lines)
-        self._renderFocus(lines, moved)
+        self._renderFocus(lines)
         return "\n".join(lines)
 
     def _presence(self):
@@ -84,13 +82,12 @@ class ReplyContext:
                                          LAST=last, TURNS=session.turnCount))
         return lines
 
-    def _renderState(self, lines, moved):
+    def _renderState(self, lines):
         entries = list(self.state or [])
         if not entries:
             lines.append(self.parts.text("noFeelings"))
             return
         now = self.hereAndNow.now
-        inConversation = self._conversationEvents()
         lines.append(self.parts.text("feelingsHead"))
         clusters = sorted(self.rumination.cluster(entries),
                           key=lambda cluster: -cluster.representative.feltAt(now, self.fading))
@@ -101,11 +98,6 @@ class ReplyContext:
                 TAG=self._tag(record), WORDS=self._words(record), FEELING=record.feeling,
                 RECUR=self.parts.fill("recur", COUNT=cluster.count) if cluster.count > 1 else "",
                 CONCLUSION=self.parts.fill("conclusion", TEXT=record.conclusion) if record.conclusion else ""))
-            for episode in record.episodes or []:
-                if episode.text(Rendering.AS_IT_HAPPENED) in inConversation:
-                    continue
-                moved.append(self.parts.fill("beforeEvent", AGO=self.clock.formatAgo(episode.happenedAt, now),
-                                             EVENT=episode.text(Rendering.RETOLD)))
 
     def _renderSlot(self, lines):
         if not self.held:
@@ -122,31 +114,35 @@ class ReplyContext:
         lines.append(self.parts.text("dispositionsHead"))
         lines.extend(self.parts.fill("disposition", RULE=rule) for rule in self.dispositions)
 
-    def _renderFocus(self, lines, moved):
-        stateIds = {record.id for record in (self.state or [])}
-        entries = [entry for entry in self.focusEntries
-                   if not (entry.isEvoked() and entry.record.id in stateIds)]
-        if not entries and not moved:
+    def _renderFocus(self, lines):
+        if (self.summary or "").strip():
+            lines.append(self.parts.fill("summary", TEXT=self.summary.strip().replace("\n", "\n  ")))
+        if not self.focusEntries:
             return
         lines.append(self.parts.text("focusHead"))
-        if moved:
-            lines.append(self.parts.text("beforeHead"))
-            lines.extend(moved)
-            lines.append(self.parts.text("beforeEnd"))
         lines.append(self.parts.text("conversationHead"))
-        for entry in entries:
+        for entry in self.focusEntries:
             lines.extend(self._entry(entry))
 
     def _entry(self, entry):
+        """A held thought is its own statement. An entry whose feeling is in the state shows only its
+        event: the feeling is not repeated."""
         now = self.hereAndNow.now
         record = entry.record
-        rendering = Rendering.RETOLD if entry.isEvoked() else Rendering.AS_IT_HAPPENED
+        if entry.isHeldThought():
+            return [self.parts.fill("entryThought", AGO=self.clock.formatAgo(record.happenedAt, now),
+                                    STATEMENT=record.statement())]
+        rendering = Rendering.RETOLD if entry.isFromBefore() else Rendering.AS_IT_HAPPENED
         episodes = sorted(record.episodes or [], key=lambda episode: episode.happenedAt)
         texts = [episode.text(rendering) for episode in episodes if episode.text(rendering)]
         head = texts[0] if len(texts) == 1 else ""
-        line = self.parts.fill("entry", AGO=self.clock.formatAgo(record.happenedAt, now), TAG=self._tag(record),
-                               WORDS=self._words(record), FEELING=record.feeling,
-                               EVENT=self.parts.fill("entryEvent", EVENT=head) if head else "")
+        if self._isFelt(record):
+            line = self.parts.fill("entryEventsOnly", AGO=self.clock.formatAgo(record.happenedAt, now),
+                                   TAG=self._tag(record), EVENT=head)
+        else:
+            line = self.parts.fill("entry", AGO=self.clock.formatAgo(record.happenedAt, now),
+                                   TAG=self._tag(record), WORDS=self._words(record), FEELING=record.feeling,
+                                   EVENT=self.parts.fill("entryEvent", EVENT=head) if head else "")
         subs = []
         if len(texts) > 1:
             subs = [self.parts.fill("subEvent", AGO=self.clock.formatAgo(episode.happenedAt, now),
@@ -158,9 +154,12 @@ class ReplyContext:
     def _words(self, record):
         return self.feelingWords.describe(record.valence, record.feltAt(self.hereAndNow.now, self.fading))
 
-    def _conversationEvents(self):
+    def _isFelt(self, record):
+        return any(felt.id == record.id for felt in (self.state or []))
+
+    def _lineEvents(self):
         return {episode.text(Rendering.AS_IT_HAPPENED)
-                for entry in self.focusEntries if not entry.isEvoked()
+                for entry in self.focusEntries if not entry.isHeldThought()
                 for episode in (entry.record.episodes or [])}
 
     def _tag(self, record):

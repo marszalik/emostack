@@ -33,10 +33,10 @@ class serviceConversationState:
             "held": [{"text": construct.statement(), "at": construct.happenedAt} for construct in assembly.slot.held()],
             "state": [dict(self._record(record, now, assembly.fadingLaw), evoked=record.id in evokedIds)
                       for record in state],
-            "summary": (conversation.summary.text or "").strip() if conversation else "",
-            "focus": [dict(self._record(entry.record, now, assembly.fadingLaw, entry.isEvoked()), evoked=entry.isEvoked())
-                      for entry in (conversation.focus.entries if conversation else [])
-                      if not (entry.isEvoked() and entry.record.id in state.ids())],
+            "summary": (conversation.focus.summary.text or "").strip() if conversation else "",
+            "focus": [dict(self._record(entry.record, now, assembly.fadingLaw, entry.isFromBefore()),
+                           evoked=entry.isFromBefore(), felt=entry.record.id in state.ids())
+                      for entry in (conversation.focus.inView() if conversation else [])],
             "dispositions": [{"rule": d.rule, "weight": d.weight, "count": d.count}
                              for d in (conversation.lastDispositions if conversation else [])],
         }

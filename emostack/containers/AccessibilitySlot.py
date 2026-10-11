@@ -41,6 +41,10 @@ class AccessibilitySlot:
     def held(self):
         return [construct for construct, _ in self.places]
 
+    def heldSince(self):
+        """Each held construct with the time it was formed or last brought back to mind."""
+        return list(self.places)
+
     def ids(self):
         return {construct.id for construct, _ in self.places}
 

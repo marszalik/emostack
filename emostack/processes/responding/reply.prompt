@@ -137,19 +137,15 @@ from your past
 @@ focusHead
 
 === THIS CONVERSATION SO FAR ===
-@@ beforeHead
-  (from before this conversation: the events your feelings above rest on)
-@@ beforeEvent
-    ◦ [«AGO»] «EVENT»
-@@ beforeEnd
-
 @@ conversationHead
-  (what was said to you and what you said back, in order)
+  (what you are attending to, in order: what you came in with, what was said to you and what you said back, what came back to you, and your own thoughts; what is already in your state above is shown here without its feeling)
 @@ entry
   • [«AGO» | «TAG»] you feel: «WORDS» | «FEELING»«EVENT»
 @@ entryEvent
  | «EVENT»
 @@ entryEventsOnly
   • [«AGO» | «TAG»] «EVENT»
+@@ entryThought
+  • [«AGO»] «STATEMENT»
 @@ subEvent
         ◦ [«AGO»] «EVENT»

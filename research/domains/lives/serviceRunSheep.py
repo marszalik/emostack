@@ -91,7 +91,7 @@ class serviceRunSheep:
         for construct in outcome.thoughts:
             self._add(day, "thought", construct.statement(), valence=construct.valence,
                       intensity=construct.intensity, feeling=construct.feeling)
-        moment = conversation.focus.entries[-1].record if conversation.focus.entries and not outcome.failed else None
+        moment = conversation.focus.lastMoment() if not outcome.failed else None
         text = outcome.words or ("(the reply could not be read)" if outcome.failed else "(silent)")
         self._add(day, "sheep", text, person=role["name"], roleId=role["id"], turnIndex=turnIndex,
                   valence=moment.valence if moment else None, intensity=moment.intensity if moment else None,

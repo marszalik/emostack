@@ -124,9 +124,9 @@ emostack/
     Association.py                  # record + origin (Involuntary | Deliberate) + destination (State | Focus)
     Associations.py
     State.py                        # budget, ordered by felt strength
-    Focus.py
-    FocusEntry.py                   # ThisConversation | EvokedFromBefore
-    ConversationSummary.py
+    Focus.py                        # attention: a line of the last N entries, older ones folded
+    FocusEntry.py                   # CarriedFromBefore | ThisConversation | EvokedFromBefore | HeldThought
+    ConversationSummary.py          # the folded events, without feelings or conclusions
     AccessibilitySlot.py            # three places, seven days
     SlotPlace.py                    # Reserved | Free
     ApplicableDispositions.py

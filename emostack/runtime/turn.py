@@ -23,12 +23,12 @@ from emostack.senses.Senses import Senses
 class turn:
     """The fast path: one trigger, in this order. The learned dispositions that fit are selected;
     recall brings up what the words bring to mind; the state is composed from the most recent
-    records and the strongest associations, and the rest go to the focus; reply generation produces
-    the act. A search, or one of the engine's own searches when the person is unknown or asks about
+    records and the strongest associations; the focus line shows what is in view, with what came to
+    mind placed after the moment that evoked it; reply generation produces the act. A search, or one of the engine's own searches when the person is unknown or asks about
     a moment or about the being's own dreams, beliefs, decisions or wants, adds to the associations
     and the reply is generated again; a pause to think runs reflection first. Appraisal forms the
-    record to keep with the state withheld; the temperament bends it; encoding keeps it. Nothing on
-    this path deliberates.
+    record to keep with the state withheld; the temperament bends it; encoding keeps it; what leaves
+    the focus is folded into its summary. Nothing on this path deliberates.
 
     One instance serves one trigger: the performer methods read the state of this trigger."""
 
@@ -77,10 +77,6 @@ class turn:
         self.associations.add(recalled.records)
         recent = self.hippocampus.mostRecentlyFelt(self.parameters["recentCount"], livedOnly=True)
         others = self.presence.others(self.presenceKey, conversation.sessionId)
-        conversation.summary.countTurn()
-        if conversation.summary.isDue():
-            conversation.summary.text = self.summarising.refresh(
-                self.being.name, person, conversation.focus, conversation.summary.text)
         self.searches = []
         memorySize = self.hippocampus.size()
         hops = self.parameters["turnActionHops"]
@@ -95,7 +91,7 @@ class turn:
             conversation.lastHereAndNow = hereAndNow
             context = ReplyContext(ReplyContext.WORDS, hereAndNow, state, focusEntries, self.clock,
                                    self.feelingWords, self.fading, self.rumination, words=utterance.words,
-                                   held=self.slot.held(), summary=conversation.summary.text,
+                                   held=self._slotBlock(), summary=conversation.focus.summary.text,
                                    dispositions=[disposition.rule for disposition in dispositions])
             reaction = self.responding.react(context)
             if reaction.failed:
@@ -138,7 +134,6 @@ class turn:
         reaction, state, focusEntries, hereAndNow = kept
         affect = self._appraise(utterance, reaction, state, focusEntries, hereAndNow)
         valence, intensity = self.being.temperament.apply(affect.valence, affect.intensity)
-        self._evoke()
         conversation.lastAssociations = self.associations.records()
         event = self.eventWords.said(person, utterance.words)
         if reaction.words:
@@ -146,6 +141,8 @@ class turn:
         moment = Moment(person, event, reaction.retold, affect.feeling, affect.conclusion, valence, intensity,
                         self.clock.now())
         self._keep(moment)
+        self._evoke()
+        self._fold()
         return TurnOutcome(reaction.words, self.thoughts)
 
     # ---- acts of a turn ----
@@ -195,13 +192,12 @@ class turn:
             hereAndNow = HereAndNow(self.clock.now(), self.being.name, person, others, senses)
             conversation.lastHereAndNow = hereAndNow
             context = ReplyContext(ReplyContext.ARRIVAL, hereAndNow, state, focusEntries, self.clock,
-                                   self.feelingWords, self.fading, self.rumination, held=self.slot.held())
+                                   self.feelingWords, self.fading, self.rumination, held=self._slotBlock())
             reaction = self.responding.react(context)
             if reaction.failed or reaction.action.target is not ActionTarget.MEMORY:
                 break
             if hop < self.parameters["turnActionHops"]:
                 self.associations.add(self.recall.plain(reaction.action.query, person))
-        self._evoke()
         conversation.lastAssociations = self.associations.records()
         greeting = "" if reaction is None or reaction.failed else reaction.words
         event = self.eventWords.entered(person)
@@ -213,7 +209,9 @@ class turn:
             arrivalRecord = EmoThought(EmoThought.newId(), self.being.id, Author.person(person), reaction.feeling,
                                        reaction.conclusion, valence, Strength(intensity, now), now)
             arrivalRecord.episodes = [Episode(Episode.newId(), self.being.id, arrivalRecord.id, person, event, now)]
-            conversation.focus.pushMoment(arrivalRecord)
+            conversation.focus.pushMoment(arrivalRecord, now)
+        self._evoke()
+        self._fold()
         conversation.livingRecordId = None
         return TurnOutcome(greeting)
 
@@ -235,7 +233,7 @@ class turn:
                                 self.presence.others(self.presenceKey, conversation.sessionId), senses)
         conversation.closingContext = ReplyContext(
             ReplyContext.DEPARTURE, hereAndNow, state, focusEntries, self.clock, self.feelingWords,
-            self.fading, self.rumination, held=self.slot.held(), summary=conversation.summary.text).render()
+            self.fading, self.rumination, held=self._slotBlock(), summary=conversation.focus.summary.text).render()
         self.presence.leave(conversation.sessionId)
         for _ in range(self.parameters["quietThoughts"]):
             self.thoughts += self.reflection.run(conversation.focus)
@@ -256,9 +254,10 @@ class turn:
         return self.selection.select(self.being, situation, self.carried.text())
 
     def _compose(self, recent):
-        """The state from the recent records and the associations, the rest of the associations into
-        the focus view. The being's own constructs are not felt: bringing one to mind puts it in the
-        slot."""
+        """The state from the recent records and the strongest associations, and the focus line for
+        this turn. A felt record the being brought from elsewhere enters the line when it enters the
+        state. What came to mind in this turn, strong or weak, stands at the end of the line. The
+        being's own constructs are not felt: bringing one to mind puts it in the slot."""
         now = self.clock.now()
         felt = []
         for record in self.associations.records():
@@ -266,13 +265,21 @@ class turn:
                 self.slot.activate(record, now)
             else:
                 felt.append(record)
-        state, weak = State.compose(recent, felt, now, self.fading, self.parameters["stateMassBudget"])
+        state, _ = State.compose(recent, felt, now, self.fading, self.parameters["stateMassBudget"])
         self.hippocampus.withEpisodes(state.entries, self.parameters["episodesPerFeeling"], reload=True)
-        inFocus = self.conversation.focus.ids()
-        weakEntries = [FocusEntry(record, FocusEntry.EVOKED_FROM_BEFORE)
-                       for record in self.hippocampus.withEpisodes(weak, self.parameters["episodesPerFeeling"])
-                       if record.id not in inFocus]
-        return state, list(self.conversation.focus.entries) + weakEntries
+        focus = self.conversation.focus
+        associationIds = {record.id for record in felt}
+        for record in state.entries:
+            if record.id not in associationIds:
+                focus.pushCarried(record, now)
+        current = [FocusEntry(record, FocusEntry.EVOKED_FROM_BEFORE, now)
+                   for record in self.hippocampus.withEpisodes(felt, self.parameters["episodesPerFeeling"])]
+        held = self.slot.heldSince() if self.parameters["heldThoughtsInLine"] else []
+        return state, focus.line(current, held)
+
+    def _slotBlock(self):
+        """The held thoughts as their own block, when they are not placed in the focus line."""
+        return [] if self.parameters["heldThoughtsInLine"] else self.slot.held()
 
     def _appraise(self, utterance, reaction, state, focusEntries, hereAndNow):
         associationIds = self.associations.ids()
@@ -284,21 +291,31 @@ class turn:
         context = AppraisalContext(
             HereAndNow(hereAndNow.now, hereAndNow.beingName, hereAndNow.person, hereAndNow.otherSessions, senses),
             remembered, focusEntries, self.clock, self.feelingWords, self.fading, self.rumination,
-            utterance.words, summary=self.conversation.summary.text)
+            utterance.words, summary=self.conversation.focus.summary.text)
         affect = self.appraisal.appraise(context)
         if affect is None:
             return Affect(reaction.feeling, reaction.conclusion, reaction.valence, reaction.intensity)
         return affect
 
     def _evoke(self):
-        """What came to mind stays in view for the rest of the conversation."""
+        """What came to mind enters the focus line after the moment that evoked it."""
         now = self.clock.now()
         for record in self.associations.records():
             if record.isConstruct():
                 self.slot.activate(record, now)
                 continue
             self.hippocampus.withEpisodes([record], self.parameters["episodesPerFeeling"])
-            self.conversation.focus.pushEvoked(record)
+            self.conversation.focus.pushEvoked(record, now)
+
+    def _fold(self):
+        """What leaves view is folded into the summary. If the call fails, it stays in view."""
+        focus = self.conversation.focus
+        leaving = focus.overflow()
+        if not leaving:
+            return
+        summary = self.summarising.fold(self.being.name, focus.summary.text, leaving)
+        if summary is not None:
+            focus.fold(leaving, summary)
 
     def _keep(self, moment):
         encoded = self.encoding.encode(self.being.id, moment, self.conversation.livingRecordId,
@@ -310,7 +327,7 @@ class turn:
         record = EmoThought(encoded.record.id, self.being.id, Author.person(moment.person), moment.feeling,
                             moment.conclusion, moment.valence, Strength(moment.intensity, moment.at), moment.at)
         record.episodes = [encoded.episode]
-        self.conversation.focus.pushMoment(record)
+        self.conversation.focus.pushMoment(record, moment.at)
 
     def _learn(self, person):
         moments = [entry.record for entry in self.conversation.focus.moments(person)

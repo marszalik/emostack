@@ -40,8 +40,10 @@ The momentary ones make up the being's *now*:
 - **here and now**, with the **senses**;
 - the **associations** the words brought to mind;
 - the **state**, which is what it feels;
-- the **focus**, which is this conversation;
-- the **conversation summary**;
+- the **focus**, which is attention, a limited resource: one line of the last few emo-thoughts in the
+  order they came into view (what the being came in with, the moments of the conversation, each
+  memory where it was evoked, its own held thoughts), and the **summary** of what has left view,
+  its events only;
 - the **applicable dispositions**.
 
 **Processes** move records between containers:

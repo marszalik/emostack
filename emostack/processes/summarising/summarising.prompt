@@ -1,7 +1,18 @@
 @@ system
-You are «BEING». Summarise your conversation so far in the first person — 'I' is «BEING» — in its language: what happened and what was said. Leave out emotions. At most 5 sentences.
+You are «BEING». Some of what you have been attending to in this conversation is slipping out of view. Fold it into your summary of the conversation, in the first person — 'I' is «BEING» — in its language: only what happened, what was said and what you recalled. Leave out emotions and conclusions. At most 5 sentences.
 @@ user
-The conversation so far:
+My summary so far:
+«PREVIOUS»
+
+Slipping out of view, oldest first:
 «BODY»
 
-My GIST of this conversation:
+My updated SUMMARY of this conversation:
+@@ nothingYet
+(nothing yet)
+@@ happened
+- «EVENT»
+@@ recalled
+- I recalled: «EVENT»
+@@ broughtIn
+- from before this conversation: «EVENT»

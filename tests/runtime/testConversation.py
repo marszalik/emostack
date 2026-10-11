@@ -1,5 +1,6 @@
 import unittest
 
+from emostack.core.ProcessorError import ProcessorError
 from tests.support.testEngine import testEngine
 
 
@@ -42,6 +43,44 @@ class testConversation(unittest.TestCase):
         conversationPart = user.split("=== THIS CONVERSATION SO FAR ===")[1]
         self.assertIn("Daniel said: Did you ever have a pet?", conversationPart)
         self.assertIn("you feel:", conversationPart)
+
+    def testAMomentWhoseFeelingIsInTheStateShowsOnlyItsEvent(self):
+        conversation, _ = self.engine.open("Maya", "Daniel")
+        self.say(conversation, "Did you ever have a pet?")
+        self.say(conversation, "What was its name?")
+        user = self.processor.callsFor("reply")[-1]["user"]
+        state = user.split("=== YOUR STATE (now) ===")[1].split("=== THIS CONVERSATION SO FAR ===")[0]
+        line = [row for row in user.split("=== THIS CONVERSATION SO FAR ===")[1].splitlines()
+                if "Did you ever have a pet?" in row][0]
+        self.assertIn("a mild warmth", state)
+        self.assertNotIn("you feel:", line)
+
+    def testWhatLeavesViewIsFoldedIntoTheSummaryOfEvents(self):
+        test = testEngine()
+        test.engine.parameters["focusSize"] = 2
+        conversation, _ = test.engine.open("Maya", "Daniel")
+        for words in ("First thing.", "Second thing.", "Third thing.", "Fourth thing."):
+            test.time.advance(30)
+            test.engine.hear(conversation, words)
+        folded = "\n".join(call["user"] for call in test.processor.callsFor("summarising"))
+        self.assertIn("Daniel entered the conversation", folded)
+        self.assertIn("Daniel said: First thing.", folded)
+        self.assertNotIn("a mild warmth", folded)
+        self.assertNotIn("this was kind", folded)
+        self.assertLessEqual(len(conversation.focus.inView()), 2)
+        user = test.processor.callsFor("reply")[-1]["user"]
+        self.assertIn("=== EARLIER IN THIS CONVERSATION (your summary) ===\n  We talked.", user)
+        self.assertNotIn("First thing.", user.split("=== THIS CONVERSATION SO FAR ===")[1])
+
+    def testAFailedFoldLeavesTheEntriesInView(self):
+        test = testEngine()
+        test.engine.parameters["focusSize"] = 1
+        conversation, _ = test.engine.open("Maya", "Daniel")
+        test.processor.prepare("summarising", ProcessorError("down"), ProcessorError("down"))
+        test.time.advance(30)
+        test.engine.hear(conversation, "First thing.")
+        self.assertEqual(len(conversation.focus.inView()), 2)
+        self.assertEqual(conversation.focus.summary.text, "")
 
     def testTheStateShowsEachFeelingWithItsConclusion(self):
         conversation, _ = self.engine.open("Maya", "Daniel")
@@ -124,7 +163,23 @@ class testConversation(unittest.TestCase):
         self.assertIn("when mocked → stay calm", self.processor.callsFor("reply")[-1]["user"])
         self.assertNotIn("when mocked", self.processor.callsFor("appraisal")[-1]["user"])
 
+    def testAHeldThoughtStandsInTheLineByWhenItCameToMind(self):
+        conversation, _ = self.engine.open("Maya", "Daniel")
+        self.processor.prepare("introspection", {
+            "thought": "I miss him.", "emo_summary": "sad", "conclusion": "loss stays", "valence": -0.4,
+            "intensity": 0.6, "reinforces": -1, "action": {"type": "decision", "text": "I will keep his memory."}})
+        self.say(conversation, "Hi.")
+        self.engine.leave(conversation)
+        self.test.time.advance(60)
+        second, _ = self.engine.open("Maya", "Anna")
+        self.say(second, "Hello.")
+        user = self.processor.callsFor("reply")[-1]["user"]
+        line = user.split("=== THIS CONVERSATION SO FAR ===")[1]
+        self.assertNotIn("=== YOUR OWN THOUGHTS ===", user)
+        self.assertLess(line.index("I decided: I will keep his memory."), line.index("Anna entered"))
+
     def testAThoughtGoesToTheSlotAndTheReplySeesIt(self):
+        self.engine.parameters["heldThoughtsInLine"] = False
         conversation, _ = self.engine.open("Maya", "Daniel")
         self.processor.prepare("introspection", {
             "thought": "I miss him.", "emo_summary": "sad", "conclusion": "loss stays", "valence": -0.4,

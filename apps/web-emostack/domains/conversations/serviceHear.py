@@ -32,7 +32,7 @@ class serviceHear:
                 message = live.add("thought", construct.statement(), conclusion=construct.conclusion)
                 transcripts.add(live.beingId, live.id, live.person, "thought", construct.statement())
                 self.application.streams.emit(key, {"kind": "message", "message": message})
-            moment = live.conversation.focus.entries[-1].record if not outcome.failed else None
+            moment = live.conversation.focus.lastMoment() if not outcome.failed else None
             role = "failed" if outcome.failed else ("being" if outcome.words else "silence")
             message = live.add(role, outcome.words, calls=live.takeCalls(),
                                feeling=moment.feeling if moment else "",

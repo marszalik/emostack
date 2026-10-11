@@ -5,7 +5,7 @@ from emostack.core.processor import processor
 
 class scriptedProcessor(processor):
     """An LLM model for tests: answers each purpose from a queue of prepared answers, or with a
-    default, and keeps every call."""
+    default, and keeps every call. A prepared exception is raised."""
 
     defaults = {
         "reply": {"emothought": {"emo_summary": "a quiet interest", "conclusion": "they are curious",
@@ -47,4 +47,6 @@ class scriptedProcessor(processor):
     def _send(self, system, messages, temperature, responseFormat):
         queue = self.queues.get(self._purpose) or []
         answer = queue.pop(0) if queue else self.defaults[self._purpose]
+        if isinstance(answer, Exception):
+            raise answer
         return answer if isinstance(answer, str) else json.dumps(answer)

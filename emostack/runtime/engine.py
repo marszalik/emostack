@@ -57,8 +57,8 @@ class engine:
         """A person arrives. Returns the conversation and what the being said, if it greeted."""
         being = self.being(beingName)
         self._activity(being)
-        conversation = Conversation(being, person, self.time.now(), self.parameters["focusCap"],
-                                    self.parameters["summaryEveryTurns"])
+        conversation = Conversation(being, person, self.time.now(), self.parameters["focusSize"],
+                                    self.parameters["focusCap"])
         outcome = self.assemblyFor(being).turnFor(conversation).take(Arrival(person, self.time.now()))
         return conversation, outcome
 

@@ -312,7 +312,7 @@ class serviceRoom:
                 message = live.add("thought", construct.statement(), conclusion=construct.conclusion, who=live.beingName)
                 transcripts.add(live.beingId, live.id, live.person, "thought", construct.statement())
                 self._emit({"kind": "message", "message": self._shown(message)})
-            moment = live.conversation.focus.entries[-1].record if not outcome.failed else None
+            moment = live.conversation.focus.lastMoment() if not outcome.failed else None
             role = "failed" if outcome.failed else ("being" if outcome.words else "silence")
             message = live.add(role, outcome.words, who=live.beingName, feeling=moment.feeling if moment else "",
                                valence=moment.valence if moment else None)
