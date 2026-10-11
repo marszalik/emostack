@@ -69,7 +69,7 @@ class testConversation(unittest.TestCase):
         self.assertNotIn("this was kind", folded)
         self.assertLessEqual(len(conversation.focus.inView()), 2)
         user = test.processor.callsFor("reply")[-1]["user"]
-        self.assertIn("=== EARLIER IN THIS CONVERSATION (your summary) ===\n  We talked.", user)
+        self.assertIn("(your summary: what happened before this conversation and earlier in it) ===\n  We talked.", user)
         self.assertNotIn("First thing.", user.split("=== THIS CONVERSATION SO FAR ===")[1])
 
     def testAFailedFoldLeavesTheEntriesInView(self):
