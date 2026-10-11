@@ -9,7 +9,7 @@ class Focus:
     entries are in view; older ones are folded into the summary, their events without the feelings.
     Folded entries stay known to the conversation; `cap` only protects memory."""
 
-    def __init__(self, size=8, cap=100):
+    def __init__(self, size=4, cap=100):
         self.size = int(size)
         self.cap = cap
         self.entries = []

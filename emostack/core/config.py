@@ -36,7 +36,7 @@ class config:
             "fadeNegativeSlowdown": 1.5,
             "stateMassBudget": 5.0,
             "episodesPerFeeling": 5,
-            "focusSize": 8,
+            "focusSize": 4,
             "focusCap": 100,
             "heldThoughtsInLine": True,
             "summaryThreadCap": 40,

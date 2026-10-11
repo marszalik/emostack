@@ -7,7 +7,7 @@ class Conversation:
     """One conversation of a being with a person, from arrival to departure: its focus, with the
     summary of what has left view, and the record the conversation is currently living."""
 
-    def __init__(self, being, person, startedAt, focusSize=8, focusCap=100, sessionId=None):
+    def __init__(self, being, person, startedAt, focusSize=4, focusCap=100, sessionId=None):
         self.being = being
         self.person = person
         self.startedAt = startedAt
