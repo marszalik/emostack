@@ -31,6 +31,7 @@ class config:
             "filterKeep": 4,
             "nameBonus": 0.5,
             "strengthPassesFilter": 0.5,
+            "recallByFeeling": True,
             "fadeFloor": 0.3,
             "fadeTauDays": 3.0,
             "fadeNegativeSlowdown": 1.5,

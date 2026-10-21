@@ -55,7 +55,8 @@ class assembly:
         return recall(self.hippocampus, self.embedder,
                       associationFilter(self.processor, self.words, self.parameters["filterKeep"]),
                       self.rumination, self.fadingLaw, self.time, self.parameters["recallCandidates"],
-                      self.parameters["nameBonus"], self.parameters["strengthPassesFilter"])
+                      self.parameters["nameBonus"], self.parameters["strengthPassesFilter"],
+                      self.parameters["recallByFeeling"])
 
     def reflection(self):
         return reflection(self.being, self.hippocampus, self.slot, introspection(self.processor, self.actions),

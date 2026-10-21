@@ -22,7 +22,7 @@ class recall:
     namePattern = re.compile(r"(?<![.!?]\s)(?<!^)\b([A-ZŁŚŻŹĆŃÓĘĄ][a-ząćęłńóśźż]{2,})\b")
 
     def __init__(self, hippocampus, embedder, filter, rumination, fading, clock, candidates=10,
-                 nameBonus=0.5, strengthPasses=0.5, episodesPerCandidate=3):
+                 nameBonus=0.5, strengthPasses=0.5, byFeeling=True, episodesPerCandidate=3):
         self.hippocampus = hippocampus
         self.embedder = embedder
         self.filter = filter
@@ -32,6 +32,7 @@ class recall:
         self.candidates = candidates
         self.nameBonus = nameBonus
         self.strengthPasses = strengthPasses
+        self.byFeeling = byFeeling
         self.episodesPerCandidate = episodesPerCandidate
 
     # ---- the involuntary path: what the words bring to mind ----
@@ -39,8 +40,10 @@ class recall:
     def involuntary(self, words, person, conversationIds):
         candidates = self._collapsed(self.search(words, person))
         now = self.clock.now()
-        passed = [c for c in candidates if c.record.feltAt(now, self.fading) >= self.strengthPasses]
-        rest = [c for c in candidates if c.record.feltAt(now, self.fading) < self.strengthPasses]
+        # by meaning alone (byFeeling off): nothing passes on its strength, the filter reads them all
+        passed = [c for c in candidates
+                  if self.byFeeling and c.record.feltAt(now, self.fading) >= self.strengthPasses]
+        rest = [c for c in candidates if c not in passed]
         # the filter always has a say on the rest, even when the strong ones fill the room: it also
         # reads whether the words ask the being to recall a moment of its own
         room = max(1, self.filter.keepAtMost - len(passed))
@@ -101,7 +104,7 @@ class recall:
         names = self._names(text, person)
         scored = []
         for record, similarity in zip(records, self._similarities(vector, records)):
-            score = similarity * record.feltAt(now, self.fading)
+            score = similarity * self._weight(record, now)
             if names and self._mentions(self._recordText(record), names):
                 score += self.nameBonus
             scored.append(Candidate(score, similarity, record))
@@ -111,7 +114,7 @@ class recall:
         for episode, similarity in zip(episodes, self._similarities(vector, episodes)):
             index = position[episode.recordId]
             record = records[index]
-            score = float(similarity) * record.feltAt(now, self.fading)
+            score = float(similarity) * self._weight(record, now)
             if names and self._mentions(episode.asItHappened, names):
                 score += self.nameBonus
             if score > scored[index].score:
@@ -121,6 +124,10 @@ class recall:
         top = scored[:self.candidates]
         self.hippocampus.withEpisodes([candidate.record for candidate in top], self.episodesPerCandidate)
         return top
+
+    def _weight(self, record, now):
+        """Present felt strength; 1.0 for every record when recall is by meaning alone."""
+        return record.feltAt(now, self.fading) if self.byFeeling else 1.0
 
     def _collapsed(self, candidates):
         if len(candidates) <= 1:

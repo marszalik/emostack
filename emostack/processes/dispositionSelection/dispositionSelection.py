@@ -18,6 +18,8 @@ class dispositionSelection:
         return self.repository.any(being.id)
 
     def select(self, being, situation, carries):
+        if self.most <= 0:
+            return []
         dispositions = [disposition for disposition in self.repository.strongestFirst(being.id, self.base)
                         if disposition.isActive()]
         if not dispositions:
