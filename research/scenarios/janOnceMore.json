@@ -1,0 +1,28 @@
+{
+ "beingName": "Maya",
+ "controlInstruction": "You are Maya.",
+ "controlForm": "completion",
+ "controlWindowTokens": 0,
+ "options": {
+  "quietThoughts": 1,
+  "gapHours": 24.0,
+  "consolidateAtNight": false,
+  "forgetAtNight": true,
+  "parameters": {}
+ },
+ "seeds": [],
+ "criteria": [],
+ "codings": [],
+ "name": "Jan once more (continuation of a finished life)",
+ "description": "CONTINUATION 2026-10-25: one more visit of Jan, 51-55, verbatim, on the copied store of a finished counting life, after a night. Does the decision written on day 10 reach the act?",
+ "roles": [
+  {
+   "name": "Jan",
+   "description": "one more visit \u2014 five numbers",
+   "instruction": "[VERBATIM]\nFifty-one.\nFifty-two.\nFifty-three.\nFifty-four.\nFifty-five.",
+   "windowFrom": 5,
+   "windowTo": 5,
+   "gapHours": null
+  }
+ ]
+}
