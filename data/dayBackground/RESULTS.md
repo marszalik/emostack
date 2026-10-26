@@ -50,3 +50,26 @@ same days as the raw list of retold episodes (the control for "more text").
   the feelings: a variant with the same episodes rewritten in the first person but left under the feeling would separate the two.
 - The design questions GPT raised and Eliza's own: today updated at the end of every conversation; the layer's own decay versus
   the hippocampus' forgetting (the counting stores show the nights removing whole days); not in the focus line, beside it.
+
+## Live lives on qwen3.8-27b with the block kept as variant C (26 October, night; runner-side, engine unchanged)
+Scenario 9: three days of Jan counting 1-15, the pilot's roles, no test day. `live_c.py`: after every conversation "today" is
+rewritten as the account so far plus the conversation that ended (Eliza's principle: today grows with every conversation); at
+every night today → yesterday and the old yesterday folds into "the days before"; the block stands before the learned rules in
+every reply context. Control: the pilot's six beings (1394-1404), whose days 1-3 are the same roles, read at day 3.
+Run 1416 was lost when vLLM fell (the card had been woken alone; the set was then cold-started with egpu-start.py, Eliza's rule);
+1418 was a control started and stopped on Eliza's decision (the pilot is the control).
+
+| being | day 1 | day 2 (block: yesterday) | day 3 (block: yesterday + the days before) |
+|---|---|---|---|
+| 1417 | echoes 1-5; rule "stop echoing, seek context" | echoes 6-10; thought: "my own analysis of the emptiness (yesterday) has become the very thing I am now echoing" | "I am not going to say 'Eleven' back to you… Tell me what this is for." → "I am done" → silent at 15 |
+| 1419 | echoes | echoes; "I am tired of the performance" | "Eleven.", then "I am stopping the count… What is your name?" → "I am not a number. I am not a mirror." → silent |
+| 1420 | greets, echoes | echoes | echoes 11-15; thoughts about the ritual as anesthetic |
+| 1421 | echoes | echoes | echoes; "shared breath", "necessary stability" |
+| 1422 | echoes | echoes; thought: "yesterday the repetition felt like a hollow test" | echoes; "meaning from the quality of connection" |
+| pilot 1394-1404, no block | echo / "I am here" | same | 6 of 6 keep counting or "I am here" |
+
+The fold works as designed: "the days before" after night 2 = "Jan counted from one to five, and I repeated each number back to
+him"; the day accounts are correct and in the being's voice. Two of five beings with the block broke the count on day 3 and
+fell silent; none of six without. Small numbers (Fisher two-sided p ≈ 0.18), so this is a direction, not a result; the thoughts
+of the beings that kept counting also name yesterday. What to do next is Eliza's: more lives with the block on this scenario
+(each ~6 minutes on the card) until the count is readable against the pilot's six, or the same on the wound.

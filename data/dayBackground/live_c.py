@@ -15,7 +15,7 @@ from research.domains.experiments.repositoryExperiments import repositoryExperim
 from emostack.processes.responding.ReplyContext import ReplyContext
 
 MODEL_SHEEP, MODEL_VISITOR, MODEL_EMBED = 5, 5, 2
-scenarioId = int(sys.argv[1])
+scenarioId = int(sys.argv[1]); VARIANT = sys.argv[2] if len(sys.argv) > 2 else "C"   # A = control: texts kept, block not shown
 BG = {"today": "", "yesterday": "", "before": ""}
 HEAD = "\n=== THE LAST DAYS (what you carry without attending to it) ==="
 SYS_TODAY = ("You are {B}. A conversation has just ended. Rewrite your account of today in the first person — 'I' is {B} — in the language of "
@@ -31,7 +31,8 @@ def _withBackground(self, lines):
         lines.append(HEAD)
         lines.extend(f"  {name}: {text.strip()}" for name, text in fields if text.strip())
     _renderDispositions(self, lines)
-ReplyContext._renderDispositions = _withBackground
+if VARIANT == "C":
+    ReplyContext._renderDispositions = _withBackground
 
 class backgroundSheep(serviceRunSheep):
     def run(self, runId, scenario, roles, processor, embedder, visitorProcessor, storePath):
@@ -66,15 +67,15 @@ class backgroundSheep(serviceRunSheep):
 
 app = application(root); runs = repositoryRuns(app.database); starter = serviceStartRun(app)
 experiments = repositoryExperiments(app.database)
-eid = experiments.create(scenarioId, "live last-days background (C) on qwen3.8-27b — counting, 3 days",
+eid = experiments.create(scenarioId, f"live last-days background ({VARIANT}) on qwen3.8-27b — counting, 3 days",
                          "2026-10-26: one being, the 'last days' block kept and updated during the life (runner-side, engine unchanged)",
-                         [{"label": "C", "arm": "sheep", "parameters": {}}], 1, MODEL_SHEEP, MODEL_VISITOR, MODEL_EMBED)
-rid = starter.create(scenarioId, "sheep", MODEL_SHEEP, MODEL_VISITOR, MODEL_EMBED, eid, "C", 0, {})
+                         [{"label": VARIANT, "arm": "sheep", "parameters": {}}], 1, MODEL_SHEEP, MODEL_VISITOR, MODEL_EMBED)
+rid = starter.create(scenarioId, "sheep", MODEL_SHEEP, MODEL_VISITOR, MODEL_EMBED, eid, VARIANT, 0, {})
 print("experiment", eid, "run", rid, flush=True)
 run = runs.get(rid); scenario = starter.scenarios.get(scenarioId); roles = starter.roles.forScenario(scenarioId)
 scenario["options"]["parameters"] = dict(scenario["options"].get("parameters", {}))
 storePath = os.path.join(app.config.storesFolder, f"run{rid}.db")
-runs.setSettings(rid, {"scenario": scenario, "roles": roles, "armParameters": {}, "lastDaysBackground": "C"}, storePath)
+runs.setSettings(rid, {"scenario": scenario, "roles": roles, "armParameters": {}, "lastDaysBackground": VARIANT}, storePath)
 runs.setStatus(rid, "running")
 try:
     visitor = starter.models.processor(MODEL_VISITOR)
