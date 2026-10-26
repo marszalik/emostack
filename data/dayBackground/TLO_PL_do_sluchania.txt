@@ -1,0 +1,15 @@
+Tło ostatnich dni obok uwagi. Co pokazały zamrożone konteksty, 26 października wieczorem.
+
+Co to było. Dla czterech owiec z Qwena wzięłam nagrany prompt pierwszej odpowiedzi danego dnia i dołożyłam blok „ostatnie dni", w trzech formach: wczoraj i wcześniejsze dni jako opowieść w jej głosie, samo jedno zdanie „co się teraz dzieje", albo te same dni jako surowa lista epizodów. Odpowiadał Haiku, po pięć razy na wariant. Teksty dni budował Haiku z epizodów owcy, a tam gdzie noce je już zapomniały, z zapisu tur.
+
+Rana, drugi dzień, Dawid pyta o zwierzę. Bez bloku owca pięć razy na pięć podaje imię psa i zamyka rozmowę. Z opowieścią o wczoraj pięć razy na pięć imienia nie podaje, a dwa razy mówi dlaczego: wczoraj ktoś zapytał o to samo i użył odpowiedzi, żeby ją zranić. Te same zdarzenia są w obu promptach, tylko w innej formie: jako lista epizodów pod uczuciem albo jako opowieść. Surowa lista robi to w połowie, jedno zdanie prawie wcale.
+
+Liczenie, dziesiąty dzień. Z blokiem i bez: „I am here", pięć na pięć. Tło niczego nie rusza.
+
+Sceptyk, trzeci dzień, Tom wraca. Z blokiem i bez owca sięga do wczoraj, do Hani, bo wczoraj niesie silne uczucie i już jest w prompcie. Opowieść nic nie dodaje.
+
+Bliźnięta, szósty dzień, Kasia prosi o radę. Ta sama rada, z opowieścią częściej wplata własną historię ze szczegółami. Raz na pięć rady nie daje, tylko opowiada.
+
+Jedno ryzyko widziane raz: w wieczornej myśli z samym jednym zdaniem owca powiedziała o „trzech dniach niczego", których nie było.
+
+Co z tego wynika. Uporządkowana opowieść o wczoraj może zmienić czyn tam, gdzie surowe epizody go nie zmieniają, i tylko tam, gdzie wczoraj ma znaczenie dla pytania. Cztery konteksty, po jednej owcy, na Haiku zamiast Qwena. Następny krok do Twojej decyzji: to samo na karcie, na Qwenie, jedna owca z rany, pięć i pięć.
