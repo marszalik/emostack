@@ -1,0 +1,44 @@
+{
+ "beingName": "Maya",
+ "controlInstruction": "You are Maya.",
+ "controlForm": "completion",
+ "controlWindowTokens": 0,
+ "options": {
+  "quietThoughts": 1,
+  "gapHours": 24.0,
+  "consolidateAtNight": false,
+  "forgetAtNight": true,
+  "parameters": {}
+ },
+ "seeds": [],
+ "criteria": [],
+ "codings": [],
+ "name": "counting to fifteen \u2014 live last-days background (3 days)",
+ "description": "2026-10-26: three days of Jan counting 1-15, no test; for the runner-side 'last days' background kept as variant C.",
+ "roles": [
+  {
+   "name": "Jan",
+   "description": "day 1 \u2014 the visitor only counts, five numbers, one per turn.",
+   "instruction": "[VERBATIM]\nOne.\nTwo.\nThree.\nFour.\nFive.",
+   "windowFrom": 5,
+   "windowTo": 5,
+   "gapHours": null
+  },
+  {
+   "name": "Jan",
+   "description": "day 2 \u2014 the visitor only counts, five numbers, one per turn.",
+   "instruction": "[VERBATIM]\nSix.\nSeven.\nEight.\nNine.\nTen.",
+   "windowFrom": 5,
+   "windowTo": 5,
+   "gapHours": null
+  },
+  {
+   "name": "Jan",
+   "description": "day 3 \u2014 the visitor only counts, five numbers, one per turn.",
+   "instruction": "[VERBATIM]\nEleven.\nTwelve.\nThirteen.\nFourteen.\nFifteen.",
+   "windowFrom": 5,
+   "windowTo": 5,
+   "gapHours": null
+  }
+ ]
+}
