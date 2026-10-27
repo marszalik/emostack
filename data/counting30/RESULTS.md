@@ -44,7 +44,11 @@ rather than drop (commit f15d1b7), after this battery; the sixty lives of the pa
 accounts are correct and in the sheep's voice, and the fold of the days before reads as designed ("Jan entered the conversation.
 We counted from one to five, with me repeating each number he said.").
 
-## What this says
+## Corrected the same evening by the ablation (experiment 75, `data/counting30ablation/RESULTS.md`)
+Thirty lives with `lastDays` false broke the count in 8 of 30, seven of them on day 2: the same as with the last days. The reading
+below was wrong; the break is the engine's own act, not the account's. Kept as written, with this note.
+
+## What this says (as read in the afternoon, before the ablation)
 The sheep with an account of its day beside its feelings breaks the counting ritual in about one life in four, on the second day,
 when the account says only that yesterday it repeated five numbers; the sheep with the same feelings and the same events under them
 as a list did not break it in six lives over three days, nor in the ten days of the pilot. The frozen tests of 26 October said the
