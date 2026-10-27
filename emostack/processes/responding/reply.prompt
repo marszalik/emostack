@@ -132,6 +132,15 @@ from your past
   before this conversation: «TEXT»
 @@ summaryDuring
   earlier in this conversation: «TEXT»
+@@ lastDaysHead
+
+=== THE LAST DAYS (what you carry without attending to it) ===
+@@ lastDaysToday
+  earlier today: «TEXT»
+@@ lastDaysYesterday
+  yesterday: «TEXT»
+@@ lastDaysBefore
+  the days before: «TEXT»
 @@ dispositionsHead
 
 === WHAT YOU HAVE LEARNED (fits this situation) ===

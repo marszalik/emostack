@@ -19,6 +19,7 @@ class scriptedProcessor(processor):
                           "valence": 0.2, "intensity": 0.5, "reinforces": -1,
                           "action": {"type": "none", "text": ""}},
         "summarising": "We talked.",
+        "lastDays": "Someone came and we talked.",
         "dispositionSelection": {"matched": [0]},
         "dispositionLearning": {"learned": None},
         "dispositionClassification": {"same": -1, "contradicts": -1},

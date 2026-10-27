@@ -28,13 +28,15 @@ class turn:
     a moment or about the being's own dreams, beliefs, decisions or wants, adds to the associations
     and the reply is generated again; a pause to think runs reflection first. Appraisal forms the
     record to keep with the state withheld; the temperament bends it; encoding keeps it; what leaves
-    the focus is folded into its summary. Nothing on this path deliberates.
+    the focus is folded into its summary. The last days stand beside the focus in every reply context;
+    when the person leaves, the conversation is folded into today. Nothing on this path deliberates.
 
     One instance serves one trigger: the performer methods read the state of this trigger."""
 
     def __init__(self, conversation, hippocampus, slot, recall, responding, appraisal, encoding,
                  reconsolidation, summarising, selection, learning, reflection, presence, presenceKey,
-                 carried, eventWords, probeWords, clock, feelingWords, fading, rumination, parameters):
+                 carried, eventWords, probeWords, clock, feelingWords, fading, rumination, parameters,
+                 lastDays=None):
         self.conversation = conversation
         self.being = conversation.being
         self.hippocampus = hippocampus
@@ -58,6 +60,7 @@ class turn:
         self.fading = fading
         self.rumination = rumination
         self.parameters = parameters
+        self.lastDays = lastDays
         self.thoughts = []
 
     def take(self, trigger):
@@ -92,7 +95,8 @@ class turn:
             context = ReplyContext(ReplyContext.WORDS, hereAndNow, state, focusEntries, self.clock,
                                    self.feelingWords, self.fading, self.rumination, words=utterance.words,
                                    held=self._slotBlock(), summary=conversation.focus.summary,
-                                   dispositions=[disposition.rule for disposition in dispositions])
+                                   dispositions=[disposition.rule for disposition in dispositions],
+                                   lastDays=self._lastDays())
             reaction = self.responding.react(context)
             if reaction.failed:
                 break
@@ -192,7 +196,8 @@ class turn:
             hereAndNow = HereAndNow(self.clock.now(), self.being.name, person, others, senses)
             conversation.lastHereAndNow = hereAndNow
             context = ReplyContext(ReplyContext.ARRIVAL, hereAndNow, state, focusEntries, self.clock,
-                                   self.feelingWords, self.fading, self.rumination, held=self._slotBlock())
+                                   self.feelingWords, self.fading, self.rumination, held=self._slotBlock(),
+                                   lastDays=self._lastDays())
             reaction = self.responding.react(context)
             if reaction.failed or reaction.action.target is not ActionTarget.MEMORY:
                 break
@@ -219,7 +224,8 @@ class turn:
 
     def onDeparture(self, departure):
         """No record and no reply. The context the being worked from, as it stands when the person
-        leaves, is what disposition learning reads; first the being has its quiet."""
+        leaves, is what disposition learning reads; first the being has its quiet. Last, the
+        conversation is folded into today."""
         conversation = self.conversation
         person = departure.person
         self.slot.load(self.clock.now())
@@ -233,15 +239,23 @@ class turn:
                                 self.presence.others(self.presenceKey, conversation.sessionId), senses)
         conversation.closingContext = ReplyContext(
             ReplyContext.DEPARTURE, hereAndNow, state, focusEntries, self.clock, self.feelingWords,
-            self.fading, self.rumination, held=self._slotBlock(), summary=conversation.focus.summary).render()
+            self.fading, self.rumination, held=self._slotBlock(), summary=conversation.focus.summary,
+            lastDays=self._lastDays()).render()
         self.presence.leave(conversation.sessionId)
         for _ in range(self.parameters["quietThoughts"]):
             self.thoughts += self.reflection.run(conversation.focus)
         self._learn(person)
+        if self.lastDays is not None:
+            self.lastDays.conversationEnded(conversation.focus)
         conversation.closed = True
         return TurnOutcome("", self.thoughts)
 
     # ---- helpers ----
+
+    def _lastDays(self):
+        """The last days as they stand, beside the focus in every reply context; None when the
+        layer is switched off."""
+        return None if self.lastDays is None else self.lastDays.current()
 
     def _applicable(self, person, words):
         if not self.selection.hasAny(self.being):

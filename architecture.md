@@ -127,6 +127,8 @@ emostack/
     Focus.py                        # attention: a line of the last N entries, older ones folded
     FocusEntry.py                   # CarriedFromBefore | ThisConversation | EvokedFromBefore | HeldThought
     ConversationSummary.py          # the folded events, without feelings or conclusions
+    LastDays.py                     # beside the focus: earlier today, yesterday, the days before; own voice, events only
+    lastDaysRepository.py           # SQLite, one row per being; survives conversations, turns at the night
     AccessibilitySlot.py            # three places, seven days
     SlotPlace.py                    # Reserved | Free
     ApplicableDispositions.py
@@ -164,6 +166,10 @@ emostack/
       summarising.py
       SummarisingContext.py
       summarising.prompt
+    lastDays/
+      lastDays.py                   # today rewritten when a person leaves; the night folds yesterday into the days before
+      LastDaysContext.py
+      lastDays.prompt
     dispositionSelection/
       dispositionSelection.py
       DispositionSelectionContext.py

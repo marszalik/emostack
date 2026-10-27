@@ -178,6 +178,57 @@ class testConversation(unittest.TestCase):
         self.assertNotIn("=== YOUR OWN THOUGHTS ===", user)
         self.assertLess(line.index("I decided: I will keep his memory."), line.index("Anna entered"))
 
+    def testTheLastDaysStandBesideTheFocusAfterANight(self):
+        self.processor.prepare("lastDays", "Daniel came and asked about my dog.")
+        conversation, _ = self.engine.open("Maya", "Daniel")
+        self.say(conversation, "Did you ever have a pet?")
+        self.assertNotIn("=== THE LAST DAYS", self.processor.callsFor("reply")[-1]["user"])
+        self.engine.leave(conversation)
+        call = self.processor.callsFor("lastDays")[-1]
+        self.assertIn("Daniel entered", call["user"])
+        self.assertIn("- Someone spoke and the being answered.", call["user"])
+        self.assertNotIn("a mild warmth", call["user"])
+        self.assertNotIn("this was kind", call["user"])
+        self.test.time.advance(3600)
+        second, _ = self.engine.open("Maya", "Ann")
+        self.say(second, "Hello.")
+        user = self.processor.callsFor("reply")[-1]["user"]
+        self.assertIn("=== THE LAST DAYS (what you carry without attending to it) ===\n  earlier today: Daniel came and asked about my dog.", user)
+        self.processor.prepare("lastDays", "Daniel came and asked about my dog; later Ann came.")
+        self.engine.leave(second)
+        self.test.time.advance(86400)
+        self.engine.night("Maya")
+        third, _ = self.engine.open("Maya", "Carol")
+        self.say(third, "Hi.")
+        user = self.processor.callsFor("reply")[-1]["user"]
+        block = user.split("=== THE LAST DAYS")[1].split("=== THIS CONVERSATION SO FAR ===")[0]
+        self.assertNotIn("earlier today", block)
+        self.assertIn("  yesterday: Daniel came and asked about my dog; later Ann came.", block)
+        self.assertLess(user.index("=== THE LAST DAYS"), user.index("=== THIS CONVERSATION SO FAR ==="))
+        self.assertNotIn("THE LAST DAYS", self.processor.callsFor("appraisal")[-1]["user"])
+
+    def testTheLastDaysSurviveTheNightAndAreFoldedOnTheSecond(self):
+        for person in ("Daniel", "Ann"):
+            conversation, _ = self.engine.open("Maya", person)
+            self.say(conversation, "Hello.")
+            self.engine.leave(conversation)
+            self.test.time.advance(86400)
+            self.engine.night("Maya")
+        days = self.engine.repositories["lastDays"].get(self.engine.being("Maya").id)
+        self.assertEqual(days.today, "")
+        self.assertEqual(days.yesterday, "Someone came and we talked.")
+        self.assertEqual(days.before, "Someone came and we talked.")
+        self.assertEqual(len(self.processor.callsFor("lastDays")), 3)
+
+    def testWithoutTheLastDaysNothingIsKeptOrShown(self):
+        self.engine.parameters["lastDays"] = False
+        conversation, _ = self.engine.open("Maya", "Daniel")
+        self.say(conversation, "Hello.")
+        self.engine.leave(conversation)
+        self.engine.night("Maya")
+        self.assertEqual(self.processor.callsFor("lastDays"), [])
+        self.assertTrue(self.engine.repositories["lastDays"].get(self.engine.being("Maya").id).isEmpty())
+
     def testAThoughtGoesToTheSlotAndTheReplySeesIt(self):
         self.engine.parameters["heldThoughtsInLine"] = False
         conversation, _ = self.engine.open("Maya", "Daniel")

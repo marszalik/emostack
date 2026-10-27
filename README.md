@@ -34,8 +34,11 @@ The being has four kinds of **record**:
 A fixed **temperament** bends every new feeling.
 
 Records are in view through **containers**. The durable ones are the **hippocampus**, which holds
-everything lived, and the **accessibility slot**, which holds three of the being's own constructs.
-The momentary ones make up the being's *now*:
+everything lived, the **accessibility slot**, which holds three of the being's own constructs, and
+the **last days**, three accounts in the being's own voice of what happened earlier today, yesterday
+and the days before, events only: today is rewritten at the end of every conversation, and the night
+turns the days. It stands beside the focus in every reply, what the being carries without attending
+to it. The momentary ones make up the being's *now*:
 
 - **here and now**, with the **senses**;
 - the **associations** the words brought to mind;
@@ -50,8 +53,8 @@ The momentary ones make up the being's *now*:
 
 - **recall**, **appraisal** and **encoding** run in every turn;
 - **introspection** runs in reflection;
-- **disposition learning** runs when a person leaves;
-- **fading**, **consolidation** and **forgetting** run over time and in sleep.
+- **disposition learning** and the folding of the conversation into **today** run when a person leaves;
+- **fading**, **consolidation**, **forgetting** and the turning of the **last days** run over time and in sleep.
 
 Each call to the language model sees some containers and not others. Those separations are the
 design. The appraisal that forms the memory, for example, does not see the mood.

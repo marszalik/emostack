@@ -15,6 +15,7 @@ from emostack.processes.encoding.encoding import encoding
 from emostack.processes.fading.fading import fading
 from emostack.processes.introspection.constructFormation import constructFormation
 from emostack.processes.introspection.introspection import introspection
+from emostack.processes.lastDays.lastDays import lastDays
 from emostack.processes.recall.associationFilter import associationFilter
 from emostack.processes.recall.recall import recall
 from emostack.processes.recall.ruminationClusters import ruminationClusters
@@ -71,6 +72,9 @@ class assembly:
         return sleep(self.processor, self.hippocampus, self.time, self.words,
                      forgettingThreshold(self.parameters["forgettingCurve"]), self.parameters["anchorMinimum"])
 
+    def lastDays(self):
+        return lastDays(self.processor, self.repositories["lastDays"], self.being, self.parameters["lastDays"])
+
     def turnFor(self, conversation):
         dispositions = self.repositories["dispositions"]
         return turn(
@@ -82,4 +86,4 @@ class assembly:
             dispositionLearning(self.processor, dispositions, self.time, self.parameters["dispositionsBase"]),
             self.reflection(), self.presence, self.presenceKey, carriedLines(self.hippocampus), eventWords(),
             Senses.words(),
-            self.time, self.words, self.fadingLaw, self.rumination, self.parameters)
+            self.time, self.words, self.fadingLaw, self.rumination, self.parameters, self.lastDays())

@@ -50,10 +50,12 @@ class serviceRunSheep:
         if hours <= 0:
             return
         clock.advance(hours * 3600)
-        forgotten = 0
-        if options.forgetAtNight or options.consolidateAtNight:
-            forgotten = mind.night(name, options.consolidateAtNight)
+        forgotten = mind.night(name, options.consolidateAtNight, options.forgetAtNight)
         self._add(day, "event", f"{hours:g} hours pass" + (f"; {forgotten} records forgotten" if forgotten else ""))
+        days = self._lastDays(mind, name)
+        if days is not None and not days.isEmpty():
+            self._add(day, "event", f"the last days, after the night — yesterday: {days.yesterday or '(nothing)'}"
+                      f" | the days before: {days.before or '(nothing)'}")
 
     def _day(self, mind, name, role, day, turnIndex):
         person = role["name"]
@@ -85,7 +87,18 @@ class serviceRunSheep:
         for construct in outcome.thoughts:
             self._add(day, "thought", construct.statement(), valence=construct.valence,
                       intensity=construct.intensity, feeling=construct.feeling)
+        days = self._lastDays(mind, name)
+        if days is not None and days.today:
+            self._add(day, "event", f"the last days, after this conversation — today: {days.today}")
         return turnIndex
+
+    @staticmethod
+    def _lastDays(mind, name):
+        """The being's last days as the engine keeps them, for the record of the run; None when the
+        layer is switched off."""
+        if not mind.parameters.get("lastDays", True):
+            return None
+        return mind.repositories["lastDays"].get(mind.being(name).id)
 
     def _moment(self, day, role, conversation, outcome, turnIndex):
         for construct in outcome.thoughts:

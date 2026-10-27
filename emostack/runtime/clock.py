@@ -1,7 +1,8 @@
 class clock:
     """The slow path in time. An awake being reflects first thing on waking and once after a
     silence; after a long silence it falls asleep; some minutes into sleep the awake period is
-    folded and what is too weak for its age is forgotten."""
+    folded, what is too weak for its age is forgotten, and the last days turn: today becomes
+    yesterday. A day, to the being, is one awake period."""
 
     def __init__(self, beings, mindFor, time, parameters):
         self.beings = beings
@@ -43,5 +44,6 @@ class clock:
         if being.wokeAt > 0:
             mind.sleep().consolidate(being, being.wokeAt)
         mind.sleep().forget()
+        mind.lastDays().night()
         being.consolidated = True
         self.beings.saveWakefulness(being)

@@ -5,17 +5,18 @@ from emostack.episode.Rendering import Rendering
 class ReplyContext:
     """What the reply call sees, in the order the LLM model reads it: here and now with the senses;
     the state, each feeling with its words, strength and conclusion; the accessibility slot, when its
-    thoughts are not placed in the line; the applicable dispositions; the focus: the summary of what
-    has left view, then the line in the order things came into view, the feelings brought in from
-    before and evoked memories retold, the moments as they happened, each under its feeling unless
-    the feeling is already in the state; and what is heard. Nothing is withheld."""
+    thoughts are not placed in the line; the last days, what the being carries without attending to
+    it: earlier today, yesterday, the days before; the applicable dispositions; the focus: the summary
+    of what has left view, then the line in the order things came into view, the feelings brought in
+    from before and evoked memories retold, the moments as they happened, each under its feeling
+    unless the feeling is already in the state; and what is heard. Nothing is withheld."""
 
     WORDS = "words"
     ARRIVAL = "arrival"
     DEPARTURE = "departure"
 
     def __init__(self, kind, hereAndNow, state, focusEntries, clock, feelingWords, fading, rumination,
-                 words="", held=None, summary=None, dispositions=None):
+                 words="", held=None, summary=None, dispositions=None, lastDays=None):
         self.kind = kind
         self.hereAndNow = hereAndNow
         self.state = state
@@ -28,6 +29,7 @@ class ReplyContext:
         self.held = list(held or [])
         self.summary = summary
         self.dispositions = list(dispositions or [])
+        self.lastDays = lastDays
         self.parts = promptTemplate.beside(__file__, "reply.prompt")
         self.template = self._ownTemplate()
 
@@ -62,6 +64,7 @@ class ReplyContext:
         lines.extend(self._presence())
         self._renderState(lines)
         self._renderSlot(lines)
+        self._renderLastDays(lines)
         self._renderDispositions(lines)
         self._renderFocus(lines)
         return "\n".join(lines)
@@ -107,6 +110,18 @@ class ReplyContext:
         for construct in self.held:
             lines.append(self.parts.fill("slotEntry", AGO=self.clock.formatAgo(construct.happenedAt, now),
                                          STATEMENT=construct.statement()))
+
+    def _renderLastDays(self, lines):
+        """The last days, beside the focus: what the being carries of its recent days without
+        attending to it, each part as its own account; nothing when the layer holds nothing."""
+        days = self.lastDays
+        if days is None or days.isEmpty():
+            return
+        lines.append(self.parts.text("lastDaysHead"))
+        for part, text in (("lastDaysToday", days.today), ("lastDaysYesterday", days.yesterday),
+                           ("lastDaysBefore", days.before)):
+            if text.strip():
+                lines.append(self.parts.fill(part, TEXT=text.strip().replace("\n", " ")))
 
     def _renderDispositions(self, lines):
         if not self.dispositions:

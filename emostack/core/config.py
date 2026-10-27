@@ -41,6 +41,7 @@ class config:
             "focusCap": 100,
             "heldThoughtsInLine": True,
             "summaryThreadCap": 40,
+            "lastDays": True,
             "strengthClosing": 0.6,
             "introspectionEntries": 8,
             "reflectionMaxSteps": 3,

@@ -6,6 +6,7 @@ from emostack.emoThought.Strength import Strength
 from emostack.episode.Episode import Episode
 from emostack.being.beingRepository import beingRepository
 from emostack.containers.accessibilitySlotRepository import accessibilitySlotRepository
+from emostack.containers.lastDaysRepository import lastDaysRepository
 from emostack.core.database import database
 from emostack.core.localEmbedder import localEmbedder
 from emostack.core.openAiCompatibleProcessor import openAiCompatibleProcessor
@@ -37,6 +38,7 @@ class engine:
             "hippocampus": hippocampusRepository(self.database),
             "dispositions": dispositionRepository(self.database),
             "slot": accessibilitySlotRepository(self.database),
+            "lastDays": lastDaysRepository(self.database),
         }
         self.presence = presence(self.time, self.parameters["presenceStaleSeconds"])
         self.clock = clock(self.beings, self.assemblyFor, self.time, self.parameters)
@@ -87,14 +89,18 @@ class engine:
         hippocampus.setOriginEpisode(record, episode)
         return record
 
-    def night(self, beingName, consolidate=False):
-        """Sleep now, whatever the clock says: fold the awake period if asked, then forget what is
-        too weak for its age. Returns the number of records forgotten."""
+    def night(self, beingName, consolidate=False, forget=True):
+        """Sleep now, whatever the clock says: fold the awake period if asked, forget what is too
+        weak for its age unless asked not to, and turn the last days: today becomes yesterday.
+        Returns the number of records forgotten."""
         being = self.being(beingName)
-        sleep = self.assemblyFor(being).sleep()
+        mind = self.assemblyFor(being)
+        sleep = mind.sleep()
         if consolidate:
             sleep.consolidate(being, being.wokeAt or 0.0)
-        return len(sleep.forget())
+        forgotten = len(sleep.forget()) if forget else 0
+        mind.lastDays().night()
+        return forgotten
 
     def think(self, conversation):
         """The being stops to think now, in the middle of a conversation, with nobody asking.
@@ -107,11 +113,12 @@ class engine:
         self.repositories["hippocampus"].deleteBeing(beingId)
         self.repositories["dispositions"].deleteBeing(beingId)
         self.repositories["slot"].replace(beingId, [])
+        self.repositories["lastDays"].delete(beingId)
         self.beings.delete(beingId)
 
     def copyBeing(self, sourcePath, sourceBeingId, name):
         """A copy of a being that has lived, from another store, with all its records, episodes,
-        dispositions and slot; the source is untouched. Returns the new being."""
+        dispositions, slot and last days; the source is untouched. Returns the new being."""
         connection = self.database.connection
         with self.database.lock:
             connection.execute("ATTACH DATABASE ? AS source", (sourcePath,))
@@ -139,6 +146,10 @@ class engine:
                 connection.execute(
                     "INSERT INTO slot SELECT ?, recordId || ?, activatedAt FROM source.slot WHERE beingId = ?",
                     (newId, suffix, sourceBeingId))
+                if connection.execute("SELECT name FROM source.sqlite_master WHERE name = 'lastDays'").fetchone():
+                    connection.execute(
+                        "INSERT INTO lastDays (beingId, today, yesterday, before) SELECT ?, today, yesterday, before "
+                        "FROM source.lastDays WHERE beingId = ?", (newId, sourceBeingId))
                 connection.commit()
             finally:
                 connection.execute("DETACH DATABASE source")

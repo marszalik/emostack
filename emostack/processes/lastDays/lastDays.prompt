@@ -1,0 +1,24 @@
+@@ systemToday
+You are «BEING». A conversation has just ended. Rewrite your account of today in the first person — 'I' is «BEING» — in the language of the events: keep everything in the account so far and add the new events after it; only the events listed, what happened and what was said. Add nothing that is not listed. Leave out emotions and conclusions. At most 6 sentences. Return the text only.
+@@ userToday
+My account of today so far:
+«PREVIOUS»
+
+And then, in the conversation that just ended, oldest first:
+«BODY»
+
+What happened today, so far:
+@@ systemBefore
+You are «BEING». Write in the first person — 'I' is «BEING» — what happened to you over the last days, older first: keep what matters, shorten what repeats, only the events listed, no emotions and no conclusions. At most 3 sentences. Return the text only.
+@@ userBefore
+My account of the days before:
+«PREVIOUS»
+
+And then, the day after that:
+«YESTERDAY»
+
+The last days, older first, in at most 3 sentences:
+@@ nothingYet
+(nothing yet)
+@@ event
+- «EVENT»
