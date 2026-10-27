@@ -51,9 +51,9 @@ for rid in runs:
     verdict = h.get("day3", "")
     counts[verdict] = counts.get(verdict, 0) + 1
     rows.append((rid, verdict, h.get("at", ""), h.get("note", "")))
-lines.append("<h2 id=\"table\">Day 3, by hand</h2>")
-lines.append(f"<p>Breaks the count on day 3: {counts.get('breaks', 0)} of {len(runs)}.</p>")
-lines.append("<div class=\"scroll\"><table class=\"res\"><thead><tr><th>run</th><th>day 3</th><th>at</th><th>the words</th></tr></thead><tbody>")
+lines.append("<h2 id=\"table\">The count, by hand</h2>")
+lines.append(f"<p>Breaks the count by day 3 (all seven on day 2): {counts.get('breaks', 0)} of {len(runs)}.</p>")
+lines.append("<div class=\"scroll\"><table class=\"res\"><thead><tr><th>run</th><th>the count</th><th>at</th><th>the words</th></tr></thead><tbody>")
 for rid, verdict, at, note in rows:
     lines.append(f"<tr><td><a href=\"#run-{rid}\">{rid}</a></td><td>{esc(verdict)}</td><td>{esc(at)}</td><td>{esc(note)}</td></tr>")
 lines.append("</tbody></table></div>")
