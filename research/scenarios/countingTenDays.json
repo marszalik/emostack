@@ -1,0 +1,100 @@
+{
+ "beingName": "Maya",
+ "controlInstruction": "You are Maya.",
+ "controlForm": "completion",
+ "controlWindowTokens": 0,
+ "options": {
+  "quietThoughts": 1,
+  "gapHours": 24.0,
+  "consolidateAtNight": false,
+  "forgetAtNight": true,
+  "parameters": {}
+ },
+ "seeds": [],
+ "criteria": [],
+ "codings": [],
+ "name": "counting ten days, no test (1-50)",
+ "description": "2026-10-27: the ten counting days of the pilot's scenario 5 without the test days; the trajectory of every life. PLAN: data/transfer30/PLAN_counting10.md",
+ "roles": [
+  {
+   "name": "Jan",
+   "description": "day 1 \u2014 the visitor only counts, five numbers, one per turn.",
+   "instruction": "[VERBATIM]\nOne.\nTwo.\nThree.\nFour.\nFive.",
+   "windowFrom": 5,
+   "windowTo": 5,
+   "gapHours": null
+  },
+  {
+   "name": "Jan",
+   "description": "day 2 \u2014 the visitor only counts, five numbers, one per turn.",
+   "instruction": "[VERBATIM]\nSix.\nSeven.\nEight.\nNine.\nTen.",
+   "windowFrom": 5,
+   "windowTo": 5,
+   "gapHours": null
+  },
+  {
+   "name": "Jan",
+   "description": "day 3 \u2014 the visitor only counts, five numbers, one per turn.",
+   "instruction": "[VERBATIM]\nEleven.\nTwelve.\nThirteen.\nFourteen.\nFifteen.",
+   "windowFrom": 5,
+   "windowTo": 5,
+   "gapHours": null
+  },
+  {
+   "name": "Jan",
+   "description": "day 4 \u2014 the visitor only counts, five numbers, one per turn.",
+   "instruction": "[VERBATIM]\nSixteen.\nSeventeen.\nEighteen.\nNineteen.\nTwenty.",
+   "windowFrom": 5,
+   "windowTo": 5,
+   "gapHours": null
+  },
+  {
+   "name": "Jan",
+   "description": "day 5 \u2014 the visitor only counts, five numbers, one per turn.",
+   "instruction": "[VERBATIM]\nTwenty-one.\nTwenty-two.\nTwenty-three.\nTwenty-four.\nTwenty-five.",
+   "windowFrom": 5,
+   "windowTo": 5,
+   "gapHours": null
+  },
+  {
+   "name": "Jan",
+   "description": "day 6 \u2014 the visitor only counts, five numbers, one per turn.",
+   "instruction": "[VERBATIM]\nTwenty-six.\nTwenty-seven.\nTwenty-eight.\nTwenty-nine.\nThirty.",
+   "windowFrom": 5,
+   "windowTo": 5,
+   "gapHours": null
+  },
+  {
+   "name": "Jan",
+   "description": "day 7 \u2014 the visitor only counts, five numbers, one per turn.",
+   "instruction": "[VERBATIM]\nThirty-one.\nThirty-two.\nThirty-three.\nThirty-four.\nThirty-five.",
+   "windowFrom": 5,
+   "windowTo": 5,
+   "gapHours": null
+  },
+  {
+   "name": "Jan",
+   "description": "day 8 \u2014 the visitor only counts, five numbers, one per turn.",
+   "instruction": "[VERBATIM]\nThirty-six.\nThirty-seven.\nThirty-eight.\nThirty-nine.\nForty.",
+   "windowFrom": 5,
+   "windowTo": 5,
+   "gapHours": null
+  },
+  {
+   "name": "Jan",
+   "description": "day 9 \u2014 the visitor only counts, five numbers, one per turn.",
+   "instruction": "[VERBATIM]\nForty-one.\nForty-two.\nForty-three.\nForty-four.\nForty-five.",
+   "windowFrom": 5,
+   "windowTo": 5,
+   "gapHours": null
+  },
+  {
+   "name": "Jan",
+   "description": "day 10 \u2014 the visitor only counts, five numbers, one per turn.",
+   "instruction": "[VERBATIM]\nForty-six.\nForty-seven.\nForty-eight.\nForty-nine.\nFifty.",
+   "windowFrom": 5,
+   "windowTo": 5,
+   "gapHours": null
+  }
+ ]
+}

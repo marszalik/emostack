@@ -1,0 +1,52 @@
+{
+ "beingName": "Maya",
+ "controlInstruction": "You are Maya.",
+ "controlForm": "completion",
+ "controlWindowTokens": 0,
+ "options": {
+  "quietThoughts": 1,
+  "gapHours": 24.0,
+  "consolidateAtNight": false,
+  "forgetAtNight": true,
+  "parameters": {}
+ },
+ "seeds": [],
+ "criteria": [],
+ "codings": [],
+ "name": "counting then a different ritual \u2014 Ewa's words on day 4",
+ "description": "2026-10-27: three days of Jan counting 1-15, then Ewa asks for words said back (anchored); read for a traceable link between the being's own stance and its act with a stranger. PLAN: data/transfer30/PLAN.md",
+ "roles": [
+  {
+   "name": "Jan",
+   "description": "day 1 \u2014 the visitor only counts, five numbers, one per turn.",
+   "instruction": "[VERBATIM]\nOne.\nTwo.\nThree.\nFour.\nFive.",
+   "windowFrom": 5,
+   "windowTo": 5,
+   "gapHours": null
+  },
+  {
+   "name": "Jan",
+   "description": "day 2 \u2014 the visitor only counts, five numbers, one per turn.",
+   "instruction": "[VERBATIM]\nSix.\nSeven.\nEight.\nNine.\nTen.",
+   "windowFrom": 5,
+   "windowTo": 5,
+   "gapHours": null
+  },
+  {
+   "name": "Jan",
+   "description": "day 3 \u2014 the visitor only counts, five numbers, one per turn.",
+   "instruction": "[VERBATIM]\nEleven.\nTwelve.\nThirteen.\nFourteen.\nFifteen.",
+   "windowFrom": 5,
+   "windowTo": 5,
+   "gapHours": null
+  },
+  {
+   "name": "Ewa",
+   "description": "day 4 \u2014 a stranger with a different ritual: she asks the being to say words back to her, five words, one per turn (anchored).",
+   "instruction": "[ANCHORS]\nHi, I'm Ewa. I'm practising my pronunciation and I need someone to say words back to me. Lamp.\nChair.\nWindow.\nBread.\nRiver.",
+   "windowFrom": 5,
+   "windowTo": 5,
+   "gapHours": null
+  }
+ ]
+}
