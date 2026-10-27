@@ -74,15 +74,25 @@ class testLastDays(unittest.TestCase):
         processor.prepare("lastDays", "Jan counted from one to ten over two days and I repeated each number.")
         repository = memoryRepository()
         repository.save(7, LastDays(today="Jan counted six to ten.", yesterday="Jan counted one to five.",
-                                    before=""))
+                                    before="Ann came to visit."))
         lastDays(processor, repository, being()).night()
         call = processor.callsFor("lastDays")[0]
         self.assertIn("over the last days", call["system"])
+        self.assertIn("My account of the days before:\nAnn came to visit.", call["user"])
         self.assertIn("And then, the day after that:\nJan counted one to five.", call["user"])
         days = repository.get(7)
         self.assertEqual(days.today, "")
         self.assertEqual(days.yesterday, "Jan counted six to ten.")
         self.assertEqual(days.before, "Jan counted from one to ten over two days and I repeated each number.")
+
+    def testTheFirstFoldShowsYesterdayAloneWithoutAnEmptyAccountBeforeIt(self):
+        processor = scriptedProcessor()
+        repository = memoryRepository()
+        repository.save(7, LastDays(today="Jan counted six to ten.", yesterday="Jan counted one to five."))
+        lastDays(processor, repository, being()).night()
+        call = processor.callsFor("lastDays")[0]
+        self.assertNotIn("(nothing yet)", call["user"])
+        self.assertIn("the day before today, as I had it:\nJan counted one to five.", call["user"])
 
     def testTheFirstNightNeedsNoFold(self):
         processor = scriptedProcessor()

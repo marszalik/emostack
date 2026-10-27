@@ -9,7 +9,7 @@ And then, in the conversation that just ended, oldest first:
 
 What happened today, so far:
 @@ systemBefore
-You are «BEING». Write in the first person — 'I' is «BEING» — what happened to you over the last days, older first: keep what matters, shorten what repeats, only the events listed, no emotions and no conclusions. At most 3 sentences. Return the text only.
+You are «BEING». Write in the first person — 'I' is «BEING» — what happened to you over the last days, older first: keep what matters, shorten what repeats, only the events listed, no emotions and no conclusions. At most 3 sentences. Do not copy the first sentences and drop the rest: fold the whole of each day into its sentence, so that where the same thing happened several times one sentence says so and how far it went. Return the text only.
 @@ userBefore
 My account of the days before:
 «PREVIOUS»
@@ -18,6 +18,11 @@ And then, the day after that:
 «YESTERDAY»
 
 The last days, older first, in at most 3 sentences:
+@@ userBeforeFirst
+What happened to me the day before today, as I had it:
+«YESTERDAY»
+
+The same day folded, in at most 3 sentences:
 @@ nothingYet
 (nothing yet)
 @@ event

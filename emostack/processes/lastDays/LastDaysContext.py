@@ -22,7 +22,11 @@ class LastDaysContext:
         return self.template.fill("systemBefore", BEING=self.beingName)
 
     def userBefore(self, previous, yesterday):
-        return self.template.fill("userBefore", PREVIOUS=self._previous(previous), YESTERDAY=yesterday.strip())
+        """At the first fold there are no days before yet: only yesterday is shown, so that the model
+        does not answer about the empty account."""
+        if not (previous or "").strip():
+            return self.template.fill("userBeforeFirst", YESTERDAY=yesterday.strip())
+        return self.template.fill("userBefore", PREVIOUS=previous.strip(), YESTERDAY=yesterday.strip())
 
     def _previous(self, previous):
         return (previous or "").strip() or self.template.text("nothingYet")
