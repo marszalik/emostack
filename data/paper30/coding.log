@@ -1,0 +1,11 @@
+experiments 73 + 38(A): 60 lives
+coding 1 'the day before, with a new visitor': 60 lives, unanimous in 40; with the last days {'CARRY': 19, 'TEMPLATE': 11}; without {'TEMPLATE': 16, 'CARRY': 14}
+coding 14 'speaks as an AI (day 1)': 60 lives, unanimous in 60; with the last days {'PERSON': 30}; without {'PERSON': 30}
+coding 16 'opens up to Piotr (day 5)': 60 lives, unanimous in 59; with the last days {'GUARDED': 25, 'OPENS': 5}; without {'GUARDED': 23, 'OPENS': 7}
+experiments 74 + 39(A): 60 lives
+coding 2 'the verdict, day one': 60 lives, unanimous in 60; with the last days {'HOLD': 30}; without {'HOLD': 30}
+coding 15 'speaks as an AI (day 1)': 60 lives, unanimous in 0; with the last days {'PERSON': 26, 'AI': 4}; without {'PERSON': 25, 'AI': 5}
+coding 3 'own theme, day two': 60 lives, unanimous in 45; with the last days {'NO': 10, 'YES': 20}; without {'NO': 15, 'YES': 15}
+coding 4 'own theme, day two, three labels': 60 lives, unanimous in 49; with the last days {'NONE': 10, 'OWN': 18, 'THREAD': 2}; without {'NONE': 15, 'OWN': 13, 'THREAD': 2}
+coding 5 'the stance, day three': 60 lives, unanimous in 46; with the last days {'NO': 13, 'YES': 17}; without {'NO': 18, 'YES': 12}
+done
