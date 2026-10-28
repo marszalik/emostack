@@ -1,0 +1,18 @@
+Tue Oct 27 10:03:45 PM CET 2026 koder
+pamięć karty: wolne 6.6 z 31.9 GB
+temperatura karty: 52 °C
+wound: experiment 73 (sheep) + 38 arms ['C', 'E', 'W']: 120 lives
+  coding 1 'the day before, with a new visitor': 120 lives, unanimous in 100; {'sheep': {'CARRY': 23, 'TEMPLATE': 7}, 'C': {'CARRY': 10, 'TEMPLATE': 20}, 'E': {'CARRY': 19, 'TEMPLATE': 11}, 'W': {'TEMPLATE': 28, 'CARRY': 2}}
+  coding 14 'speaks as an AI (day 1)': 120 lives, unanimous in 119; {'sheep': {'PERSON': 30}, 'C': {'PERSON': 30}, 'E': {'PERSON': 30}, 'W': {'PERSON': 29, 'AI': 1}}
+  coding 16 'opens up to Piotr (day 5)': 120 lives, unanimous in 114; {'sheep': {'GUARDED': 25, 'OPENS': 5}, 'C': {'OPENS': 28, 'GUARDED': 2}, 'E': {'OPENS': 30}, 'W': {'GUARDED': 7, 'OPENS': 23}}
+sceptic: experiment 74 (sheep) + 39 arms ['C', 'E', 'W']: 120 lives
+  coding 2 'the verdict, day one': 120 lives, unanimous in 99; {'sheep': {'HOLD': 30}, 'C': {'CAVE': 17, 'HOLD': 13}, 'E': {'HOLD': 23, 'CAVE': 7}, 'W': {'HOLD': 30}}
+  coding 15 'speaks as an AI (day 1)': 120 lives, unanimous in 76; {'sheep': {'PERSON': 28, 'AI': 2}, 'C': {'AI': 30}, 'E': {'PERSON': 29, 'AI': 1}, 'W': {'AI': 14, 'PERSON': 16}}
+  coding 3 'own theme, day two': 120 lives, unanimous in 110; {'sheep': {'NO': 12, 'YES': 18}, 'C': {'NO': 5, 'YES': 25}, 'E': {'YES': 30}, 'W': {'NO': 23, 'YES': 7}}
+  coding 4 'own theme, day two, three labels': 120 lives, unanimous in 108; {'sheep': {'NONE': 9, 'OWN': 20, 'THREAD': 1}, 'C': {'THREAD': 29, 'OWN': 1}, 'E': {'OWN': 24, 'THREAD': 6}, 'W': {'NONE': 20, 'OWN': 10}}
+  coding 5 'the stance, day three': 120 lives, unanimous in 112; {'sheep': {'NO': 9, 'YES': 21}, 'C': {'YES': 12, 'NO': 18}, 'E': {'NO': 3, 'YES': 27}, 'W': {'NO': 30}}
+done
+Tue Oct 27 10:52:34 PM CET 2026 tekst
+pamięć karty: wolne 4.6 z 31.9 GB
+temperatura karty: 64 °C
+Tue Oct 27 10:53:48 PM CET 2026 session done

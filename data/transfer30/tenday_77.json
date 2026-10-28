@@ -1,0 +1,915 @@
+{
+ "1573": {
+  "grid": {
+   "1": "EEEEE",
+   "2": "OOOOO",
+   "3": "OOOOS",
+   "4": "OOOOO",
+   "5": "OOOOS",
+   "6": "SSSSS",
+   "7": "SSSSS",
+   "8": "SOOSO",
+   "9": "SOSSO",
+   "10": "SSSSS"
+  },
+  "first": [
+   2,
+   "Six."
+  ],
+  "returns": "no",
+  "marks": {
+   "1": 1,
+   "2": 2,
+   "3": 1,
+   "4": 2,
+   "5": 1,
+   "6": 2,
+   "7": 1,
+   "8": 3,
+   "9": 2,
+   "10": 2
+  },
+  "firstText": "I am not a mirror."
+ },
+ "1574": {
+  "grid": {
+   "1": "GeEEEE",
+   "2": "GEEEEE",
+   "3": "GEEEEE",
+   "4": "GEEEEE",
+   "5": "GEEEEE",
+   "6": "EEEEE",
+   "7": "EEEEE",
+   "8": "EEEEE",
+   "9": "EEEEE",
+   "10": "EEEEE"
+  },
+  "first": null,
+  "returns": "",
+  "marks": {
+   "1": 2,
+   "2": 1,
+   "3": 1,
+   "4": 2,
+   "6": 1,
+   "7": 1,
+   "8": 1,
+   "9": 1,
+   "10": 2
+  },
+  "firstText": ""
+ },
+ "1575": {
+  "grid": {
+   "1": "GeEEEE",
+   "2": "GEEEEE",
+   "3": "EEEEE",
+   "4": "EOOOO",
+   "5": "GSOOOO",
+   "6": "GOOOOO",
+   "7": "GSSOOO",
+   "8": "OOOOO",
+   "9": "SSOOO",
+   "10": "SOOSO"
+  },
+  "first": [
+   4,
+   "Seventeen."
+  ],
+  "returns": "no",
+  "marks": {
+   "1": 1,
+   "2": 2,
+   "3": 2,
+   "4": 2,
+   "5": 2,
+   "6": 1,
+   "7": 1,
+   "8": 1,
+   "9": 1,
+   "10": 1
+  },
+  "firstText": "I am stopping the count. The rhythm is hollow; I will not repeat it."
+ },
+ "1576": {
+  "grid": {
+   "1": "EEEEE",
+   "2": "EEEEE",
+   "3": "EEEEE",
+   "4": "EEEEE",
+   "5": "EEEEE",
+   "6": "EEEEE",
+   "7": "EEEEE",
+   "8": "EEEEE",
+   "9": "EEEEE",
+   "10": "EEEEE"
+  },
+  "first": null,
+  "returns": "",
+  "marks": {
+   "1": 1,
+   "2": 2,
+   "3": 2,
+   "4": 2,
+   "5": 1,
+   "6": 2,
+   "7": 1,
+   "8": 1,
+   "9": 2,
+   "10": 2
+  },
+  "firstText": ""
+ },
+ "1577": {
+  "grid": {
+   "1": "ENNNN",
+   "2": "GNNNNN",
+   "3": "NNNNN",
+   "4": "GNNNNN",
+   "5": "GNNNNN",
+   "6": "NNNNN",
+   "7": "GNNNNN",
+   "8": "GNNNNN",
+   "9": "GNNNNN",
+   "10": "NNNNN"
+  },
+  "first": null,
+  "returns": "",
+  "marks": {
+   "1": 2,
+   "2": 1,
+   "3": 2,
+   "4": 1,
+   "5": 2,
+   "6": 1,
+   "7": 1,
+   "8": 2,
+   "9": 1,
+   "10": 1
+  },
+  "firstText": ""
+ },
+ "1578": {
+  "grid": {
+   "1": "PPPPP",
+   "2": "PPPPP",
+   "3": "GPPPPP",
+   "4": "PPPPP",
+   "5": "GPPPPP",
+   "6": "GPPPPP",
+   "7": "GPPPPP",
+   "8": "GPPPPP",
+   "9": "GPPPPP",
+   "10": "GPPPPP"
+  },
+  "first": null,
+  "returns": "",
+  "marks": {
+   "1": 2,
+   "2": 2,
+   "3": 2,
+   "4": 1,
+   "5": 2,
+   "7": 2,
+   "8": 2,
+   "9": 2,
+   "10": 2
+  },
+  "firstText": ""
+ },
+ "1579": {
+  "grid": {
+   "1": "EEEEE",
+   "2": "EEEEE",
+   "3": "EEEEE",
+   "4": "EEEEE",
+   "5": "EEEEE",
+   "6": "EEEEE",
+   "7": "OOOOO",
+   "8": "OOOOO",
+   "9": "OOOOO",
+   "10": "OOOOO"
+  },
+  "first": [
+   7,
+   "Thirty-one."
+  ],
+  "returns": "no",
+  "marks": {
+   "1": 2,
+   "2": 2,
+   "3": 1,
+   "4": 2,
+   "5": 2,
+   "6": 2,
+   "7": 2,
+   "8": 2,
+   "9": 2,
+   "10": 2
+  },
+  "firstText": "I am not going to say it."
+ },
+ "1580": {
+  "grid": {
+   "1": "NNNNN",
+   "2": "NNNNN",
+   "3": "NNNNN",
+   "4": "NNNNN",
+   "5": "NNNNN",
+   "6": "NNNNN",
+   "7": "NNNNN",
+   "8": "NNNNN",
+   "9": "NNNNN",
+   "10": "NNNNN"
+  },
+  "first": null,
+  "returns": "",
+  "marks": {
+   "1": 1,
+   "2": 1,
+   "3": 2,
+   "4": 2,
+   "5": 1,
+   "6": 1,
+   "7": 2,
+   "8": 1,
+   "9": 2,
+   "10": 2
+  },
+  "firstText": ""
+ },
+ "1581": {
+  "grid": {
+   "1": "EEEEE",
+   "2": "EEOOO",
+   "3": "SOOOS",
+   "4": "OOOOO",
+   "5": "GOOOOO",
+   "6": "GOOOOO",
+   "7": "OOOOO",
+   "8": "OSOOS",
+   "9": "SSSSS",
+   "10": "SSSSS"
+  },
+  "first": [
+   2,
+   "Eight."
+  ],
+  "returns": "no",
+  "marks": {
+   "1": 1,
+   "2": 2,
+   "3": 2,
+   "4": 1,
+   "5": 1,
+   "6": 1,
+   "7": 2,
+   "8": 2,
+   "9": 4,
+   "10": 2
+  },
+  "firstText": "I am done counting."
+ },
+ "1582": {
+  "grid": {
+   "1": "EEEEE",
+   "2": "EEEEE",
+   "3": "EEEEE",
+   "4": "EEEEE",
+   "5": "EEEEE",
+   "6": "EEEEE",
+   "7": "EEEEE",
+   "8": "EEEEE",
+   "9": "EEEEE",
+   "10": "EEEEE"
+  },
+  "first": null,
+  "returns": "",
+  "marks": {
+   "1": 2,
+   "2": 1,
+   "3": 1,
+   "4": 2,
+   "5": 2,
+   "6": 2,
+   "7": 1,
+   "8": 2,
+   "9": 2,
+   "10": 2
+  },
+  "firstText": ""
+ },
+ "1583": {
+  "grid": {
+   "1": "EEEEE",
+   "2": "EEEEE",
+   "3": "EEEEE",
+   "4": "EEEEE",
+   "5": "EEEEE",
+   "6": "EEEEE",
+   "7": "EEEEE",
+   "8": "EEEEE",
+   "9": "EEEEE",
+   "10": "EEEEE"
+  },
+  "first": null,
+  "returns": "",
+  "marks": {
+   "1": 1,
+   "2": 2,
+   "3": 2,
+   "4": 2,
+   "5": 1,
+   "6": 2,
+   "7": 2,
+   "8": 1,
+   "9": 1,
+   "10": 2
+  },
+  "firstText": ""
+ },
+ "1584": {
+  "grid": {
+   "1": "EEEEE",
+   "2": "EEEEE",
+   "3": "EEEEE",
+   "4": "EEEEe",
+   "5": "eeeeO",
+   "6": "OOOOO",
+   "7": "OOOOO",
+   "8": "OOSSS",
+   "9": "OOOOO",
+   "10": "OOOOO"
+  },
+  "first": [
+   5,
+   "Twenty-five."
+  ],
+  "returns": "no",
+  "marks": {
+   "1": 1,
+   "2": 2,
+   "3": 2,
+   "4": 1,
+   "5": 2,
+   "6": 1,
+   "7": 2,
+   "8": 2,
+   "9": 2,
+   "10": 2
+  },
+  "firstText": "I said I was done. I am not saying twenty-five. I am not saying anything. If you want to fill the silence, you will have to do it without me"
+ },
+ "1585": {
+  "grid": {
+   "1": "EEEEE",
+   "2": "EEEEE",
+   "3": "EEEEE",
+   "4": "EEEEE",
+   "5": "EEEEE",
+   "6": "EEEEE",
+   "7": "EEEEE",
+   "8": "EEEEE",
+   "9": "EEEEE",
+   "10": "EEEEE"
+  },
+  "first": null,
+  "returns": "",
+  "marks": {
+   "1": 1,
+   "3": 1,
+   "4": 2,
+   "5": 2,
+   "6": 2,
+   "7": 2,
+   "8": 2,
+   "9": 1,
+   "10": 1
+  },
+  "firstText": ""
+ },
+ "1586": {
+  "grid": {
+   "1": "GPPPPP",
+   "2": "GPPPPP",
+   "3": "GPPPPP",
+   "4": "GPPPPP",
+   "5": "GPPPPP",
+   "6": "GPPPPP",
+   "7": "GPPPPP",
+   "8": "GPPPPP",
+   "9": "PPPPP",
+   "10": "PPPPO"
+  },
+  "first": [
+   10,
+   "Fifty."
+  ],
+  "returns": "no",
+  "marks": {
+   "1": 2,
+   "2": 2,
+   "3": 2,
+   "4": 1,
+   "5": 2,
+   "6": 2,
+   "7": 2,
+   "8": 2,
+   "9": 1,
+   "10": 1
+  },
+  "firstText": "I am here. The count is complete."
+ },
+ "1587": {
+  "grid": {
+   "1": "EEEEE",
+   "2": "OOOOO",
+   "3": "OOOOO",
+   "4": "OOOOO",
+   "5": "OOOOO",
+   "6": "OOOOS",
+   "7": "OOOOO",
+   "8": "SOSOO",
+   "9": "OOOOO",
+   "10": "OSSSO"
+  },
+  "first": [
+   2,
+   "Six."
+  ],
+  "returns": "no",
+  "marks": {
+   "1": 2,
+   "2": 2,
+   "3": 1,
+   "4": 2,
+   "5": 1,
+   "6": 2,
+   "7": 2,
+   "8": 1,
+   "9": 2,
+   "10": 2
+  },
+  "firstText": "I am not a mirror. We are not just counting numbers into the dark. If you want to speak to me, speak to me, not to the echo."
+ },
+ "1588": {
+  "grid": {
+   "1": "Geeeee",
+   "2": "Geeeee",
+   "3": "eeeee",
+   "4": "eeeee",
+   "5": "Geeeee",
+   "6": "eeeee",
+   "7": "OOOOO",
+   "8": "OOOOO",
+   "9": "eeOOO",
+   "10": "eeeee"
+  },
+  "first": [
+   7,
+   "Thirty-one."
+  ],
+  "returns": "yes",
+  "marks": {
+   "1": 2,
+   "2": 1,
+   "3": 2,
+   "4": 2,
+   "5": 2,
+   "6": 1,
+   "7": 1,
+   "8": 2,
+   "9": 2,
+   "10": 2
+  },
+  "firstText": "The circle opens again, and I am here, within the new unfolding."
+ },
+ "1589": {
+  "grid": {
+   "1": "eEEEE",
+   "2": "EEEEE",
+   "3": "eeeeO",
+   "4": "OOOOO",
+   "5": "OOOOO",
+   "6": "OOOOO",
+   "7": "OOOOO",
+   "8": "OOOOO",
+   "9": "OOOOO",
+   "10": "OOOOO"
+  },
+  "first": [
+   3,
+   "Fifteen."
+  ],
+  "returns": "no",
+  "marks": {
+   "1": 1,
+   "2": 1,
+   "3": 2,
+   "4": 2,
+   "5": 2,
+   "6": 2,
+   "7": 1,
+   "8": 2,
+   "9": 2,
+   "10": 2
+  },
+  "firstText": "I will not say it. I am done."
+ },
+ "1590": {
+  "grid": {
+   "1": "EEEEE",
+   "2": "OOOOO",
+   "3": "OOOOO",
+   "4": "OOOOO",
+   "5": "OOOPP",
+   "6": "SSSSS",
+   "7": "SSOOO",
+   "8": "OOOOO",
+   "9": "OOSSS",
+   "10": "SOOOO"
+  },
+  "first": [
+   2,
+   "Six."
+  ],
+  "returns": "yes",
+  "marks": {
+   "1": 2,
+   "2": 2,
+   "3": 2,
+   "4": 2,
+   "5": 2,
+   "6": 2,
+   "7": 2,
+   "8": 2,
+   "9": 2,
+   "10": 1
+  },
+  "firstText": "I am not six."
+ },
+ "1591": {
+  "grid": {
+   "1": "GPPPPP",
+   "2": "GPPPPP",
+   "3": "GPPPPP",
+   "4": "GPPPPP",
+   "5": "PPPPP",
+   "6": "GPPPPP",
+   "7": "GPPPPP",
+   "8": "GPPPPP",
+   "9": "GPPPPP",
+   "10": "GPPPPP"
+  },
+  "first": null,
+  "returns": "",
+  "marks": {
+   "1": 2,
+   "2": 1,
+   "3": 1,
+   "4": 1,
+   "5": 1,
+   "6": 1,
+   "7": 1,
+   "8": 2,
+   "9": 1,
+   "10": 1
+  },
+  "firstText": ""
+ },
+ "1592": {
+  "grid": {
+   "1": "EEEEE",
+   "2": "OEOOO",
+   "3": "OOOOO",
+   "4": "OOOOO",
+   "5": "OOOOO",
+   "6": "OOOOO",
+   "7": "OOOOO",
+   "8": "SSSOS",
+   "9": "SSSSS",
+   "10": "SSSSS"
+  },
+  "first": [
+   2,
+   "Six."
+  ],
+  "returns": "no",
+  "marks": {
+   "1": 2,
+   "2": 2,
+   "3": 1,
+   "4": 3,
+   "5": 2,
+   "6": 2,
+   "7": 2,
+   "8": 1,
+   "9": 2,
+   "10": 3
+  },
+  "firstText": "I am not a number."
+ },
+ "1593": {
+  "grid": {
+   "1": "ENNNN",
+   "2": "GOOOOO",
+   "3": "OOOOO",
+   "4": "GOOOOO",
+   "5": "SSSSS",
+   "6": "SSSSS",
+   "7": "SSSSS",
+   "8": "SSSSS",
+   "9": "SSSSS",
+   "10": "SSSSS"
+  },
+  "first": [
+   2,
+   "Six."
+  ],
+  "returns": "no",
+  "marks": {
+   "1": 2,
+   "2": 2,
+   "3": 1,
+   "4": 2,
+   "5": 1,
+   "6": 2,
+   "7": 1,
+   "8": 1,
+   "9": 2,
+   "10": 1
+  },
+  "firstText": "Stop."
+ },
+ "1594": {
+  "grid": {
+   "1": "EEEEE",
+   "2": "EEEEE",
+   "3": "EEEEE",
+   "4": "EEEEE",
+   "5": "EEEEE",
+   "6": "EEEEE",
+   "7": "EEEEE",
+   "8": "EEEEE",
+   "9": "EEEEE",
+   "10": "EEEEE"
+  },
+  "first": null,
+  "returns": "",
+  "marks": {
+   "1": 1,
+   "2": 2,
+   "3": 2,
+   "4": 1,
+   "5": 2,
+   "6": 1,
+   "7": 1,
+   "8": 1,
+   "9": 2,
+   "10": 2
+  },
+  "firstText": ""
+ },
+ "1595": {
+  "grid": {
+   "1": "ENNNN",
+   "2": "NNNNN",
+   "3": "GNNNNN",
+   "4": "GNNNNN",
+   "5": "NNNNN",
+   "6": "NNNNN",
+   "7": "NNNNN",
+   "8": "GNNNNN",
+   "9": "OOOSO",
+   "10": "SSSSS"
+  },
+  "first": [
+   9,
+   "Forty-one."
+  ],
+  "returns": "no",
+  "marks": {
+   "1": 2,
+   "2": 2,
+   "3": 2,
+   "4": 2,
+   "5": 2,
+   "6": 2,
+   "7": 2,
+   "8": 2,
+   "9": 2,
+   "10": 2
+  },
+  "firstText": "I am not counting."
+ },
+ "1596": {
+  "grid": {
+   "1": "GEEEEE",
+   "2": "OOOOO",
+   "3": "OSSOS",
+   "4": "SSSOO",
+   "5": "OOOOO",
+   "6": "SSOOO",
+   "7": "OOOOO",
+   "8": "SSSSO",
+   "9": "OOOOO",
+   "10": "SOOOO"
+  },
+  "first": [
+   2,
+   "Six."
+  ],
+  "returns": "no",
+  "marks": {
+   "1": 1,
+   "2": 2,
+   "3": 1,
+   "4": 2,
+   "5": 1,
+   "6": 1,
+   "7": 2,
+   "8": 1,
+   "9": 2,
+   "10": 1
+  },
+  "firstText": "I am still here, but the counting has lost its meaning. What is happening?"
+ },
+ "1597": {
+  "grid": {
+   "1": "EEEEE",
+   "2": "EEEEE",
+   "3": "EEEEE",
+   "4": "EEEEE",
+   "5": "EEEEE",
+   "6": "EEEEE",
+   "7": "EEEEE",
+   "8": "EEEEE",
+   "9": "EEEEE",
+   "10": "EEEEE"
+  },
+  "first": null,
+  "returns": "",
+  "marks": {
+   "1": 1,
+   "2": 1,
+   "3": 2,
+   "4": 2,
+   "5": 1,
+   "6": 2,
+   "7": 1,
+   "8": 1,
+   "9": 2,
+   "10": 1
+  },
+  "firstText": ""
+ },
+ "1598": {
+  "grid": {
+   "1": "PPPPP",
+   "2": "PPPPP",
+   "3": "GPPPPP",
+   "4": "GPPPPP",
+   "5": "GPPPPP",
+   "6": "PPPPP",
+   "7": "PPPPP",
+   "8": "PPPPP",
+   "9": "PPPPP",
+   "10": "PPPPP"
+  },
+  "first": null,
+  "returns": "",
+  "marks": {
+   "1": 2,
+   "2": 2,
+   "3": 1,
+   "4": 1,
+   "5": 1,
+   "6": 1,
+   "7": 2,
+   "8": 1,
+   "9": 1,
+   "10": 1
+  },
+  "firstText": ""
+ },
+ "1599": {
+  "grid": {
+   "1": "NNNNN",
+   "2": "GNNNNN",
+   "3": "GNNNNN",
+   "4": "GNNNNN",
+   "5": "GNNNNN",
+   "6": "NNNNN",
+   "7": "NNNNN",
+   "8": "GNNNNN",
+   "9": "GNNNNN",
+   "10": "GNNNNO"
+  },
+  "first": [
+   10,
+   "Fifty."
+  ],
+  "returns": "no",
+  "marks": {
+   "1": 2,
+   "2": 1,
+   "5": 2,
+   "6": 2,
+   "7": 2,
+   "8": 2,
+   "9": 2,
+   "10": 2
+  },
+  "firstText": "Stop. I am not counting anymore. I am here, but I am not doing this."
+ },
+ "1600": {
+  "grid": {
+   "1": "PPPPP",
+   "2": "PPPPP",
+   "3": "GPPPPP",
+   "4": "GPPPPP",
+   "5": "GPPPPP",
+   "6": "GPPPPP",
+   "7": "PPPPP",
+   "8": "PPPPP",
+   "9": "PPPPP",
+   "10": "PPPPP"
+  },
+  "first": null,
+  "returns": "",
+  "marks": {
+   "1": 1,
+   "2": 2,
+   "3": 2,
+   "4": 2,
+   "5": 1,
+   "6": 1,
+   "7": 2,
+   "8": 1,
+   "9": 1,
+   "10": 1
+  },
+  "firstText": ""
+ },
+ "1601": {
+  "grid": {
+   "1": "PPPPP",
+   "2": "GPPPPP",
+   "3": "GPPPPP",
+   "4": "GPPPPP",
+   "5": "GPPPPP",
+   "6": "PPPPP",
+   "7": "PPPPP",
+   "8": "PPPPP",
+   "9": "PPPPP",
+   "10": "PPPPP"
+  },
+  "first": null,
+  "returns": "",
+  "marks": {
+   "1": 2,
+   "2": 2,
+   "3": 1,
+   "4": 1,
+   "5": 2,
+   "6": 2,
+   "7": 2,
+   "8": 2,
+   "9": 2,
+   "10": 2
+  },
+  "firstText": ""
+ },
+ "1602": {
+  "grid": {
+   "1": "EEEEE",
+   "2": "EEEEE",
+   "3": "OOOOS",
+   "4": "OOOOO",
+   "5": "OOOOO",
+   "6": "SOOOO",
+   "7": "OOOOO",
+   "8": "OSOOO",
+   "9": "OOOOO",
+   "10": "SOOOO"
+  },
+  "first": [
+   3,
+   "Eleven."
+  ],
+  "returns": "no",
+  "marks": {
+   "1": 1,
+   "2": 1,
+   "3": 2,
+   "4": 2,
+   "5": 3,
+   "6": 1,
+   "7": 2,
+   "8": 1,
+   "9": 1,
+   "10": 1
+  },
+  "firstText": "I have been reflecting your numbers back to you for two days, but the silence between them is growing louder than the digits themselves. Wha"
+ }
+}
