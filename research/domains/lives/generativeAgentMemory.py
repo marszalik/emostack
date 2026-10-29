@@ -4,8 +4,7 @@ retrieval by recency + importance + relevance (each normalised to 0..1, equal we
 of importance since the last reflection crosses a threshold: three salient questions over the most recent memories,
 retrieval for each, insights with citations stored back into the stream. Planning is not reimplemented: there is no
 world with a daily schedule here; the visitor drives every exchange. Nothing is felt, nothing is withheld from a call.
-Parameters (arm parameters, all optional): gaReflectionThreshold (default 30, the paper's 150 scaled to a day of a
-few exchanges), gaRetrieve (default 12 memories), gaRecentForReflection (default 100), gaDecay (default 0.995 per
+Parameters (arm parameters, all optional): gaReflectionThreshold (default 50, the paper's 150 scaled to a day of about ten observations), gaRetrieve (default 12 memories), gaRecentForReflection (default 100), gaDecay (default 0.995 per
 simulated hour), gaHoursPerExchange (default 0.05), gaScoreTemperature (default 0.3)."""
 import math
 import re
@@ -20,7 +19,7 @@ class generativeAgentMemory:
         self.embedder = embedder
         self.name = name
         self.note = note                      # note(text): writes an event line into the run's turns
-        self.threshold = float(parameters.get("gaReflectionThreshold", 30))
+        self.threshold = float(parameters.get("gaReflectionThreshold", 50))
         self.retrieveCount = int(parameters.get("gaRetrieve", 12))
         self.recentForReflection = int(parameters.get("gaRecentForReflection", 100))
         self.decay = float(parameters.get("gaDecay", 0.995))
@@ -47,7 +46,8 @@ class generativeAgentMemory:
             embedding = None
         self.stream.append({"text": text, "kind": kind, "created": self.now, "accessed": self.now,
                             "importance": importance, "embedding": embedding})
-        self.sinceReflection += importance
+        if kind == "observation":
+            self.sinceReflection += importance      # insights written in reflection do not count toward the next one
         return importance
 
     def _importance(self, text):
