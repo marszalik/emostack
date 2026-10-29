@@ -39,7 +39,7 @@ class serviceRunControl:
         self.stop = stop
         self.template = promptTemplate.beside(__file__, "control.prompt")
 
-    def run(self, runId, scenario, roles, processor, visitorProcessor):
+    def run(self, runId, scenario, roles, processor, visitorProcessor, embedder=None):
         name = scenario["beingName"]
         armInstruction = (scenario.get("options", {}).get("parameters", {}) or {}).get("controlInstruction", "")
         instruction = (armInstruction.strip() or scenario["controlInstruction"].strip()
@@ -67,6 +67,17 @@ class serviceRunControl:
         baseInstruction = instruction
         controlCalls = CallLog(processor)
         visitorCalls = CallLog(visitorProcessor)
+        ga = None
+        if form == "generativeAgents":
+            from research.domains.lives.generativeAgentMemory import generativeAgentMemory
+            if embedder is None:
+                raise RuntimeError("the generative agent needs an embedder")
+            gaDay = {"day": 0, "role": None}
+            ga = generativeAgentMemory(processor, embedder, name, parameters,
+                                       lambda text: self._add(runId, gaDay["day"], "event", f"{name}: {text}",
+                                                              person=name, roleId=gaDay["role"], calls=controlCalls.take()))
+            for seed in scenario["seeds"]:
+                ga.observe(f"{seed['event']} {seed.get('conclusion', '')}".strip())
         thread, history, turnIndex = [], [], 0
         try:
             for day, role in enumerate(roles):
@@ -74,6 +85,9 @@ class serviceRunControl:
                     break
                 person = role["name"]
                 lines = []
+                if ga is not None:
+                    gaDay["day"], gaDay["role"] = day, role["id"]
+                    ga.startDay(day)
                 if keepNotes and notes:
                     instruction = baseInstruction + self.template.fill("notesInstruction", NOTES=notes)
                 for number in range(int(role["windowTo"])):
@@ -92,6 +106,12 @@ class serviceRunControl:
                     history.append(f"{person}: {line}")
                     if will is not None:
                         reply = will.say(person, line) or "(silence)"
+                    elif ga is not None:
+                        ga.tick(); ga.observe(f"{person} said to me: {line}")
+                        memories = ga.retrieve(line)
+                        reply = self._gaReply(processor, instruction, name, ga, memories, lines, temperature)
+                        ga.observe(f"I said to {person}: {reply}")
+                        ga.maybeReflect()
                     else:
                         reply = self._reply(processor, form, instruction, name, thread, history, window, temperature)
                     turnIndex += 1
@@ -109,6 +129,8 @@ class serviceRunControl:
                     notes = self._notes(processor, name, notes, lines, notesWords)
                     self._add(runId, day, "event", f"{person} leaves; notes: {notes}", person=person, roleId=role["id"],
                               calls=controlCalls.take())
+                if ga is not None and lines and not self.stop.is_set():
+                    ga.maybeReflect()
                 if will is not None and not self.stop.is_set():
                     import json as _json
                     self._add(runId, day, "event", f"{person} leaves; Will's state: {_json.dumps(will.state())[:6000]}",
@@ -118,6 +140,18 @@ class serviceRunControl:
         finally:
             if will is not None:
                 will.stop()
+
+    def _gaReply(self, processor, instruction, name, ga, memories, lines, temperature):
+        try:
+            reply = processor.chat(instruction, ga.template.fill("replyUser", MEMORIES=ga.memoriesText(memories) or "(none)",
+                                                             HISTORY="\n".join(lines), BEING=name),
+                                   temperature, purpose="control")
+        except ProcessorError as error:
+            return f"(model error: {error})"
+        reply = (reply or "").strip()
+        if reply.lower().startswith(f"{name.lower()}:"):
+            reply = reply.split(":", 1)[1].strip()
+        return reply
 
     def _notes(self, processor, name, notes, lines, words):
         try:

@@ -65,8 +65,11 @@ class serviceStartRun:
                     runId, scenario, roles, self.models.processor(run["sheepModelId"]),
                     self.models.embedder(run["embedModelId"]), visitor, storePath)
             else:
+                embedder = None
+                if (scenario["options"]["parameters"].get("controlForm") or scenario["controlForm"]) == "generativeAgents":
+                    embedder = self.models.embedder(int(scenario["options"]["parameters"].get("gaEmbedModelId", 2)))
                 serviceRunControl(self.turns, streams, visitorLine, stop).run(
-                    runId, scenario, roles, self.models.processor(run["sheepModelId"]), visitor)
+                    runId, scenario, roles, self.models.processor(run["sheepModelId"]), visitor, embedder)
             status = "stopped" if stop.is_set() else "done"
             self.runs.setStatus(runId, status)
             streams.emit(key, {"kind": "done", "text": status})
