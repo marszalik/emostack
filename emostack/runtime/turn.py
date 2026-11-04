@@ -28,7 +28,8 @@ class turn:
     a moment or about the being's own dreams, beliefs, decisions or wants, adds to the associations
     and the reply is generated again; a pause to think runs reflection first. Appraisal forms the
     record to keep with the state withheld; the temperament bends it; encoding keeps it; what leaves
-    the focus is folded into its summary. The last days stand beside the focus in every reply context;
+    the focus is folded into its summary. With `appraisalBeforeReaction` the appraisal is made first,
+    and the feeling it formed stands at the end of the focus line as the reaction is made. The last days stand beside the focus in every reply context;
     when the person leaves, the conversation is folded into today. Nothing on this path deliberates.
 
     One instance serves one trigger: the performer methods read the state of this trigger."""
@@ -85,6 +86,7 @@ class turn:
         hops = self.parameters["turnActionHops"]
         unknownProbe = kindProbe = momentProbe = False
         kept = None
+        affect = None
         for self.hop in range(hops + 3):
             state, focusEntries = self._compose(recent)
             now = self.clock.now()
@@ -92,6 +94,11 @@ class turn:
                             AttentionAndMemory(len(state), len(self.associations), memorySize, self.searches))
             hereAndNow = HereAndNow(now, self.being.name, person, others, senses)
             conversation.lastHereAndNow = hereAndNow
+            if self.parameters["appraisalBeforeReaction"]:
+                if affect is None:
+                    affect = self._appraise(utterance, None, state, focusEntries, hereAndNow)
+                if affect is not None:
+                    focusEntries = focusEntries + [self._appraised(person, utterance.words, affect, now)]
             context = ReplyContext(ReplyContext.WORDS, hereAndNow, state, focusEntries, self.clock,
                                    self.feelingWords, self.fading, self.rumination, words=utterance.words,
                                    held=self._slotBlock(), summary=conversation.focus.summary,
@@ -136,7 +143,8 @@ class turn:
         if kept is None:
             return TurnOutcome(failed=True)
         reaction, state, focusEntries, hereAndNow = kept
-        affect = self._appraise(utterance, reaction, state, focusEntries, hereAndNow)
+        if affect is None:
+            affect = self._appraise(utterance, reaction, state, focusEntries, hereAndNow)
         valence, intensity = self.being.temperament.apply(affect.valence, affect.intensity)
         conversation.lastAssociations = self.associations.records()
         event = self.eventWords.said(person, utterance.words)
@@ -307,9 +315,20 @@ class turn:
             remembered, focusEntries, self.clock, self.feelingWords, self.fading, self.rumination,
             utterance.words, summary=self.conversation.focus.summary)
         affect = self.appraisal.appraise(context)
-        if affect is None:
+        if affect is None and reaction is not None:
             return Affect(reaction.feeling, reaction.conclusion, reaction.valence, reaction.intensity)
         return affect
+
+    def _appraised(self, person, words, affect, now):
+        """The feeling the appraisal formed of these words, as an entry of the focus line for the
+        reaction: the moment with its feeling, before the reply exists. Not kept here; the record
+        is kept once the turn ends."""
+        valence, intensity = self.being.temperament.apply(affect.valence, affect.intensity)
+        record = EmoThought(EmoThought.newId(), self.being.id, Author.person(person), affect.feeling,
+                            affect.conclusion, valence, Strength(intensity, now), now)
+        record.episodes = [Episode(Episode.newId(), self.being.id, record.id, person,
+                                   self.eventWords.said(person, words), now)]
+        return FocusEntry(record, FocusEntry.THIS_CONVERSATION, now)
 
     def _evoke(self):
         """What came to mind enters the focus line after the moment that evoked it."""

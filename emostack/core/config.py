@@ -47,6 +47,7 @@ class config:
             "reflectionMaxSteps": 3,
             "introspection": True,
             "turnActionHops": 1,
+            "appraisalBeforeReaction": False,
             "slotSize": 3,
             "slotDays": 7.0,
             "dispositionsMax": 3,
