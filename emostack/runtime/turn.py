@@ -26,10 +26,12 @@ class turn:
     records and the strongest associations; the focus line shows what is in view, with what came to
     mind placed after the moment that evoked it; reply generation produces the act. A search, or one of the engine's own searches when the person is unknown or asks about
     a moment or about the being's own dreams, beliefs, decisions or wants, adds to the associations
-    and the reply is generated again; a pause to think runs reflection first. Appraisal forms the
-    record to keep with the state withheld; the temperament bends it; encoding keeps it; what leaves
-    the focus is folded into its summary. With `appraisalBeforeReaction` the appraisal is made first,
-    and the feeling it formed stands at the end of the focus line as the reaction is made. The last days stand beside the focus in every reply context;
+    and the reply is generated again; a pause to think runs reflection first. Appraisal reads the
+    moment first, with the state withheld, and forms the record to keep; the temperament bends it;
+    the feeling it formed stands at the end of the focus line as the reaction is made, so the reply
+    meets the moment already felt and still writes its own feeling of it. Encoding keeps the record
+    once the turn ends; what leaves the focus is folded into its summary. With
+    `appraisalBeforeReaction` off the appraisal is made after the reply instead. The last days stand beside the focus in every reply context;
     when the person leaves, the conversation is folded into today. Nothing on this path deliberates.
 
     One instance serves one trigger: the performer methods read the state of this trigger."""
