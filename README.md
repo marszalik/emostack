@@ -1,12 +1,12 @@
 # EmoStack
 
-EmoStack is an affective-cognitive layer over a frozen large language model. It builds a *being*
+EmoStack is a harness of evolved processes over a frozen large language model. It builds a *being*
 that lives in its own present: it feels what happens to it, remembers it under those feelings,
 thinks about itself in its quiet moments, learns how to meet a kind of situation, and answers from
 all of that. The language model is only the processor. It holds nothing between calls and is never
-fine-tuned. Everything the being is lives in this layer.
+fine-tuned. Everything the being is lives in this harness.
 
-The words *feels*, *thinks* and *learns* name what the layer does, and the paper measures them as
+The words *feels*, *thinks* and *learns* name what the harness does, and the paper measures them as
 acts. Like the paper, this project does not claim that there is something it is like to be a being
 built this way; on that, the traces are the only evidence there is.
 
@@ -15,9 +15,12 @@ and the research panel used to run and measure the lives of beings.
 
 The design and the experiments are described in the paper:
 
-> Eliza Marszalik. *What Do Electric Sheep Dream Of? Artificial Consciousness by Construction: A Cognitive
-> Architecture over a Frozen LLM.* Version 1.1, 2026.
-> [doi:10.5281/zenodo.23124632](https://doi.org/10.5281/zenodo.23124632)
+> Eliza Marszalik. *What Do Electric Sheep Dream Of? A Harness of Evolved Processes over a Frozen
+> Language Model.* Version 1.3, 2026.
+> [emostack.com/article/paper-full-text](https://emostack.com/article/paper-full-text)
+>
+> Earlier versions on Zenodo: 1.1, [doi:10.5281/zenodo.23124632](https://doi.org/10.5281/zenodo.23124632);
+> 1.0, [doi:10.5281/zenodo.22936968](https://doi.org/10.5281/zenodo.22936968).
 
 ## The idea in one page
 

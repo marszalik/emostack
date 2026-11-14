@@ -2,14 +2,14 @@ cff-version: 1.2.0
 message: "If you use EmoStack, please cite the preprint below."
 title: "EmoStack"
 abstract: >-
-  A cognitive layer over a frozen language model: a being with its own history,
-  feelings, thoughts and learned dispositions, and a research panel that runs
-  its lives against a control on the same LLM model.
+  A harness of evolved processes over a frozen language model: a being with its
+  own history, feelings, thoughts and learned dispositions, and a research panel
+  that runs its lives against controls on the same language model.
 type: software
 authors:
   - family-names: Marszalik
     given-names: Eliza
-    email: eliza.marszalik@pjwstk.edu.pl
+    email: eliza.marszalik@pja.edu.pl
     orcid: "https://orcid.org/0009-0004-6548-7670"
 repository-code: "https://github.com/marszalik/emostack"
 url: "https://emostack.com"
@@ -17,24 +17,23 @@ license: PolyForm-Noncommercial-1.0.0
 version: "1.0"
 date-released: 2026-09-25
 keywords:
-  - artificial consciousness
-  - cognitive architecture
-  - language models
+  - synthetic being
+  - individuality
+  - appraisal
   - autobiographical memory
-  - affect
+  - self
+  - language models
 preferred-citation:
   type: article
-  title: "What Do Electric Sheep Dream Of? Artificial Consciousness by Construction: A Cognitive Architecture over a Frozen LLM"
+  title: "What Do Electric Sheep Dream Of? A Harness of Evolved Processes over a Frozen Language Model"
   authors:
     - family-names: Marszalik
       given-names: Eliza
-      email: eliza.marszalik@pjwstk.edu.pl
-    orcid: "https://orcid.org/0009-0004-6548-7670"
-  doi: 10.5281/zenodo.23124632
-  url: "https://doi.org/10.5281/zenodo.23124632"
-  publisher:
-    name: Zenodo
+      email: eliza.marszalik@pja.edu.pl
+      orcid: "https://orcid.org/0009-0004-6548-7670"
+  url: "https://emostack.com/article/paper-full-text"
+  version: "1.3"
   year: 2026
   month: 10
-  date-published: 2026-10-03
+  date-published: 2026-10-24
   status: preprint
